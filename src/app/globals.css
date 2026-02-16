@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors -- Hunter Green palette */
+  --color-hunter-green-50: #F0F5F1;
+  --color-hunter-green-100: #D4E2D6;
+  --color-hunter-green-200: #A8C5AD;
+  --color-hunter-green-300: #7DA884;
+  --color-hunter-green-400: #517B57;
+  --color-hunter-green-500: #355E3B;
+  --color-hunter-green-600: #2A4B2F;
+  --color-hunter-green-700: #1F3823;
+  --color-hunter-green-800: #152618;
+  --color-hunter-green-900: #0A130C;
+  --color-hunter-green: #355E3B;
+
+  /* Colors -- Gold palette */
+  --color-gold-50: #FBF6EC;
+  --color-gold-100: #F5E9CC;
+  --color-gold-200: #EBD399;
+  --color-gold-300: #E1BD66;
+  --color-gold-400: #D4A843;
+  --color-gold-500: #B8902E;
+  --color-gold-600: #937324;
+  --color-gold-700: #6E561B;
+  --color-gold-800: #493A12;
+  --color-gold-900: #241D09;
+  --color-gold: #D4A843;
+
+  /* Fonts */
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Type scale -- premium, generous sizing */
+  --text-display: 4.5rem;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: 3.5rem;
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.01em;
+
+  --text-h2: 2.5rem;
+  --text-h2--line-height: 1.2;
+
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 1.3;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.4;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.7;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.6;
+
+  /* Spacing -- generous white space */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+
+  /* Max widths */
+  --container-content: 72rem;
+  --container-narrow: 48rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    /* Section background alternation tokens */
+    --bg-primary: #ffffff;
+    --bg-secondary: #F0F5F1;
+    --bg-dark: #355E3B;
+    --bg-black: #111111;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    /* Gold accent for borders, hovers, underlines */
+    --accent: #D4A843;
+    --accent-hover: #B8902E;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-body leading-relaxed text-neutral-900 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
 }
