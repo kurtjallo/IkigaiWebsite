@@ -11,41 +11,64 @@
 
 The `react-calendly` package (v4.4.0, current) provides React components for Calendly integration. Peer dependency: React >=16.8.0 (compatible with React 19 used by Next.js).
 
+**Verified via npm README (npm view react-calendly readme):**
+
 **Components available:**
-- `PopupButton` -- Renders a button that opens Calendly popup on click
-- `PopupWidget` -- Renders a floating popup button (bottom-right corner)
-- `InlineWidget` -- Renders Calendly inline in the page
+- `InlineWidget` -- Renders Calendly inline in the page (full calendar embed)
+- `PopupWidget` -- Renders a floating popup button (bottom-right corner, customizable colors)
+- `PopupButton` -- Renders a button that opens Calendly popup modal on click
+- `useCalendlyEventListener` -- Hook for listening to Calendly events (onEventScheduled, onDateAndTimeSelected, etc.)
 
 **Recommended: `PopupButton`** for the contact page. It renders a customizable trigger button that opens the Calendly popup overlay. This keeps the page clean (no large inline embed eating space) and only loads when user clicks.
 
-**Usage pattern:**
+**PopupButton API (verified from README):**
 ```tsx
-'use client'
-import { PopupButton } from 'react-calendly'
+import { PopupButton } from "react-calendly";
 
-export function CalendarBooking() {
-  return (
-    <PopupButton
-      url="https://calendly.com/CALENDLY_USERNAME/strategy-call"
-      rootElement={document.getElementById('__next')!}
-      text="Schedule a Strategic Conversation"
-    />
-  )
-}
+<PopupButton
+  url="https://calendly.com/your_scheduling_page"
+  rootElement={document.getElementById("root")}  // Required - React Portal target
+  text="Click here to schedule!"                  // Button text
+/>
 ```
 
-**Key considerations:**
-- `rootElement` is required -- must point to a DOM node (use `document.getElementById('__next')`)
-- Must be a Client Component ('use client') since it uses browser APIs
-- The package loads Calendly's widget.js script automatically
+**PopupWidget API (alternative -- floating button):**
+```tsx
+import { PopupWidget } from "react-calendly";
+
+<PopupWidget
+  url="https://calendly.com/your_scheduling_page"
+  rootElement={document.getElementById("root")}
+  text="Click here to schedule!"
+  textColor="#ffffff"
+  color="#00a2ff"
+/>
+```
+
+**Optional props (all components):**
+- `pageSettings` -- Customize background color, text color, hide event type details (Pro plan only)
+- `prefill` -- Pre-fill email, name, guests, custom answers
+- `utm` -- UTM tracking parameters (utmSource, utmMedium, utmCampaign, etc.)
+- `styles` -- Custom styles (e.g., `{ height: '1000px' }` for InlineWidget)
+
+**Note on pageSettings:** Color customization requires Calendly Pro plan. Free plan will ignore these settings.
+
+**Key implementation considerations:**
+- `rootElement` is REQUIRED -- uses React Portals to render popup modal. Must point to a DOM node. In Next.js, use `document.getElementById('__next')` instead of `'root'`.
+- Must be a Client Component ('use client') since it accesses `document`
+- The package loads Calendly's widget.js script automatically (no manual script tag)
 - CSP note: must allowlist `https://assets.calendly.com` and `https://calendly.com` in Content-Security-Policy (Phase 11)
 
-**Alternative: Manual script loading (no npm package)**
+**useCalendlyEventListener hook (for future use):**
 ```tsx
-// Load https://assets.calendly.com/assets/external/widget.js
-// Call window.Calendly.initPopupWidget({ url: '...' })
+useCalendlyEventListener({
+  onProfilePageViewed: () => console.log("onProfilePageViewed"),
+  onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
+  onEventTypeViewed: () => console.log("onEventTypeViewed"),
+  onEventScheduled: (e) => console.log(e.data.payload),
+});
 ```
-This avoids a dependency but requires manual TypeScript type declarations and script lifecycle management. The npm package is cleaner for React.
+This could be used to track conversions with Vercel Analytics in Phase 11.
 
 **Decision: Use `react-calendly` PopupButton.** The npm package handles script loading, popup lifecycle, and provides TypeScript types. The env var `NEXT_PUBLIC_CALENDLY_URL` will store the Calendly scheduling URL so the user can configure it without code changes.
 
@@ -81,6 +104,7 @@ if (response.ok) {
 - Direct fetch gives full control over form state, validation, and UI
 - No abstraction layer to debug
 - The form has only 4 fields -- zero complexity benefit from a library
+- @formspree/react README redirects to external docs (less self-contained)
 
 **Anti-spam: Honeypot field (INTG-03)**
 
@@ -93,13 +117,17 @@ Formspree supports honeypot fields natively. A honeypot is a hidden input that r
 
 Formspree recognizes `_gotcha` as a honeypot field. If it contains a value, the submission is silently rejected. No CAPTCHA needed.
 
-**Additional Formspree fields:**
-- `_subject`: Custom email subject line
-- `_replyto` or `email`: Sets Reply-To header on notification email
+**Additional Formspree special fields:**
+- `_gotcha`: Honeypot anti-spam (silently rejects if filled)
+- `_subject`: Custom email subject line for notification
+- `_replyto` or `email`: Sets Reply-To header on notification email (auto-detected from `email` field)
 
 **Free tier:** 50 submissions/month -- more than sufficient for a consulting firm's inquiry volume.
 
 **Environment variable:** `NEXT_PUBLIC_FORMSPREE_ID` will store the form ID. User creates a form at formspree.io and provides the ID.
+
+**Verified URLs:**
+- Formspree privacy policy: `https://formspree.io/legal/privacy-policy` (verified accessible, last updated April 2022)
 
 ---
 
@@ -161,7 +189,8 @@ The privacy policy page (PAGE-07) must include:
 | Source | What Was Verified | Confidence |
 |--------|-------------------|------------|
 | npm registry: react-calendly v4.4.0 | Version, peer dependencies, package description | HIGH |
+| npm view react-calendly readme | Full component API: PopupButton, PopupWidget, InlineWidget, useCalendlyEventListener, all props | HIGH |
 | npm registry: @formspree/react v3.0.0 | Version, peer dependencies (decided against using) | HIGH |
-| Formspree homepage | Endpoint URL format, anti-spam features, processing flow | HIGH |
+| Formspree homepage (formspree.io) | Endpoint URL format (`/f/{FORM_ID}`), anti-spam features, processing flow | HIGH |
+| Formspree privacy policy URL | Verified accessible at `formspree.io/legal/privacy-policy` | HIGH |
 | PIPEDA (Office of Privacy Commissioner of Canada) | Fair information principles, consent requirements | HIGH |
-| Calendly embed patterns | PopupButton component, script loading, rootElement requirement | MEDIUM (based on training data + npm verification) |
