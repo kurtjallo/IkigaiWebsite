@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { playfairDisplay, inter } from '@/lib/fonts'
+import { SkipNav } from '@/components/layout/skip-nav'
+import { Navigation } from '@/components/layout/navigation'
+import { Footer } from '@/components/layout/footer'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -14,7 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body className="font-sans antialiased flex flex-col min-h-screen">
+        <SkipNav />
+        <Navigation />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   )
 }
