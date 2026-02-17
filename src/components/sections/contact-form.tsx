@@ -2,6 +2,7 @@
 
 import { useState, useRef, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
+import { FadeIn } from '@/components/animation/fade-in'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -94,7 +95,7 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="mx-auto max-w-[48rem] text-center py-12">
+      <div className="mx-auto max-w-[48rem] text-center py-12" role="status" aria-live="polite">
         <div className="mb-6 h-0.5 w-16 bg-gold mx-auto" />
         <h3 className="font-serif text-h2 text-neutral-900">Thank You</h3>
         <p className="mt-4 text-body-lg text-neutral-600 max-w-[32rem] mx-auto">
@@ -110,6 +111,7 @@ export function ContactForm() {
   const isSubmitting = status === 'submitting'
 
   return (
+    <FadeIn>
     <div className="mx-auto max-w-[48rem]">
       {status === 'error' && (
         <div
@@ -134,7 +136,7 @@ export function ContactForm() {
 
       <form onSubmit={handleSubmit} noValidate className="space-y-6">
         {/* Honeypot -- hidden from users, catches bots */}
-        <div style={{ display: 'none' }} aria-hidden="true">
+        <div className="absolute -left-[9999px]" aria-hidden="true">
           <label htmlFor="contact-gotcha">Do not fill this out</label>
           <input
             type="text"
@@ -287,5 +289,6 @@ export function ContactForm() {
         </p>
       </form>
     </div>
+    </FadeIn>
   )
 }

@@ -1,4 +1,7 @@
+'use client'
+
 import { cn } from '@/lib/utils'
+import { HoverAccent } from '@/components/animation/hover-accent'
 
 interface CardProps {
   hover?: boolean
@@ -12,7 +15,7 @@ interface CardProps {
  * Gold is only used on the hover border -- never as text. Safe on all backgrounds.
  */
 export function Card({ hover = true, className, children }: CardProps) {
-  return (
+  const cardContent = (
     <div
       className={cn(
         'rounded-sm bg-white p-6 shadow-sm md:p-8',
@@ -25,4 +28,10 @@ export function Card({ hover = true, className, children }: CardProps) {
       {children}
     </div>
   )
+
+  if (hover) {
+    return <HoverAccent>{cardContent}</HoverAccent>
+  }
+
+  return cardContent
 }

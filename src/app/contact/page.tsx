@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/data/metadata'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { ContactForm } from '@/components/sections/contact-form'
 import { CalendarBooking } from '@/components/sections/calendar-booking'
 
-export const metadata: Metadata = {
-  title: 'Begin the Conversation',
-  description:
-    'Begin the conversation with Ikigai Consulting Group. Reach out about your organizational challenges or schedule a strategic conversation.',
-}
+export const metadata: Metadata = pageMetadata.contact
 
 export default function ContactPage() {
   return (
@@ -34,10 +31,10 @@ export default function ContactPage() {
       {/* Location info */}
       <Section background="light-green">
         <div className="text-center">
-          <p className="font-serif text-h3 text-neutral-900">
+          <h2 className="font-serif text-h3 text-neutral-900">
             Serving purpose-driven organizations across Ontario
-          </p>
-          <div className="mt-4 h-0.5 w-16 bg-gold mx-auto" />
+          </h2>
+          <div className="mt-4 h-0.5 w-16 bg-gold mx-auto" aria-hidden="true" />
           <p className="mt-6 text-body-lg text-neutral-600">
             Have a quick question? Email us directly at{' '}
             <a

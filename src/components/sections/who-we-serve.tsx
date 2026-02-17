@@ -1,5 +1,7 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
+import { StaggerChildren, StaggerItem } from '@/components/animation/stagger-children'
 
 const audiences = [
   {
@@ -27,16 +29,18 @@ const audiences = [
 export function WhoWeServe() {
   return (
     <Section background="hunter-green">
-      <SectionHeading
-        tagline="Who We Serve"
-        heading="Built for Leaders Who Carry Mission."
-        align="center"
-        dark
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+      <FadeIn>
+        <SectionHeading
+          tagline="Who We Serve"
+          heading="Built for Leaders Who Carry Mission."
+          align="center"
+          dark
+        />
+      </FadeIn>
+      <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
         {audiences.map((audience) => (
+          <StaggerItem key={audience.name}>
           <div
-            key={audience.name}
             className="rounded-sm border border-hunter-green-400/20 bg-hunter-green-600/30 p-6"
           >
             <h3 className="font-serif text-h4 text-white">{audience.name}</h3>
@@ -44,8 +48,9 @@ export function WhoWeServe() {
               {audience.tagline}
             </p>
           </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerChildren>
     </Section>
   )
 }

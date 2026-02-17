@@ -2,6 +2,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Button } from '@/components/ui/button'
 import { PillarIcon } from '@/components/svg/pillar-icons'
+import { FadeIn } from '@/components/animation/fade-in'
 import type { Pillar } from '@/lib/data/pillars'
 
 interface ServicePillarProps {
@@ -15,7 +16,7 @@ function BulletList({ items }: { items: string[] }) {
     <ul className="space-y-3">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-3">
-          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
           <span className="text-body text-neutral-700">{item}</span>
         </li>
       ))}
@@ -26,6 +27,7 @@ function BulletList({ items }: { items: string[] }) {
 export function ServicePillar({ pillar, background, index }: ServicePillarProps) {
   return (
     <Section background={background} id={pillar.slug}>
+      <FadeIn>
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div>
           <PillarIcon
@@ -61,6 +63,7 @@ export function ServicePillar({ pillar, background, index }: ServicePillarProps)
           </div>
         </div>
       </div>
+      </FadeIn>
     </Section>
   )
 }

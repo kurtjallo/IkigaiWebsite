@@ -1,6 +1,7 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Card } from '@/components/ui/card'
+import { FadeIn } from '@/components/animation/fade-in'
 
 const philosophyPillars = [
   {
@@ -28,11 +29,14 @@ const philosophyPillars = [
 export function Philosophy() {
   return (
     <Section background="light-green">
-      <SectionHeading
-        tagline="Our Philosophy"
-        heading="Why Ikigai?"
-        align="center"
-      />
+      <FadeIn>
+        <SectionHeading
+          tagline="Our Philosophy"
+          heading="Why Ikigai?"
+          align="center"
+        />
+      </FadeIn>
+      <FadeIn delay={0.15}>
       <p className="text-body-lg text-neutral-600 max-w-[48rem] mx-auto text-center mt-6">
         Ikigai is the Japanese concept of finding purpose at the intersection of
         what you love, what the world needs, what you can be paid for, and what
@@ -53,6 +57,7 @@ export function Philosophy() {
           </Card>
         ))}
       </div>
+      </FadeIn>
     </Section>
   )
 }

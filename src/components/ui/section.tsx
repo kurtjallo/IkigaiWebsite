@@ -8,6 +8,7 @@ interface SectionProps {
   background?: SectionBackground
   padding?: SectionPadding
   id?: string
+  ariaLabel?: string
   className?: string
   children: React.ReactNode
 }
@@ -36,12 +37,14 @@ export function Section({
   background = 'white',
   padding = 'default',
   id,
+  ariaLabel,
   className,
   children,
 }: SectionProps) {
   return (
     <section
       id={id}
+      aria-label={ariaLabel}
       className={cn(
         backgroundClasses[background],
         padding === 'default' && 'py-16 md:py-24',

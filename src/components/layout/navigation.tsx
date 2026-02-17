@@ -39,6 +39,7 @@ export function Navigation() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={isActive ? 'page' : undefined}
                     className={cn(
                       'text-sm font-medium uppercase tracking-wide text-neutral-700 transition-colors hover:text-hunter-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold',
                       isActive && 'border-b-2 border-gold pb-1 text-hunter-green'
@@ -53,11 +54,12 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
               className="lg:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
-              <Menu className="h-6 w-6 text-hunter-green" />
+              <Menu className="h-6 w-6 text-hunter-green" aria-hidden="true" />
             </button>
           </div>
         </Container>

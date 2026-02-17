@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
 
 interface FounderBioProps {
   imageSrc?: string
@@ -9,11 +10,14 @@ interface FounderBioProps {
 export function FounderBio({ imageSrc }: FounderBioProps) {
   return (
     <Section background="white">
-      <SectionHeading
-        tagline="Our Founder"
-        heading="Nilda Bastone"
-        headingAs="h1"
-      />
+      <FadeIn>
+        <SectionHeading
+          tagline="Our Founder"
+          heading="Nilda Bastone"
+          headingAs="h1"
+        />
+      </FadeIn>
+      <FadeIn delay={0.15}>
       <div className="grid md:grid-cols-2 gap-12 mt-12">
         <div className="space-y-5">
           {imageSrc && (
@@ -67,6 +71,7 @@ export function FounderBio({ imageSrc }: FounderBioProps) {
           </blockquote>
         </div>
       </div>
+      </FadeIn>
     </Section>
   )
 }

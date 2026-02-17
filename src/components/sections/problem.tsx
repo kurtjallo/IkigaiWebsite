@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
 
 const painPoints = [
   'Strategic plans that gather dust on shelves',
@@ -12,11 +13,14 @@ const painPoints = [
 export function ProblemSection() {
   return (
     <Section background="white">
-      <SectionHeading
-        tagline="The Challenge"
-        heading="Strong Missions. Fragile Structures."
-        align="center"
-      />
+      <FadeIn>
+        <SectionHeading
+          tagline="The Challenge"
+          heading="Strong Missions. Fragile Structures."
+          align="center"
+        />
+      </FadeIn>
+      <FadeIn delay={0.15}>
       <div className="grid md:grid-cols-2 gap-12 mt-12">
         <div className="space-y-5">
           <p className="text-body-lg text-neutral-600">
@@ -37,12 +41,13 @@ export function ProblemSection() {
         <div className="space-y-6">
           {painPoints.map((point) => (
             <div key={point} className="flex items-start gap-3">
-              <span className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold" />
+              <span className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold" aria-hidden="true" />
               <p className="text-body-lg text-neutral-700">{point}</p>
             </div>
           ))}
         </div>
       </div>
+      </FadeIn>
     </Section>
   )
 }

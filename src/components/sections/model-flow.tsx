@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Divider } from '@/components/ui/divider'
 import { PillarIcon } from '@/components/svg/pillar-icons'
 import { pillars } from '@/lib/data/pillars'
+import { FadeIn } from '@/components/animation/fade-in'
+import { StaggerChildren, StaggerItem } from '@/components/animation/stagger-children'
 
 type PillarSlug =
   | 'strategic'
@@ -66,15 +68,17 @@ export function ModelFlow() {
     <>
       {/* Sub-section 1: The Four Phases */}
       <Section background="light-green">
-        <SectionHeading
-          tagline="How It Works"
-          heading="From Blueprint to Sustain"
-          description="The Ikigai Architecture Model&#8482; moves through four deliberate phases. Each phase builds on the last, creating organizational architecture that is not only sound but sustainable."
-          align="center"
-        />
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+        <FadeIn>
+          <SectionHeading
+            tagline="How It Works"
+            heading="From Blueprint to Sustain"
+            description="The Ikigai Architecture Model&#8482; moves through four deliberate phases. Each phase builds on the last, creating organizational architecture that is not only sound but sustainable."
+            align="center"
+          />
+        </FadeIn>
+        <StaggerChildren className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
           {flowPhases.map((phase, index) => (
-            <div key={phase.number} className="relative">
+            <StaggerItem key={phase.number} className="relative">
               {/* Gold connecting line between phases on desktop */}
               {index < flowPhases.length - 1 && (
                 <div
@@ -96,22 +100,25 @@ export function ModelFlow() {
                   {phase.description}
                 </p>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </Section>
 
       {/* Sub-section 2: Pillar Integration */}
       <Section background="white">
-        <SectionHeading
-          tagline="Complete Architecture"
-          heading="Seven Pillars. One Integrated System."
-          description="The pillars of the Ikigai Architecture Model&#8482; are not siloed services. They connect through the Blueprint, Build, Strengthen, and Sustain flow -- each pillar reinforcing the others to create a structure greater than any single intervention."
-          align="center"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-12">
+        <FadeIn>
+          <SectionHeading
+            tagline="Complete Architecture"
+            heading="Seven Pillars. One Integrated System."
+            description="The pillars of the Ikigai Architecture Model&#8482; are not siloed services. They connect through the Blueprint, Build, Strengthen, and Sustain flow -- each pillar reinforcing the others to create a structure greater than any single intervention."
+            align="center"
+          />
+        </FadeIn>
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-12">
           {pillars.map((pillar) => (
-            <Card key={pillar.slug}>
+            <StaggerItem key={pillar.slug}>
+            <Card>
               <PillarIcon
                 type={pillar.slug as PillarSlug}
                 className="h-8 w-8 text-gold"
@@ -124,26 +131,30 @@ export function ModelFlow() {
               </p>
               <Link
                 href={`/services#${pillar.slug}`}
+                aria-label={`Learn more about ${pillar.title}`}
                 className="mt-4 inline-block text-sm font-semibold text-hunter-green transition-colors hover:text-gold-700"
               >
                 Learn more &rarr;
               </Link>
             </Card>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </Section>
 
       {/* Sub-section 3: Why It Works */}
       <Section background="hunter-green">
-        <SectionHeading
-          tagline="The Difference"
-          heading="Why the Ikigai Architecture Model&#8482; Works"
-          align="center"
-          dark
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
+        <FadeIn>
+          <SectionHeading
+            tagline="The Difference"
+            heading="Why the Ikigai Architecture Model&#8482; Works"
+            align="center"
+            dark
+          />
+        </FadeIn>
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
           {reasons.map((reason) => (
-            <div key={reason.title}>
+            <StaggerItem key={reason.title}>
               <h3 className="font-serif text-h4 text-gold-200">
                 {reason.title}
               </h3>
@@ -151,14 +162,16 @@ export function ModelFlow() {
               <p className="mt-4 text-body text-neutral-300 leading-relaxed">
                 {reason.description}
               </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
+        <FadeIn delay={0.3}>
         <div className="mt-12 text-center">
           <Button variant="gold" size="lg" href="/contact">
             Schedule a Strategic Conversation
           </Button>
         </div>
+        </FadeIn>
       </Section>
     </>
   )

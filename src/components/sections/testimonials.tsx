@@ -1,19 +1,24 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { testimonials } from '@/lib/data/testimonials'
+import { FadeIn } from '@/components/animation/fade-in'
+import { StaggerChildren, StaggerItem } from '@/components/animation/stagger-children'
 
 export function Testimonials() {
   return (
     <Section background="hunter-green">
-      <SectionHeading
-        tagline="What Leaders Say"
-        heading="Voices of Impact"
-        align="center"
-        dark
-      />
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <FadeIn>
+        <SectionHeading
+          tagline="What Leaders Say"
+          heading="Voices of Impact"
+          align="center"
+          dark
+        />
+      </FadeIn>
+      <StaggerChildren className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {testimonials.map((testimonial) => (
-          <blockquote key={testimonial.name} className="relative">
+          <StaggerItem key={testimonial.name}>
+          <blockquote className="relative">
             {/* Decorative quotation mark */}
             <span
               className="block font-serif text-6xl leading-none text-gold-200/30 select-none"
@@ -40,8 +45,9 @@ export function Testimonials() {
               </p>
             </footer>
           </blockquote>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerChildren>
     </Section>
   )
 }

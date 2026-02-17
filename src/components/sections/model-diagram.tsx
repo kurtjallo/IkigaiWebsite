@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
 
 const pillarLabels = [
   'Strategic',
@@ -283,19 +284,24 @@ function ModelVisualDiagram() {
 export function ModelDiagram() {
   return (
     <Section background="white">
-      <SectionHeading
-        tagline="Our Framework"
-        heading="The Ikigai Architecture Model&#8482;"
-        description="A proprietary methodology for building resilient, purpose-driven organizations. Seven architectural pillars, four transformative phases -- one integrated system designed to move your organization from fragile to enduring."
-        align="center"
-      />
-      <div
-        role="img"
-        aria-label="The Ikigai Architecture Model diagram showing seven organizational pillars -- Strategic, Governance, Operational, Program, Leadership, Accountability, and Community Architecture -- arranged around a central purpose core, connected through four phases: Blueprint, Build, Strengthen, and Sustain."
-        className="mx-auto mt-12 mb-8 max-w-3xl"
-      >
-        <ModelVisualDiagram />
-      </div>
+      <FadeIn>
+        <SectionHeading
+          tagline="Our Framework"
+          heading="The Ikigai Architecture Model&#8482;"
+          headingAs="h1"
+          description="A proprietary methodology for building resilient, purpose-driven organizations. Seven architectural pillars, four transformative phases -- one integrated system designed to move your organization from fragile to enduring."
+          align="center"
+        />
+      </FadeIn>
+      <FadeIn delay={0.15}>
+        <div
+          role="img"
+          aria-label="The Ikigai Architecture Model diagram showing seven organizational pillars -- Strategic, Governance, Operational, Program, Leadership, Accountability, and Community Architecture -- arranged around a central purpose core, connected through four phases: Blueprint, Build, Strengthen, and Sustain."
+          className="mx-auto mt-12 mb-8 max-w-3xl"
+        >
+          <ModelVisualDiagram />
+        </div>
+      </FadeIn>
     </Section>
   )
 }

@@ -1,20 +1,24 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/data/metadata'
 import { pillars } from '@/lib/data/pillars'
+import { getServiceSchemas } from '@/lib/data/structured-data'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { ServicePillar } from '@/components/sections/service-pillar'
 import { Divider } from '@/components/ui/divider'
 import { CTASection } from '@/components/sections/cta-section'
 
-export const metadata: Metadata = {
-  title: 'Services \u2013 The 7 Pillars of Organizational Architecture',
-  description:
-    'From strategic planning to community engagement, our 7 pillars of organizational architecture give Ontario nonprofits and NGOs the structure they need to sustain and scale their impact.',
-}
+export const metadata: Metadata = pageMetadata.services
 
 export default function ServicesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getServiceSchemas()),
+        }}
+      />
       <Section background="hunter-green">
         <SectionHeading
           tagline="Our Services"

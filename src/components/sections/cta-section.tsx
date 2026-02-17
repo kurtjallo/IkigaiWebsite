@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/section'
 import { Button } from '@/components/ui/button'
+import { FadeIn } from '@/components/animation/fade-in'
 
 interface CTASectionProps {
   heading?: string
@@ -16,6 +17,7 @@ export function CTASection({
 }: CTASectionProps) {
   return (
     <Section background="black">
+      <FadeIn>
       <div className="text-center">
         <h2 className="font-serif text-h2 text-white">{heading}</h2>
         <p className="text-body-lg text-neutral-400 max-w-[36rem] mx-auto mt-4">
@@ -27,6 +29,7 @@ export function CTASection({
           </Button>
         </div>
       </div>
+      </FadeIn>
     </Section>
   )
 }

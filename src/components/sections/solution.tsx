@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
 
 const phases = [
   { name: 'Blueprint', description: 'Assess and design' },
@@ -11,11 +12,14 @@ const phases = [
 export function SolutionSection() {
   return (
     <Section background="light-green">
-      <SectionHeading
-        tagline="The Solution"
-        heading="We Are Organizational Architects."
-        align="center"
-      />
+      <FadeIn>
+        <SectionHeading
+          tagline="The Solution"
+          heading="We Are Organizational Architects."
+          align="center"
+        />
+      </FadeIn>
+      <FadeIn delay={0.15}>
       <p className="text-body-lg max-w-[48rem] mx-auto text-center mt-6 text-neutral-600">
         Ikigai Consulting Group designs and builds the structural foundations
         that organizations need — not quick fixes or off-the-shelf templates,
@@ -44,6 +48,7 @@ export function SolutionSection() {
       <p className="text-sm text-neutral-500 text-center mt-8">
         The Ikigai Architecture Model&trade;
       </p>
+      </FadeIn>
     </Section>
   )
 }

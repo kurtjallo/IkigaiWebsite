@@ -1,5 +1,7 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { FadeIn } from '@/components/animation/fade-in'
+import { StaggerChildren, StaggerItem } from '@/components/animation/stagger-children'
 
 const differentiators = [
   {
@@ -25,14 +27,16 @@ const differentiators = [
 export function WhyIkigai() {
   return (
     <Section background="light-green">
-      <SectionHeading
-        tagline="Why Ikigai"
-        heading="What Sets Us Apart"
-        align="center"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
+      <FadeIn>
+        <SectionHeading
+          tagline="Why Ikigai"
+          heading="What Sets Us Apart"
+          align="center"
+        />
+      </FadeIn>
+      <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
         {differentiators.map((item) => (
-          <div key={item.name}>
+          <StaggerItem key={item.name}>
             <div className="h-1 w-12 bg-gold" />
             <h3 className="mt-6 font-serif text-h3 text-neutral-900">
               {item.name}
@@ -43,9 +47,9 @@ export function WhyIkigai() {
             <p className="mt-4 text-body text-neutral-600">
               {item.description}
             </p>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerChildren>
     </Section>
   )
 }

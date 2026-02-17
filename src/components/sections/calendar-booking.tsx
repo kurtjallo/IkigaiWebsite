@@ -5,6 +5,7 @@ import { PopupButton } from 'react-calendly'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Button } from '@/components/ui/button'
+import { FadeIn } from '@/components/animation/fade-in'
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL
 const BUTTON_TEXT = 'Schedule a Strategic Conversation'
@@ -26,6 +27,7 @@ export function CalendarBooking() {
 
   return (
     <Section background="hunter-green">
+      <FadeIn>
       <div className="text-center">
         <SectionHeading
           heading="Prefer to Book Directly?"
@@ -49,6 +51,7 @@ export function CalendarBooking() {
           )}
         </div>
       </div>
+      </FadeIn>
     </Section>
   )
 }

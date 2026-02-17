@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/data/metadata'
 import { FounderBio } from '@/components/sections/founder-bio'
 import { Philosophy } from '@/components/sections/philosophy'
 import { ValuesRow } from '@/components/sections/values-row'
 import { CTASection } from '@/components/sections/cta-section'
 
-export const metadata: Metadata = {
-  title: 'About Ikigai Consulting Group',
-  description:
-    'Founded by Nilda Bastone, Ikigai Consulting Group brings deep nonprofit expertise to Ontario\u2019s purpose-driven organizations. Learn about our values, philosophy, and commitment to impact.',
-}
+export const metadata: Metadata = pageMetadata.about
 
 export default function AboutPage() {
   return (
