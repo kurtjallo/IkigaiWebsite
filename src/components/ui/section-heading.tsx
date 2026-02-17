@@ -54,7 +54,7 @@ export function SectionHeading({
         <p
           className={cn(
             'mb-3 font-sans text-sm font-semibold uppercase tracking-widest',
-            dark ? 'text-gold' : 'text-hunter-green-600'
+            dark ? 'text-gold-200' : 'text-hunter-green-600'
           )}
         >
           {tagline}

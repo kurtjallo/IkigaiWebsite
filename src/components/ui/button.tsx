@@ -27,12 +27,12 @@ const variantClasses: Record<ButtonVariant, string> = {
    * Uses gold text -- ONLY use on dark backgrounds (hunter-green, black).
    * Fails WCAG AA contrast on white/light backgrounds.
    */
-  outline: 'border-2 border-gold text-gold hover:bg-gold hover:text-black',
+  outline: 'border-2 border-gold text-gold-200 hover:bg-gold hover:text-black',
   /**
    * Uses gold text -- ONLY use on dark backgrounds (hunter-green, black).
    * Fails WCAG AA contrast on white/light backgrounds.
    */
-  ghost: 'text-gold hover:underline',
+  ghost: 'text-gold-200 hover:underline',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {

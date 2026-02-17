@@ -329,7 +329,7 @@ export default function Home() {
 
       <Section background="hunter-green">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-200">
             Background: Hunter Green
           </p>
           <p className="mt-2 text-body text-hunter-green-100">
@@ -340,7 +340,7 @@ export default function Home() {
 
       <Section background="black">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-200">
             Background: Black
           </p>
           <p className="mt-2 text-body text-neutral-400">
@@ -405,7 +405,7 @@ export default function Home() {
           </div>
 
           <div className="rounded-sm bg-hunter-green p-8">
-            <p className="mb-4 text-sm text-gold/60">Dark mode variant (on hunter green)</p>
+            <p className="mb-4 text-sm text-gold-200/60">Dark mode variant (on hunter green)</p>
             <SectionHeading
               heading="Let Us Architect Your Organization"
               tagline="Get Started"
