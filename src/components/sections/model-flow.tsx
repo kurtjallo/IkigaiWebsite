@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Card } from '@/components/ui/card'
@@ -121,12 +122,12 @@ export function ModelFlow() {
               <p className="mt-2 text-sm text-neutral-600 leading-relaxed">
                 {pillar.description}
               </p>
-              <a
+              <Link
                 href={`/services#${pillar.slug}`}
                 className="mt-4 inline-block text-sm font-semibold text-hunter-green transition-colors hover:text-gold-700"
               >
                 Learn more &rarr;
-              </a>
+              </Link>
             </Card>
           ))}
         </div>

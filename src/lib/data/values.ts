@@ -33,6 +33,6 @@ export const values: Value[] = [
     name: 'Courageous Leadership',
     description:
       'We name what others avoid. Organizational transformation requires honest assessment and the courage to act on it.',
-    icon: 'flame',
+    icon: 'compass',
   },
 ]

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Section } from '@/components/ui/section'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -292,9 +292,12 @@ export default function PrivacyPage() {
             <p className="text-sm text-neutral-500 mb-6">
               Last updated: February 2026
             </p>
-            <Button variant="ghost" href="/contact" className="text-hunter-green-600 hover:text-hunter-green-700">
+            <Link
+              href="/contact"
+              className="inline-flex items-center text-body font-semibold text-hunter-green-600 transition-colors hover:text-hunter-green-700"
+            >
               &larr; Return to Contact
-            </Button>
+            </Link>
           </div>
         </Container>
       </Section>

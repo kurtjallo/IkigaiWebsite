@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useRef, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
@@ -14,6 +14,9 @@ interface FieldErrors {
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle')
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+  const nameRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const challengeRef = useRef<HTMLTextAreaElement>(null)
 
   const [name, setName] = useState('')
   const [organization, setOrganization] = useState('')
@@ -38,6 +41,13 @@ export function ContactForm() {
     }
 
     setFieldErrors(errors)
+
+    if (Object.keys(errors).length > 0) {
+      const firstError = Object.keys(errors)[0] as keyof FieldErrors
+      const refMap = { name: nameRef, email: emailRef, challenge: challengeRef }
+      refMap[firstError]?.current?.focus()
+    }
+
     return Object.keys(errors).length === 0
   }
 
@@ -144,9 +154,11 @@ export function ContactForm() {
             Name <span className="text-red-600">*</span>
           </label>
           <input
+            ref={nameRef}
             type="text"
             id="contact-name"
             name="name"
+            autoComplete="name"
             value={name}
             onChange={(e) => {
               setName(e.target.value)
@@ -178,6 +190,7 @@ export function ContactForm() {
             type="text"
             id="contact-organization"
             name="organization"
+            autoComplete="organization"
             value={organization}
             onChange={(e) => setOrganization(e.target.value)}
             disabled={isSubmitting}
@@ -195,9 +208,11 @@ export function ContactForm() {
             Email <span className="text-red-600">*</span>
           </label>
           <input
+            ref={emailRef}
             type="email"
             id="contact-email"
             name="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value)
@@ -226,6 +241,7 @@ export function ContactForm() {
             Tell us about your challenge <span className="text-red-600">*</span>
           </label>
           <textarea
+            ref={challengeRef}
             id="contact-challenge"
             name="challenge"
             value={challenge}

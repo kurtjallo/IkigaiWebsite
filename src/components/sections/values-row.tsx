@@ -1,7 +1,7 @@
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { values } from '@/lib/data/values'
-import { Shield, Target, Scale, Award, Flame } from 'lucide-react'
+import { Shield, Target, Scale, Award, Compass } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 const iconMap: Record<string, LucideIcon> = {
@@ -9,7 +9,7 @@ const iconMap: Record<string, LucideIcon> = {
   target: Target,
   scale: Scale,
   award: Award,
-  flame: Flame,
+  compass: Compass,
 }
 
 export function ValuesRow() {
@@ -29,7 +29,7 @@ export function ValuesRow() {
               className="flex flex-col items-center text-center"
             >
               {Icon && (
-                <Icon className="w-10 h-10 text-gold" strokeWidth={1.5} />
+                <Icon className="w-10 h-10 text-gold-200" strokeWidth={1.5} />
               )}
               <h3 className="text-body font-semibold text-white mt-3">
                 {value.name}
