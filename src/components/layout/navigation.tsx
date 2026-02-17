@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { Container } from '@/components/ui/container'
-import { WordMark } from '@/components/svg/wordmark'
 import { cn } from '@/lib/utils'
 import { navigationLinks } from '@/lib/data/navigation'
 import { MobileMenu } from './mobile-menu'
@@ -24,9 +24,16 @@ export function Navigation() {
           <div className="flex h-16 items-center justify-between md:h-20">
             <Link
               href="/"
-              className="text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
-              <WordMark variant="dark" />
+              <Image
+                src="/images/logo-dark.png"
+                alt="Ikigai Consulting Group"
+                width={120}
+                height={40}
+                priority
+                className="h-8 w-auto md:h-10"
+              />
             </Link>
 
             <div className="hidden items-center gap-8 lg:flex">

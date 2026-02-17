@@ -44,9 +44,8 @@ export function Logo({ variant = 'dark', className, showTagline = true }: LogoPr
       >
         Ikigai
       </text>
-      {/* Green accent dots over i and g characters */}
+      {/* Green accent dots over the two i characters */}
       <circle cx="120" cy="5" r="3" fill={dot} />
-      <circle cx="143" cy="5" r="3" fill={dot} />
       <circle cx="183" cy="5" r="3" fill={dot} />
       {showTagline && (
         <>

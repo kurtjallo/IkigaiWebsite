@@ -48,11 +48,9 @@ export function WordMark({
           textColor
         )}
       >
-        I
-        k
+        Ik
         <DotLetter dotClassName={dotBg}>i</DotLetter>
-        <DotLetter dotClassName={dotBg}>g</DotLetter>
-        a
+        ga
         <DotLetter dotClassName={dotBg}>i</DotLetter>
       </span>
       {showTagline && (
