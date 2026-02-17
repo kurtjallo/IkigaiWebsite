@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/container'
 import { Divider } from '@/components/ui/divider'
+import { WordMark } from '@/components/svg/wordmark'
 import { navigationLinks } from '@/lib/data/navigation'
 
 export function Footer() {
@@ -10,7 +11,9 @@ export function Footer() {
         {/* Top section: Brand + Navigation */}
         <div className="md:grid md:grid-cols-2 gap-8">
           <div>
-            <p className="font-serif text-xl font-bold text-white">IKIGAI</p>
+            <Link href="/" className="inline-block text-xl">
+              <WordMark variant="light" />
+            </Link>
             <p className="mt-2 text-sm text-neutral-400">
               Organizational Architects for Purpose-Driven Organizations
             </p>

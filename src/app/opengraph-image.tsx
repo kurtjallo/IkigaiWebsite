@@ -35,30 +35,41 @@ export default function OpenGraphImage() {
           }}
         />
 
-        {/* IKIGAI */}
+        {/* Ikigai wordmark */}
         <span
           style={{
             fontSize: '96px',
             fontWeight: 700,
             color: '#FFFFFF',
             fontFamily: 'Georgia, serif',
-            letterSpacing: '16px',
+            letterSpacing: '12px',
             lineHeight: 1,
           }}
         >
-          IKIGAI
+          Ikigai
         </span>
 
-        {/* Gold accent line */}
+        {/* Decorative green dots */}
         <div
           style={{
-            width: '200px',
-            height: '3px',
-            background: '#D4A843',
+            display: 'flex',
+            gap: '16px',
             marginTop: '28px',
             marginBottom: '28px',
           }}
-        />
+        >
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                background: '#7DA884',
+              }}
+            />
+          ))}
+        </div>
 
         {/* CONSULTING GROUP */}
         <span

@@ -7,18 +7,18 @@ interface LogoProps {
 export function Logo({ variant = 'dark', className, showTagline = true }: LogoProps) {
   const colors = {
     dark: {
-      primary: '#111111',
+      primary: '#355E3B',
       secondary: '#555555',
-      accent: '#D4A843',
+      dot: '#355E3B',
     },
     light: {
       primary: '#FFFFFF',
       secondary: '#D4E2D6',
-      accent: '#D4A843',
+      dot: '#7DA884',
     },
   }
 
-  const { primary, secondary, accent } = colors[variant]
+  const { primary, secondary, dot } = colors[variant]
   const viewBox = showTagline ? '0 0 280 75' : '0 0 280 35'
 
   return (
@@ -40,16 +40,25 @@ export function Logo({ variant = 'dark', className, showTagline = true }: LogoPr
         fontSize="32"
         fontWeight="700"
         fill={primary}
-        letterSpacing="6"
+        letterSpacing="4"
       >
-        IKIGAI
+        Ikigai
       </text>
+      {/* Green accent dots over i and g characters */}
+      <circle cx="120" cy="5" r="3" fill={dot} />
+      <circle cx="143" cy="5" r="3" fill={dot} />
+      <circle cx="183" cy="5" r="3" fill={dot} />
       {showTagline && (
         <>
-          <line x1="70" y1="40" x2="210" y2="40" stroke={accent} strokeWidth="1.5" />
+          {/* Row of decorative dots */}
+          <g>
+            {[105, 120, 135, 150, 160, 175].map((cx) => (
+              <circle key={cx} cx={cx} cy="42" r="2.5" fill={dot} />
+            ))}
+          </g>
           <text
             x="140"
-            y="60"
+            y="62"
             textAnchor="middle"
             fontFamily="'Inter', system-ui, sans-serif"
             fontSize="11"

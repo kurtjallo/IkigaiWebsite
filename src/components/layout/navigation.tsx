@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { Container } from '@/components/ui/container'
+import { WordMark } from '@/components/svg/wordmark'
 import { cn } from '@/lib/utils'
 import { navigationLinks } from '@/lib/data/navigation'
 import { MobileMenu } from './mobile-menu'
@@ -23,9 +24,9 @@ export function Navigation() {
           <div className="flex h-16 items-center justify-between md:h-20">
             <Link
               href="/"
-              className="font-serif text-xl font-bold tracking-wide text-hunter-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
-              IKIGAI
+              <WordMark variant="dark" />
             </Link>
 
             <div className="hidden items-center gap-8 lg:flex">
