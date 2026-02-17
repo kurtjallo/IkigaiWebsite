@@ -74,6 +74,9 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 5: About + Services Pages -- COMPLETE** (2026-02-16)
 **Phase 6: Ikigai Model + Case Studies -- COMPLETE** (2026-02-16)
 **Phase 7: Contact + Integrations -- COMPLETE** (2026-02-16)
+**Phase 8: Animation Layer -- COMPLETE** (2026-02-17)
+**Phase 9: SEO + Structured Data -- COMPLETE** (2026-02-17)
+**Phase 10: Accessibility + Performance Audit -- COMPLETE** (2026-02-17)
 
 ### Tech Stack
 
@@ -82,13 +85,18 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - Fonts: Playfair Display (serif headlines) + Inter (sans body) via next/font/google
 - Utilities: clsx + tailwind-merge (`cn()` in `src/lib/utils.ts`)
 - Icons: lucide-react (Menu, X, Shield, Target, Scale, Award, Compass, Check) + custom SVG pillar icons
+- Animation: motion (v12.x, imported from `motion/react`) for scroll reveals, stagger, hover effects
 - Integrations: react-calendly (Calendly popup booking), Formspree (contact form backend)
+- Dev tools: @axe-core/cli (automated accessibility checking)
 
 ### Key Files
 
 - `src/app/globals.css` -- Design tokens: Hunter Green/Gold palettes (50-900), type scale, spacing
-- `src/app/layout.tsx` -- Root layout: SkipNav + Navigation + main#main-content + Footer, flex column min-h-screen
+- `src/app/layout.tsx` -- Root layout: SkipNav + Navigation + main#main-content + Footer, flex column min-h-screen, Organization + LocalBusiness JSON-LD
 - `src/app/page.tsx` -- Homepage composing 7 section components
+- `src/app/not-found.tsx` -- Branded 404 page with design system components, noindex metadata
+- `src/app/sitemap.ts` -- Auto-generated sitemap.xml with all 7 pages, priorities, change frequencies
+- `src/app/robots.ts` -- Auto-generated robots.txt allowing all crawlers, referencing sitemap
 - `src/app/icon.tsx` -- 32x32 favicon (ImageResponse, hunter-green bg + gold "I")
 - `src/app/apple-icon.tsx` -- 180x180 Apple touch icon (ImageResponse)
 - `src/app/opengraph-image.tsx` -- 1200x630 OG image (ImageResponse)
@@ -100,16 +108,24 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - **Button** -- gold/outline/ghost variants, sm/md/lg sizes, Link or button via `href` prop
 - **Container** -- max-width wrapper (72rem default, 48rem narrow)
 - **SectionHeading** -- serif heading + tagline + gold accent line + description, `dark` prop
-- **Card** -- white bg, shadow, optional gold hover border
+- **Card** -- white bg, shadow, optional gold hover border, HoverAccent gold line on hover ('use client')
 - **Divider** -- gold horizontal line
-- **Section** -- background variants (white/light-green/hunter-green/black), auto text color, wraps Container
+- **Section** -- background variants (white/light-green/hunter-green/black), auto text color, wraps Container, optional `ariaLabel` prop
 
 ### Layout Chrome (`src/components/layout/`)
 
-- **Navigation** -- sticky top bar, "IKIGAI" wordmark, desktop links (lg+), hamburger (below lg), current page gold underline, `'use client'`
-- **MobileMenu** -- full-screen overlay, Escape to close, body scroll lock, `role="dialog"`, `'use client'`
+- **Navigation** -- sticky top bar, "IKIGAI" wordmark, desktop links (lg+), hamburger (below lg), current page gold underline + `aria-current="page"`, `aria-controls="mobile-menu"`, `'use client'`
+- **MobileMenu** -- full-screen overlay, Escape to close, body scroll lock, `role="dialog"`, `id="mobile-menu"`, focus management (auto-focus close button, return focus on close), `'use client'`
 - **SkipNav** -- sr-only skip link targeting #main-content, visible on focus
 - **Footer** -- dark bg (neutral-950), nav links, contact info, copyright, Server Component
+
+### Animation Components (`src/components/animation/`)
+
+- **FadeIn** -- Scroll-triggered fade-up reveal (configurable direction: up/down/left/right, delay), `whileInView` with `viewport={{ once: true }}`, `'use client'`
+- **StaggerChildren / StaggerItem** -- Sequential grid animation wrapper using variants + `staggerChildren`, `'use client'`
+- **HoverAccent** -- Gold accent line that scales in from left on hover via `scaleX` transform, `'use client'`
+- All use `useReducedMotion()` from `motion/react` -- animations disabled when OS prefers reduced motion
+- All animate only `transform` + `opacity` (GPU-composited, no layout shift)
 
 ### Content Data (`src/lib/data/`)
 
@@ -118,7 +134,8 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - **values.ts** -- 5 company values with name, description, icon key
 - **case-studies.ts** -- 3 placeholder case studies (Challenge > Approach > Outcome > Metrics)
 - **testimonials.ts** -- 4 placeholder testimonials with specific outcomes
-- **metadata.ts** -- siteMetadata + pageMetadata per route with Ontario/nonprofit SEO keywords
+- **metadata.ts** -- BASE_URL, siteMetadata (OG, Twitter, robots), pageMetadata per route with Ontario/nonprofit SEO keywords, canonical URLs
+- **structured-data.ts** -- JSON-LD schemas: organizationSchema, localBusinessSchema, getServiceSchemas() for 7 pillars
 
 ### SVG Components (`src/components/svg/`)
 
@@ -160,7 +177,7 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 
 ### Contact Page Sections (`src/components/sections/`)
 
-- **ContactForm** -- 'use client', 4-field form + honeypot, Formspree fetch POST, idle/submitting/success/error states, inline validation
+- **ContactForm** -- 'use client', 4-field form + honeypot (offscreen positioned, aria-hidden, tabindex=-1), Formspree fetch POST, idle/submitting/success/error states, inline validation, `aria-live="polite"` on success message, `aria-describedby` for error association
 - **CalendarBooking** -- 'use client', react-calendly PopupButton, hydration-safe mounting, hunter-green bg, graceful env var fallback
 
 ### Page Routes
@@ -171,6 +188,7 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - `src/app/impact/page.tsx` -- page header + 3 CaseStudyCards + Testimonials + CTASection
 - `src/app/contact/page.tsx` -- ContactForm + CalendarBooking + location info
 - `src/app/privacy/page.tsx` -- PIPEDA-compliant privacy policy (Server Component, static content)
+- `src/app/not-found.tsx` -- Branded 404 page (noindex, gold CTA to homepage)
 
 ### Environment Variables (Contact Page)
 
@@ -188,6 +206,10 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - Photo-ready sections: About and Case Studies pages should look complete without photos but have slots that accept real photos (Nilda headshot, team/event shots) when available later
 - ImageResponse files need `export const dynamic = 'force-static'` for static export compatibility
 - Navigation is a client component (usePathname), layout.tsx stays Server Component
+- Animation wrappers are Client Components imported by Server Component sections (correct Next.js pattern -- no need for 'use client' on section files)
+- All section components now wrapped with FadeIn/StaggerChildren for scroll reveals
+- JSON-LD structured data in layout.tsx (every page) and services/page.tsx (Service schemas)
+- sitemap.ts and robots.ts use `export const dynamic = 'force-static'` for static export
 
 ## Design Guidelines
 
