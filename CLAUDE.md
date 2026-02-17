@@ -71,6 +71,9 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 2: Layout Chrome -- COMPLETE** (2026-02-16)
 **Phase 3: Content Data + Brand Assets -- COMPLETE** (2026-02-16)
 **Phase 4: Homepage -- COMPLETE** (2026-02-16)
+**Phase 5: About + Services Pages -- COMPLETE** (2026-02-16)
+**Phase 6: Ikigai Model + Case Studies -- COMPLETE** (2026-02-16)
+**Phase 7: Contact + Integrations -- COMPLETE** (2026-02-16)
 
 ### Tech Stack
 
@@ -78,7 +81,8 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - Tailwind CSS 4 with CSS-first config (`@theme` in globals.css, no tailwind.config.ts)
 - Fonts: Playfair Display (serif headlines) + Inter (sans body) via next/font/google
 - Utilities: clsx + tailwind-merge (`cn()` in `src/lib/utils.ts`)
-- Icons: lucide-react (Menu, X for navigation) + custom SVG pillar icons
+- Icons: lucide-react (Menu, X, Shield, Target, Scale, Award, Compass, Check) + custom SVG pillar icons
+- Integrations: react-calendly (Calendly popup booking), Formspree (contact form backend)
 
 ### Key Files
 
@@ -133,6 +137,45 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - **WhoWeServe** -- hunter-green bg, 5 audience segments, no gold text
 - **WhyIkigai** -- light-green bg, 3 columns (Authority, Full-Cycle, Measurable Impact)
 - **CTASection** -- black bg, configurable props, gold button, reusable on other pages
+
+### About Page Sections (`src/components/sections/`)
+
+- **FounderBio** -- white bg, two-column (bio text + gold-bordered blockquote), photo-ready via optional `imageSrc` prop
+- **Philosophy** -- light-green bg, "Why Ikigai?" with 4 philosophy pillars in 2x2 Card grid
+- **ValuesRow** -- hunter-green bg, 5 values with Lucide icons (gold), responsive 2/3/5 col grid
+
+### Services Page Sections (`src/components/sections/`)
+
+- **ServicePillar** -- reusable per-pillar section, two-column (description + included/outcomes lists), alternating bg, anchor ID via slug
+
+### Model Page Sections (`src/components/sections/`)
+
+- **ModelDiagram** -- white bg, inline architectural SVG diagram (7 columns + 4 phase strata), role="img" + aria-label, TM branding
+- **ModelFlow** -- 3 sub-sections: 4-phase flow (light-green), pillar integration grid (white), why-it-works (hunter-green) with CTA
+
+### Impact Page Sections (`src/components/sections/`)
+
+- **CaseStudyCard** -- structured article (Challenge + Approach side-by-side, Outcome, Measurable Results with gold dots), alternating bg
+- **Testimonials** -- hunter-green bg, blockquote elements, decorative gold quotation marks, full attribution grid
+
+### Contact Page Sections (`src/components/sections/`)
+
+- **ContactForm** -- 'use client', 4-field form + honeypot, Formspree fetch POST, idle/submitting/success/error states, inline validation
+- **CalendarBooking** -- 'use client', react-calendly PopupButton, hydration-safe mounting, hunter-green bg, graceful env var fallback
+
+### Page Routes
+
+- `src/app/about/page.tsx` -- FounderBio > Philosophy > ValuesRow > CTASection
+- `src/app/services/page.tsx` -- hunter-green intro + 7 ServicePillar sections (data-driven from pillars.ts) + CTASection
+- `src/app/model/page.tsx` -- ModelDiagram > ModelFlow (thought leadership page)
+- `src/app/impact/page.tsx` -- page header + 3 CaseStudyCards + Testimonials + CTASection
+- `src/app/contact/page.tsx` -- ContactForm + CalendarBooking + location info
+- `src/app/privacy/page.tsx` -- PIPEDA-compliant privacy policy (Server Component, static content)
+
+### Environment Variables (Contact Page)
+
+- `NEXT_PUBLIC_FORMSPREE_ID` -- Formspree form ID for contact form submission
+- `NEXT_PUBLIC_CALENDLY_URL` -- Calendly scheduling URL for booking popup
 
 ### Design Decisions
 
