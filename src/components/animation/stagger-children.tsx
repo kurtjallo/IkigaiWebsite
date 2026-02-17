@@ -49,7 +49,7 @@ export function StaggerChildren({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: true, margin: '0px 0px -50px 0px' }}
       variants={containerVariants(staggerDelay)}
     >
       {children}

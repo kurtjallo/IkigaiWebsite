@@ -35,7 +35,7 @@ export function FadeIn({
       className={cn(className)}
       initial={{ opacity: 0, ...offsets[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: '0px 0px -100px 0px' }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
