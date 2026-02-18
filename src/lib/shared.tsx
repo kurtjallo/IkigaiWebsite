@@ -331,7 +331,7 @@ export function CTASection({
   heading = "Let\u2019s Architect Your Organization.",
   description = "Whether you\u2019re building from the ground up or strengthening existing structures, we\u2019re ready to listen, assess, and design.",
   buttonText = 'Book Your Strategy Call',
-  buttonHref = '/concept-merged/contact',
+  buttonHref = '/contact',
 }: {
   tagline?: string
   heading?: string
@@ -456,19 +456,19 @@ export function CTASection({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Concept Nav                                                        */
+/*  Site Navigation                                                    */
 /* ------------------------------------------------------------------ */
 
-export function ConceptNav() {
+export function SiteNav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navLinks = [
-    { label: 'About', href: '/concept-merged/about' },
-    { label: 'Services', href: '/concept-merged/services' },
-    { label: 'Model', href: '/concept-merged/model' },
-    { label: 'Impact', href: '/concept-merged/impact' },
-    { label: 'Contact', href: '/concept-merged/contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Model', href: '/model' },
+    { label: 'Impact', href: '/impact' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   const isActive = (href: string) => pathname === href
@@ -495,7 +495,7 @@ export function ConceptNav() {
         }}
       >
         <Link
-          href="/concept-merged"
+          href="/"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
             fontSize: '1.5rem',
@@ -536,7 +536,7 @@ export function ConceptNav() {
             </Link>
           ))}
           <Link
-            href="/concept-merged/contact"
+            href="/contact"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: '0.75rem',
@@ -611,7 +611,7 @@ export function ConceptNav() {
             </Link>
           ))}
           <Link
-            href="/concept-merged/contact"
+            href="/contact"
             onClick={() => setMobileOpen(false)}
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
