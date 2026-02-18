@@ -78,6 +78,22 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 9: SEO + Structured Data -- COMPLETE** (2026-02-17)
 **Phase 10: Accessibility + Performance Audit -- COMPLETE** (2026-02-17)
 
+### Concept-Merged Redesign (in progress)
+
+Full site built in "Architectural Blueprint" design concept at `/concept-merged/*`:
+
+- **`src/app/concept-merged/shared.tsx`** -- Shared components: FadeIn, StaggerWrap, StaggerItem, BlueprintGridPattern, CornerBrackets, SectionLabel, PageHeader, ConceptNav, CTASection, tokens object
+- **`src/app/concept-merged/layout.tsx`** -- Layout wrapper: font variables (Instrument Serif, IBM Plex Sans, IBM Plex Mono), CSS design tokens, ConceptNav
+- **`src/app/concept-merged/fonts.ts`** -- Font config (Instrument Serif, IBM Plex Sans, IBM Plex Mono)
+- **`src/app/concept-merged/page.tsx`** -- Homepage: Hero, Problem, Solution, Pillars Grid, CTA
+- **`src/app/concept-merged/about/page.tsx`** -- Founder bio, philosophy, values with SVG icons
+- **`src/app/concept-merged/services/page.tsx`** -- 7 service pillar sections with included/outcomes
+- **`src/app/concept-merged/model/page.tsx`** -- SVG architecture diagram, 4-phase deep dive, pillar grid, why-it-works
+- **`src/app/concept-merged/impact/page.tsx`** -- 3 case study cards, testimonials section
+- **`src/app/concept-merged/contact/page.tsx`** -- Formspree form, Calendly booking, location info
+
+Design system: bone/parchment backgrounds, deep-green/archGold accents, blueprint blue folio numbers, inline CSS styles (not Tailwind), `motion/react` animations
+
 ### Tech Stack
 
 - Next.js 16 with TypeScript (strict mode), static export (`output: 'export'`)
@@ -222,7 +238,7 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 
 ## Rules
 
-- For every front-end change, use the front-end skill and review with the senior-frontend.
+- For every front-end change, use the front-end skill
 - Never include "Co-Authored-By: Claude" in any git commits, pushes, or PRs. No Claude attribution in the repo.
 - After every git commit, update this CLAUDE.md file to reflect the current state of the project (new files, components, decisions, etc.).
 
