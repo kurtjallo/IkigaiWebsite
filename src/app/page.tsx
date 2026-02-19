@@ -478,7 +478,8 @@ function PillarsGrid() {
           >
             {pillars.map((pillar, idx) => (
               <StaggerItem key={pillar.slug}>
-                <div
+                <Link
+                  href={`/services#${pillar.slug}`}
                   style={{
                     backgroundColor: tokens.boneLight,
                     padding: '2rem',
@@ -489,6 +490,8 @@ function PillarsGrid() {
                     minHeight: '12rem',
                     display: 'flex',
                     flexDirection: 'column',
+                    textDecoration: 'none',
+                    color: 'inherit',
                   }}
                   onMouseEnter={(e) => {
                     ;(e.currentTarget as HTMLElement).style.borderLeftColor =
@@ -546,14 +549,12 @@ function PillarsGrid() {
                   >
                     {pillar.description.slice(0, 140)}...
                   </p>
-                  <Link
-                    href={`/services#${pillar.slug}`}
+                  <span
                     style={{
                       fontFamily: 'var(--font-ibm-plex-sans)',
                       fontSize: '0.8125rem',
                       fontWeight: 500,
                       color: tokens.archGoldTextLight,
-                      textDecoration: 'none',
                       marginTop: '1rem',
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -562,8 +563,8 @@ function PillarsGrid() {
                   >
                     Learn More
                     <span aria-hidden="true">&rarr;</span>
-                  </Link>
-                </div>
+                  </span>
+                </Link>
               </StaggerItem>
             ))}
           </div>

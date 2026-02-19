@@ -3,7 +3,7 @@
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Design Token Object (for reuse in inline styles)                   */
@@ -477,6 +477,23 @@ export function SiteNav() {
 
   const isActive = (href: string) => pathname === href
 
+  // Body scroll lock + Escape to close
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setMobileOpen(false)
+      }
+      document.addEventListener('keydown', handleKeyDown)
+      return () => {
+        document.body.style.overflow = ''
+        document.removeEventListener('keydown', handleKeyDown)
+      }
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
   return (
     <nav
       style={{
@@ -570,6 +587,8 @@ export function SiteNav() {
             padding: '0.5rem',
           }}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={tokens.charcoal} strokeWidth="2">
             {mobileOpen ? (
@@ -584,6 +603,9 @@ export function SiteNav() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
+          id="mobile-menu"
+          role="dialog"
+          aria-label="Navigation menu"
           className="concept-nav-mobile-menu"
           style={{
             display: 'none',
