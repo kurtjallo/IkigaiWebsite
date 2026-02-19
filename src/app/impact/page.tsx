@@ -30,21 +30,13 @@ const standaloneTestimonial = testimonials.find(
 /* ------------------------------------------------------------------ */
 
 function ResultsSnapshot() {
-  const snapshots = caseStudies.map((study) => {
-    // Extract the most compelling metric (first one) as the headline result
-    const keyMetric = study.metrics[0]
-    // Short challenge summary (first sentence or truncated)
-    const challengeShort =
-      study.challenge.split('.')[0] + '.'
-
-    return {
-      org: study.organization,
-      sector: study.sector,
-      challenge: challengeShort,
-      result: keyMetric,
-      slug: study.slug,
-    }
-  })
+  const snapshots = caseStudies.map((study) => ({
+    org: study.organization,
+    sector: study.sector,
+    challenge: study.challenge.split('.')[0] + '.',
+    result: study.metrics[0],
+    slug: study.slug,
+  }))
 
   return (
     <section
@@ -71,83 +63,41 @@ function ResultsSnapshot() {
           </h2>
         </FadeIn>
 
-        <StaggerWrap staggerDelay={0.1}>
-          <div
-            style={{
-              display: 'grid',
-              gap: '1px',
-              backgroundColor: tokens.structuralLine,
-            }}
-          >
-            {/* Header row — desktop only */}
-            <div
-              className="snapshot-header"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 2fr 2fr',
-                gap: '1px',
-                backgroundColor: tokens.structuralLine,
-              }}
-            >
-              {['Organization', 'Challenge', 'Key Result'].map((label) => (
-                <div
-                  key={label}
-                  style={{
-                    backgroundColor: tokens.deepGreen,
-                    padding: '0.875rem 1.25rem',
-                  }}
-                >
-                  <span
-                    className="mobile-min-text mobile-tight-tracking"
-                    style={{
-                      fontFamily: 'var(--font-ibm-plex-mono)',
-                      fontSize: '0.6875rem',
-                      fontWeight: 500,
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                      color: tokens.archGoldTextDark,
-                    }}
-                  >
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Data rows */}
+        <StaggerWrap staggerDelay={0.12}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             {snapshots.map((row) => (
               <StaggerItem key={row.slug}>
                 <a
                   href={`#${row.slug}`}
-                  className="snapshot-row"
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 2fr 2fr',
-                    gap: '1px',
-                    backgroundColor: tokens.structuralLine,
+                    display: 'block',
+                    backgroundColor: tokens.boneLight,
+                    borderLeft: `3px solid ${tokens.archGold}`,
+                    padding: '1.75rem 2rem',
                     textDecoration: 'none',
                     color: 'inherit',
+                    transition: 'border-color 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    ;(e.currentTarget as HTMLElement).style.borderLeftColor = tokens.deepGreen
+                  }}
+                  onMouseLeave={(e) => {
+                    ;(e.currentTarget as HTMLElement).style.borderLeftColor = tokens.archGold
                   }}
                 >
-                  <div
-                    className="snapshot-cell"
-                    style={{
-                      backgroundColor: tokens.boneLight,
-                      padding: '1.25rem',
-                    }}
-                  >
+                  {/* Top line: org + sector */}
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', marginBottom: '0.625rem', flexWrap: 'wrap' }}>
                     <p
                       style={{
                         fontFamily: 'var(--font-ibm-plex-sans)',
                         fontWeight: 500,
-                        fontSize: '0.9375rem',
+                        fontSize: '1rem',
                         color: tokens.deepGreen,
-                        marginBottom: '0.25rem',
                       }}
                     >
                       {row.org}
                     </p>
-                    <p
+                    <span
                       className="mobile-min-text"
                       style={{
                         fontFamily: 'var(--font-ibm-plex-mono)',
@@ -158,37 +108,25 @@ function ResultsSnapshot() {
                       }}
                     >
                       {row.sector}
-                    </p>
+                    </span>
                   </div>
-                  <div
-                    className="snapshot-cell"
+
+                  {/* Challenge text */}
+                  <p
                     style={{
-                      backgroundColor: tokens.boneLight,
-                      padding: '1.25rem',
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontWeight: 300,
+                      fontSize: '0.875rem',
+                      lineHeight: 1.6,
+                      color: tokens.charcoal,
+                      marginBottom: '0.875rem',
                     }}
                   >
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-ibm-plex-sans)',
-                        fontWeight: 300,
-                        fontSize: '0.875rem',
-                        lineHeight: 1.6,
-                        color: tokens.charcoal,
-                      }}
-                    >
-                      {row.challenge}
-                    </p>
-                  </div>
-                  <div
-                    className="snapshot-cell snapshot-result"
-                    style={{
-                      backgroundColor: tokens.boneLight,
-                      padding: '1.25rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                    }}
-                  >
+                    {row.challenge}
+                  </p>
+
+                  {/* Key result — prominent */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
                     <span
                       aria-hidden="true"
                       style={{
@@ -203,9 +141,8 @@ function ResultsSnapshot() {
                     <p
                       style={{
                         fontFamily: 'var(--font-ibm-plex-sans)',
-                        fontWeight: 500,
+                        fontWeight: 600,
                         fontSize: '0.9375rem',
-                        lineHeight: 1.5,
                         color: tokens.deepGreen,
                       }}
                     >
@@ -218,21 +155,6 @@ function ResultsSnapshot() {
           </div>
         </StaggerWrap>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .snapshot-header { display: none !important; }
-          .snapshot-row {
-            grid-template-columns: 1fr !important;
-          }
-          .snapshot-cell {
-            padding: 1rem 1.25rem !important;
-          }
-          .snapshot-result {
-            border-left: 3px solid ${tokens.archGold};
-          }
-        }
-      `}</style>
     </section>
   )
 }
