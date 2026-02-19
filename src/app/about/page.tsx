@@ -191,32 +191,25 @@ function FounderBioSection() {
             </div>
           </FadeIn>
 
-          {/* Right column: Photo placeholder */}
+          {/* Right column: Founder photo */}
           <FadeIn delay={0.25}>
             <div
               style={{
-                aspectRatio: '4 / 5',
-                backgroundColor: tokens.deepGreen,
+                overflow: 'hidden',
                 border: `2px solid ${tokens.archGold}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 maxWidth: '24rem',
               }}
             >
-              <p
+              <img
+                src="/images/founder.jpg"
+                alt="Nilda Bastone, Founder & Principal Consultant at Ikigai Consulting Group"
                 style={{
-                  fontFamily: 'var(--font-ibm-plex-mono)',
-                  fontSize: '0.75rem',
-                  fontWeight: 400,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: tokens.parchment,
-                  opacity: 0.6,
+                  width: '100%',
+                  aspectRatio: '4 / 5',
+                  objectFit: 'cover',
+                  display: 'block',
                 }}
-              >
-                Photo Coming Soon
-              </p>
+              />
             </div>
           </FadeIn>
         </div>

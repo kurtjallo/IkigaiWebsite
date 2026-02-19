@@ -75,12 +75,37 @@ function CaseStudySection({
               fontWeight: 400,
               letterSpacing: '0.05em',
               color: tokens.archGoldTextLight,
-              marginBottom: '3rem',
+              marginBottom: '2rem',
             }}
           >
             {study.organization} &middot; {study.sector}
           </p>
         </FadeIn>
+
+        {/* Case study image */}
+        {study.image && (
+          <FadeIn delay={0.2}>
+            <div
+              style={{
+                marginBottom: '3rem',
+                overflow: 'hidden',
+                borderRadius: '2px',
+                border: `1px solid ${tokens.structuralLine}`,
+              }}
+            >
+              <img
+                src={study.image}
+                alt={`${study.organization} — ${study.title}`}
+                style={{
+                  width: '100%',
+                  height: '20rem',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </FadeIn>
+        )}
 
         {/* Challenge + Approach two-column */}
         <div
