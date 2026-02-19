@@ -115,6 +115,12 @@ Per `.planning/UX-AUDIT.md`, Wave 2 (5 items) shipped:
 - Services page: Accordion UI replacing 7 identical full-width sections (AnimatePresence, one open at a time, ARIA)
 - Services page: Proof point per pillar linking to real case study results on Impact page
 
+### UX Audit -- Wave 3 Partial (2026-02-19)
+
+Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client input):
+- About page: Founder credentials added (Catholic Community Services of York Region, 37 recommendations)
+- Still blocked: specific org count for "Proven with X organizations", 4th case study for Peel Region
+
 ### Tech Stack
 
 - Next.js 16 with TypeScript (strict mode), static export (`output: 'export'`)
