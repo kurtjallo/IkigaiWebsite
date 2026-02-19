@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import {
   FadeIn,
+  StaggerWrap,
+  StaggerItem,
   PageHeader,
   SectionLabel,
   tokens,
@@ -13,6 +15,121 @@ import {
 /* ------------------------------------------------------------------ */
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
+
+/* ------------------------------------------------------------------ */
+/*  BEST FIT ORGANIZATIONS                                             */
+/* ------------------------------------------------------------------ */
+
+function BestFitSection() {
+  const fits = [
+    {
+      label: 'Nonprofits ready to move beyond survival mode',
+      desc: 'You have the mission but need stronger systems to scale your impact.',
+    },
+    {
+      label: 'Boards seeking governance clarity',
+      desc: 'Roles are unclear, attendance is low, or strategic oversight has slipped.',
+    },
+    {
+      label: 'Organizations preparing for leadership transitions',
+      desc: 'A founder or long-serving ED is moving on and no succession plan exists.',
+    },
+    {
+      label: 'Teams that want measurable program outcomes',
+      desc: 'Funders are asking for data you don\u2019t have, or programs lack clear impact metrics.',
+    },
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.bone,
+        padding: '5rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <SectionLabel label="Best Fit" />
+
+        <FadeIn delay={0.1}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              color: tokens.deepGreen,
+              marginBottom: '0.75rem',
+            }}
+          >
+            Best Fit <em style={{ fontStyle: 'italic' }}>Organizations</em>
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={0.15}>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontWeight: 300,
+              fontSize: '1.0625rem',
+              lineHeight: 1.8,
+              color: tokens.charcoal,
+              maxWidth: '40rem',
+              marginBottom: '2.5rem',
+            }}
+          >
+            We do our best work with organizations that are ready to invest in
+            lasting structural change.
+          </p>
+        </FadeIn>
+
+        <StaggerWrap staggerDelay={0.08}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 20rem), 1fr))',
+              gap: '1.5rem',
+            }}
+          >
+            {fits.map((fit) => (
+              <StaggerItem key={fit.label}>
+                <div
+                  style={{
+                    padding: '1.5rem',
+                    borderLeft: `2px solid ${tokens.archGold}`,
+                    backgroundColor: tokens.boneLight,
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontWeight: 500,
+                      fontSize: '0.9375rem',
+                      color: tokens.deepGreen,
+                      marginBottom: '0.375rem',
+                    }}
+                  >
+                    {fit.label}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontWeight: 300,
+                      fontSize: '0.8125rem',
+                      lineHeight: 1.65,
+                      color: tokens.charcoal,
+                    }}
+                  >
+                    {fit.desc}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerWrap>
+      </div>
+    </section>
+  )
+}
 
 /* ------------------------------------------------------------------ */
 /*  CONTACT FORM SECTION                                               */
@@ -321,6 +438,141 @@ function ContactFormSection() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  COMMON CONCERNS FAQ                                                */
+/* ------------------------------------------------------------------ */
+
+function CommonConcernsSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const faqs = [
+    {
+      q: '\u201CWe already have a strategic plan.\u201D',
+      a: 'Great \u2014 that\u2019s a starting point. Most organizations we work with have a plan on paper. The challenge is usually turning it into daily practice with governance structures, operational alignment, and accountability measures that make the plan real.',
+    },
+    {
+      q: '\u201COur board isn\u2019t ready for this.\u201D',
+      a: 'That\u2019s more common than you think, and it\u2019s exactly where we start. We work with boards at every stage of readiness \u2014 from passive attendance to active governance. Our approach is designed to meet your board where they are.',
+    },
+    {
+      q: '\u201CWe don\u2019t have the budget.\u201D',
+      a: 'Many funders will fund capacity-building and governance strengthening as part of project or operational grants. We can help you identify funding pathways and frame the work in ways funders understand and support.',
+    },
+    {
+      q: '\u201CWe\u2019ve tried consultants before.\u201D',
+      a: 'We hear this often. The difference is that we don\u2019t deliver a report and leave. Our full-cycle model means we stay through implementation and follow up at 90 days to ensure results hold.',
+    },
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.boneDark,
+        padding: '5rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
+        <SectionLabel label="Common Concerns" />
+
+        <FadeIn delay={0.1}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              color: tokens.deepGreen,
+              marginBottom: '2.5rem',
+            }}
+          >
+            Questions We Hear <em style={{ fontStyle: 'italic' }}>Often</em>
+          </h2>
+        </FadeIn>
+
+        <StaggerWrap staggerDelay={0.08}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', backgroundColor: tokens.structuralLine }}>
+            {faqs.map((faq, idx) => (
+              <StaggerItem key={idx}>
+                <div style={{ backgroundColor: tokens.boneLight }}>
+                  <button
+                    onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                    aria-expanded={openIndex === idx}
+                    aria-controls={`faq-panel-${idx}`}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                      padding: '1.25rem 1.5rem',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-ibm-plex-sans)',
+                        fontWeight: 500,
+                        fontSize: '0.9375rem',
+                        color: tokens.deepGreen,
+                      }}
+                    >
+                      {faq.q}
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      style={{
+                        flexShrink: 0,
+                        transform: openIndex === idx ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.25s ease',
+                      }}
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        fill="none"
+                        stroke={tokens.charcoal}
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  {openIndex === idx && (
+                    <div
+                      id={`faq-panel-${idx}`}
+                      role="region"
+                      style={{
+                        padding: '0 1.5rem 1.25rem',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: 'var(--font-ibm-plex-sans)',
+                          fontWeight: 300,
+                          fontSize: '0.9375rem',
+                          lineHeight: 1.75,
+                          color: tokens.charcoal,
+                        }}
+                      >
+                        {faq.a}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerWrap>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  CALENDAR BOOKING SECTION                                           */
 /* ------------------------------------------------------------------ */
 
@@ -374,27 +626,41 @@ function CalendarBookingSection() {
         </FadeIn>
 
         <FadeIn delay={0.3}>
-          <button
-            type="button"
-            onClick={() => window.open(calendlyUrl, '_blank')}
-            className="mobile-cta-text"
-            style={{
-              display: 'inline-block',
-              fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '0.875rem 2.5rem',
-              backgroundColor: tokens.archGold,
-              color: tokens.ink,
-              border: 'none',
-              borderRadius: '1px',
-              cursor: 'pointer',
-            }}
-          >
-            Book a Free 30-Min Call
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <button
+              type="button"
+              onClick={() => window.open(calendlyUrl, '_blank')}
+              className="mobile-cta-text"
+              style={{
+                display: 'inline-block',
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                padding: '0.875rem 2.5rem',
+                backgroundColor: tokens.archGold,
+                color: tokens.ink,
+                border: 'none',
+                borderRadius: '1px',
+                cursor: 'pointer',
+                alignSelf: 'flex-start',
+              }}
+            >
+              Book a Free 30-Min Call
+            </button>
+            <span
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontWeight: 300,
+                fontSize: '0.8125rem',
+                color: tokens.boneDark,
+                opacity: 0.85,
+              }}
+            >
+              Free 30-minute call with Nilda.
+            </span>
+          </div>
         </FadeIn>
       </div>
     </section>
@@ -496,7 +762,9 @@ export default function ContactPage() {
         heading="Begin the Conversation."
         description="Ready to build a stronger organization? Tell us about your challenge and we'll respond within 2 business days."
       />
+      <BestFitSection />
       <ContactFormSection />
+      <CommonConcernsSection />
       <CalendarBookingSection />
       <LocationInfoSection />
     </>

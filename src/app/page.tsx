@@ -95,26 +95,40 @@ function HeroSection() {
         </FadeIn>
 
         <FadeIn delay={0.55}>
-          <Link
-            href="/contact"
-            className="mobile-cta-text"
-            style={{
-              display: 'inline-block',
-              fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '0.875rem 2rem',
-              backgroundColor: tokens.archGold,
-              color: tokens.ink,
-              borderRadius: '1px',
-              cursor: 'pointer',
-              textDecoration: 'none',
-            }}
-          >
-            Book a Strategy Call
-          </Link>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <Link
+              href="/contact"
+              className="mobile-cta-text"
+              style={{
+                display: 'inline-block',
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                padding: '0.875rem 2rem',
+                backgroundColor: tokens.archGold,
+                color: tokens.ink,
+                borderRadius: '1px',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                alignSelf: 'flex-start',
+              }}
+            >
+              Book a Strategy Call
+            </Link>
+            <span
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontWeight: 300,
+                fontSize: '0.8125rem',
+                color: tokens.boneDark,
+                opacity: 0.85,
+              }}
+            >
+              Free 30-minute call with Nilda.
+            </span>
+          </div>
         </FadeIn>
 
         {/* Credibility strip */}
@@ -901,25 +915,30 @@ function SocialProofSection() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  WHY IKIGAI SECTION                                                 */
+/*  HOW WE WORK SECTION                                                */
 /* ------------------------------------------------------------------ */
 
-function WhyIkigaiSection() {
-  const differentiators = [
+function HowWeWorkSection() {
+  const steps = [
     {
-      title: 'Deep Sector Expertise',
-      description:
-        "Two decades working exclusively with Ontario\u2019s nonprofit and social service sector. We understand your funding landscape, your governance realities, and the communities you serve.",
+      num: '01',
+      title: 'Discovery Call',
+      desc: 'A free 30-minute conversation to understand your challenges, goals, and organizational context.',
     },
     {
-      title: 'Full-Cycle Model',
-      description:
-        "Most consultants deliver a report and leave. Our Blueprint \u2192 Build \u2192 Strengthen \u2192 Sustain model means we stay until the transformation is embedded in your organization\u2019s DNA.",
+      num: '02',
+      title: 'Custom Blueprint',
+      desc: 'A tailored assessment and action plan built around your organization\u2019s specific needs \u2014 not a template.',
     },
     {
-      title: 'Measurable Results',
-      description:
-        'Every engagement produces concrete, trackable outcomes. From board attendance rates to funder confidence scores, we measure what matters.',
+      num: '03',
+      title: 'Hands-On Implementation',
+      desc: 'We work alongside your team to build systems, strengthen governance, and embed lasting change.',
+    },
+    {
+      num: '04',
+      title: 'Sustained Support',
+      desc: 'Ongoing check-ins and evaluation to ensure results hold and your team can lead independently.',
     },
   ]
 
@@ -931,7 +950,7 @@ function WhyIkigaiSection() {
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-        <SectionLabel label="06 / Differentiation" />
+        <SectionLabel label="06 / Process" />
 
         <FadeIn delay={0.1}>
           <h2
@@ -945,7 +964,7 @@ function WhyIkigaiSection() {
               marginBottom: '0.75rem',
             }}
           >
-            Why <em style={{ fontStyle: 'italic' }}>Ikigai</em>
+            How We <em style={{ fontStyle: 'italic' }}>Work</em>
           </h2>
         </FadeIn>
 
@@ -961,52 +980,67 @@ function WhyIkigaiSection() {
               marginBottom: '3rem',
             }}
           >
-            What sets us apart from traditional consulting.
+            Every engagement follows a clear path. Typical projects run
+            3&ndash;12 months depending on scope, with regular milestones
+            so you always know where things stand.
           </p>
         </FadeIn>
 
-        <StaggerWrap staggerDelay={0.12}>
+        <StaggerWrap staggerDelay={0.1}>
           <div
+            className="how-we-work-grid"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 18rem), 1fr))',
-              gap: '2.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 14rem), 1fr))',
+              gap: '0',
             }}
           >
-            {differentiators.map((item) => (
-              <StaggerItem key={item.title}>
-                <div>
+            {steps.map((step, idx) => (
+              <StaggerItem key={step.num}>
+                <div
+                  style={{
+                    padding: '2rem 1.5rem',
+                    borderLeft:
+                      idx === 0
+                        ? `2px solid ${tokens.archGold}`
+                        : `1px solid ${tokens.structuralLine}`,
+                  }}
+                >
                   <span
-                    aria-hidden="true"
+                    className="mobile-min-text mobile-tight-tracking"
                     style={{
+                      fontFamily: 'var(--font-ibm-plex-mono)',
+                      fontSize: '0.6875rem',
+                      fontWeight: 400,
+                      letterSpacing: '0.15em',
+                      color: tokens.blueprint,
                       display: 'block',
-                      width: '40px',
-                      height: '2px',
-                      backgroundColor: tokens.archGold,
-                      marginBottom: '1.25rem',
+                      marginBottom: '0.5rem',
                     }}
-                  />
+                  >
+                    Step {step.num}
+                  </span>
                   <h3
                     style={{
-                      fontFamily: 'var(--font-ibm-plex-sans)',
-                      fontSize: '1.125rem',
-                      fontWeight: 600,
+                      fontFamily: 'var(--font-instrument-serif)',
+                      fontSize: '1.375rem',
+                      fontWeight: 400,
                       color: tokens.deepGreen,
                       marginBottom: '0.75rem',
                     }}
                   >
-                    {item.title}
+                    {step.title}
                   </h3>
                   <p
                     style={{
                       fontFamily: 'var(--font-ibm-plex-sans)',
                       fontWeight: 300,
-                      fontSize: '0.9375rem',
-                      lineHeight: 1.7,
+                      fontSize: '0.875rem',
+                      lineHeight: 1.65,
                       color: tokens.charcoal,
                     }}
                   >
-                    {item.description}
+                    {step.desc}
                   </p>
                 </div>
               </StaggerItem>
@@ -1036,7 +1070,7 @@ export default function ConceptMergedPage() {
       <PillarsGrid />
       <WhoWeServeSection />
       <SocialProofSection />
-      <WhyIkigaiSection />
+      <HowWeWorkSection />
       <CTASection />
     </>
   )

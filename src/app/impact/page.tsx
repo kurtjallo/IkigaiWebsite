@@ -26,6 +26,218 @@ const standaloneTestimonial = testimonials.find(
 )!
 
 /* ------------------------------------------------------------------ */
+/*  RESULTS SNAPSHOT                                                   */
+/* ------------------------------------------------------------------ */
+
+function ResultsSnapshot() {
+  const snapshots = caseStudies.map((study) => {
+    // Extract the most compelling metric (first one) as the headline result
+    const keyMetric = study.metrics[0]
+    // Short challenge summary (first sentence or truncated)
+    const challengeShort =
+      study.challenge.split('.')[0] + '.'
+
+    return {
+      org: study.organization,
+      sector: study.sector,
+      challenge: challengeShort,
+      result: keyMetric,
+      slug: study.slug,
+    }
+  })
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.boneDark,
+        padding: '5rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <SectionLabel label="At a Glance" />
+
+        <FadeIn delay={0.1}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              color: tokens.deepGreen,
+              marginBottom: '2.5rem',
+            }}
+          >
+            Results <em style={{ fontStyle: 'italic' }}>Snapshot</em>
+          </h2>
+        </FadeIn>
+
+        <StaggerWrap staggerDelay={0.1}>
+          <div
+            style={{
+              display: 'grid',
+              gap: '1px',
+              backgroundColor: tokens.structuralLine,
+            }}
+          >
+            {/* Header row — desktop only */}
+            <div
+              className="snapshot-header"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 2fr 2fr',
+                gap: '1px',
+                backgroundColor: tokens.structuralLine,
+              }}
+            >
+              {['Organization', 'Challenge', 'Key Result'].map((label) => (
+                <div
+                  key={label}
+                  style={{
+                    backgroundColor: tokens.deepGreen,
+                    padding: '0.875rem 1.25rem',
+                  }}
+                >
+                  <span
+                    className="mobile-min-text mobile-tight-tracking"
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-mono)',
+                      fontSize: '0.6875rem',
+                      fontWeight: 500,
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      color: tokens.archGoldTextDark,
+                    }}
+                  >
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Data rows */}
+            {snapshots.map((row) => (
+              <StaggerItem key={row.slug}>
+                <a
+                  href={`#${row.slug}`}
+                  className="snapshot-row"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 2fr 2fr',
+                    gap: '1px',
+                    backgroundColor: tokens.structuralLine,
+                    textDecoration: 'none',
+                    color: 'inherit',
+                  }}
+                >
+                  <div
+                    className="snapshot-cell"
+                    style={{
+                      backgroundColor: tokens.boneLight,
+                      padding: '1.25rem',
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-ibm-plex-sans)',
+                        fontWeight: 500,
+                        fontSize: '0.9375rem',
+                        color: tokens.deepGreen,
+                        marginBottom: '0.25rem',
+                      }}
+                    >
+                      {row.org}
+                    </p>
+                    <p
+                      className="mobile-min-text"
+                      style={{
+                        fontFamily: 'var(--font-ibm-plex-mono)',
+                        fontSize: '0.6875rem',
+                        fontWeight: 400,
+                        letterSpacing: '0.05em',
+                        color: tokens.archGoldTextLight,
+                      }}
+                    >
+                      {row.sector}
+                    </p>
+                  </div>
+                  <div
+                    className="snapshot-cell"
+                    style={{
+                      backgroundColor: tokens.boneLight,
+                      padding: '1.25rem',
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-ibm-plex-sans)',
+                        fontWeight: 300,
+                        fontSize: '0.875rem',
+                        lineHeight: 1.6,
+                        color: tokens.charcoal,
+                      }}
+                    >
+                      {row.challenge}
+                    </p>
+                  </div>
+                  <div
+                    className="snapshot-cell snapshot-result"
+                    style={{
+                      backgroundColor: tokens.boneLight,
+                      padding: '1.25rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        display: 'inline-block',
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: tokens.archGold,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-ibm-plex-sans)',
+                        fontWeight: 500,
+                        fontSize: '0.9375rem',
+                        lineHeight: 1.5,
+                        color: tokens.deepGreen,
+                      }}
+                    >
+                      {row.result}
+                    </p>
+                  </div>
+                </a>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerWrap>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .snapshot-header { display: none !important; }
+          .snapshot-row {
+            grid-template-columns: 1fr !important;
+          }
+          .snapshot-cell {
+            padding: 1rem 1.25rem !important;
+          }
+          .snapshot-result {
+            border-left: 3px solid ${tokens.archGold};
+          }
+        }
+      `}</style>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  CASE STUDY SECTION                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -44,9 +256,11 @@ function CaseStudySection({
 
   return (
     <section
+      id={study.slug}
       style={{
         backgroundColor: bg,
         padding: '5rem 2rem',
+        scrollMarginTop: '5rem',
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
@@ -460,6 +674,8 @@ export default function ImpactPage() {
         heading="Impact in Action."
         description="Real organizations. Real challenges. Real results. See how the Ikigai Architecture Model&trade; transforms purpose-driven organizations from fragile to resilient."
       />
+
+      <ResultsSnapshot />
 
       {caseStudies.map((study, idx) => (
         <CaseStudySection
