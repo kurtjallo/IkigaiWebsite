@@ -437,26 +437,45 @@ export function CTASection({
         </FadeIn>
 
         <FadeIn delay={0.4}>
-          <Link
-            href={buttonHref}
-            className="mobile-cta-text"
-            style={{
-              display: 'inline-block',
-              fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '0.875rem 2.5rem',
-              backgroundColor: tokens.archGold,
-              color: tokens.ink,
-              borderRadius: '1px',
-              cursor: 'pointer',
-              textDecoration: 'none',
-            }}
-          >
-            {buttonText}
-          </Link>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.625rem' }}>
+            <Link
+              href={buttonHref}
+              className="mobile-cta-text"
+              style={{
+                display: 'inline-block',
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                padding: '0.875rem 2.5rem',
+                backgroundColor: tokens.archGold,
+                color: tokens.ink,
+                borderRadius: '1px',
+                cursor: 'pointer',
+                textDecoration: 'none',
+              }}
+            >
+              {buttonText}
+            </Link>
+            <span
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontWeight: 300,
+                fontSize: '0.8125rem',
+                color: tokens.boneDark,
+                opacity: 0.85,
+                textAlign: 'center',
+                lineHeight: 1.5,
+              }}
+            >
+              Free 30-minute call with Nilda.
+              <br />
+              <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
+                For leaders ready to strengthen their organization&rsquo;s foundations.
+              </span>
+            </span>
+          </div>
         </FadeIn>
       </div>
     </section>
