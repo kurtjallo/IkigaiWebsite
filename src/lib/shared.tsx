@@ -328,7 +328,7 @@ export function PageHeader({
 
 export function CTASection({
   tagline = 'Begin the Conversation',
-  heading = "Let\u2019s Architect Your Organization.",
+  heading = "Let\u2019s Transform Your Organization.",
   description = "Whether you\u2019re building from the ground up or strengthening existing structures, we\u2019re ready to listen, assess, and design.",
   buttonText = 'Book Your Strategy Call',
   buttonHref = '/contact',

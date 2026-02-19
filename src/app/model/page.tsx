@@ -70,7 +70,7 @@ function ModelDiagramSection() {
           >
             Four phases of transformation mapped across seven organizational
             pillars. Every cell in this matrix represents a deliberate area of
-            architectural attention.
+            focused attention.
           </p>
         </FadeIn>
 
@@ -328,6 +328,29 @@ function ModelDiagramSection() {
             Ikigai Architecture Model&trade;
           </p>
         </FadeIn>
+
+        <FadeIn delay={0.5}>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontWeight: 300,
+              fontSize: '0.9375rem',
+              lineHeight: 1.8,
+              color: tokens.charcoal,
+              maxWidth: '52rem',
+              margin: '2.5rem auto 0',
+              textAlign: 'center',
+            }}
+          >
+            Each cell in the matrix represents a specific focus area where a
+            pillar intersects with a phase. For example, during the Blueprint
+            phase, Strategic Architecture involves assessing your current
+            strategic alignment and identifying gaps. In the Build phase, it
+            means designing a new strategic framework tailored to your mission.
+            This ensures every pillar receives focused attention at every stage
+            of the engagement.
+          </p>
+        </FadeIn>
       </div>
     </section>
   )
@@ -343,7 +366,7 @@ function PhasesDeepDive() {
       num: '01',
       name: 'Blueprint',
       description:
-        'We begin by mapping your organizational architecture as it exists today. Through comprehensive assessments, stakeholder interviews, and document analysis, we diagnose structural gaps, misalignments, and untapped potential. This phase produces a clear architectural blueprint \u2014 an honest, evidence-based picture of where you are and where you need to be.',
+        'We begin by mapping your organization as it exists today. Through comprehensive assessments, stakeholder interviews, and document analysis, we diagnose structural gaps, misalignments, and untapped potential. This phase produces a clear blueprint \u2014 an honest, evidence-based picture of where you are and where you need to be.',
     },
     {
       num: '02',
@@ -355,13 +378,13 @@ function PhasesDeepDive() {
       num: '03',
       name: 'Strengthen',
       description:
-        'Implementation without capacity building doesn\u2019t last. We develop your people, refine your operations, and embed accountability at every level. This phase includes coaching, training, workshop facilitation, and hands-on support as your organization grows into its new architecture.',
+        'Implementation without capacity building doesn\u2019t last. We develop your people, refine your operations, and embed accountability at every level. This phase includes coaching, training, workshop facilitation, and hands-on support as your organization grows into its new structure.',
     },
     {
       num: '04',
       name: 'Sustain',
       description:
-        'Transformation isn\u2019t a project \u2014 it\u2019s an ongoing commitment. We provide continued evaluation, adaptive support, and strategic check-ins to ensure your organizational architecture remains resilient as conditions change. We don\u2019t just build and leave. We build to last.',
+        'Transformation isn\u2019t a project \u2014 it\u2019s an ongoing commitment. We provide continued evaluation, adaptive support, and strategic check-ins to ensure your organization remains resilient as conditions change. We don\u2019t just build and leave. We build to last.',
     },
   ]
 
@@ -500,7 +523,7 @@ function PillarIntegration() {
             }}
           >
             Seven Pillars of{' '}
-            <em style={{ fontStyle: 'italic' }}>Organizational Architecture</em>
+            <em style={{ fontStyle: 'italic' }}>Organizational Health</em>
           </h2>
         </FadeIn>
 
@@ -516,7 +539,7 @@ function PillarIntegration() {
               marginBottom: '3rem',
             }}
           >
-            Each pillar represents a critical structural element. No
+            Each pillar addresses a core area of organizational health. No
             organization can thrive with one pillar strong and another crumbling.
             The model works because it addresses all seven simultaneously.
           </p>
@@ -633,7 +656,7 @@ function WhyItWorks() {
     {
       title: 'Adaptive',
       description:
-        'The model flexes to meet organizations where they are \u2014 whether you need a full architectural overhaul or targeted structural reinforcement.',
+        'The model flexes to meet organizations where they are \u2014 whether you need a full organizational overhaul or targeted reinforcement.',
     },
     {
       title: 'Sustainable',
@@ -747,7 +770,7 @@ export default function ModelPage() {
       <PageHeader
         tagline="The Ikigai Architecture Model"
         heading="A Blueprint for Organizational Excellence"
-        description="Our proprietary framework moves organizations from assessment through sustained transformation. Four phases. Seven pillars. One integrated architecture."
+        description="Our proprietary framework moves organizations from assessment through sustained transformation. Four phases. Seven pillars. One integrated system."
       />
       <ModelDiagramSection />
       <PhasesDeepDive />
@@ -757,7 +780,7 @@ export default function ModelPage() {
         tagline="Ready to Begin?"
         heading="Your Organization Deserves Structural Excellence."
         description="Let&rsquo;s start with a conversation about where you are and where your mission needs to go."
-        buttonText="Schedule a Strategic Conversation"
+        buttonText="See How This Applies to You"
       />
     </>
   )

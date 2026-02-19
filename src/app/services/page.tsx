@@ -113,73 +113,6 @@ function ServicePillarSection({
 
             {/* Right Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              {/* What's Included */}
-              <div
-                style={{
-                  backgroundColor: tokens.boneLight,
-                  padding: '2rem',
-                  border: `1px solid ${tokens.structuralLine}`,
-                }}
-              >
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-ibm-plex-sans)',
-                    fontWeight: 600,
-                    fontSize: '0.9375rem',
-                    color: tokens.deepGreen,
-                    marginBottom: '1.25rem',
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  What&apos;s Included
-                </h3>
-
-                <StaggerWrap staggerDelay={0.06}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '0.875rem',
-                    }}
-                  >
-                    {pillar.included.map((item) => (
-                      <StaggerItem key={item}>
-                        <div
-                          style={{
-                            display: 'flex',
-                            gap: '0.875rem',
-                            alignItems: 'flex-start',
-                          }}
-                        >
-                          <span
-                            aria-hidden="true"
-                            style={{
-                              display: 'inline-block',
-                              width: '20px',
-                              height: '2px',
-                              backgroundColor: tokens.archGold,
-                              marginTop: '0.6rem',
-                              flexShrink: 0,
-                            }}
-                          />
-                          <p
-                            style={{
-                              fontFamily: 'var(--font-ibm-plex-sans)',
-                              fontWeight: 300,
-                              fontSize: '0.875rem',
-                              lineHeight: 1.6,
-                              color: tokens.charcoal,
-                            }}
-                          >
-                            {item}
-                          </p>
-                        </div>
-                      </StaggerItem>
-                    ))}
-                  </div>
-                </StaggerWrap>
-              </div>
-
               {/* Outcomes */}
               <div
                 style={{
@@ -209,7 +142,7 @@ function ServicePillarSection({
                       gap: '0.875rem',
                     }}
                   >
-                    {pillar.outcomes.map((outcome) => (
+                    {pillar.outcomes.slice(0, 2).map((outcome) => (
                       <StaggerItem key={outcome}>
                         <div
                           style={{
@@ -291,8 +224,8 @@ export default function ServicesPage() {
     <>
       <PageHeader
         tagline="Our Services"
-        heading="Seven Pillars of Organizational Architecture"
-        description="Each pillar addresses a critical dimension of organizational health. Together, they form a complete architecture for purpose-driven organizations."
+        heading="Seven Pillars of Organizational Excellence"
+        description="Each pillar addresses a critical dimension of organizational health. Together, they form a comprehensive system for purpose-driven organizations."
       />
 
       {pillars.map((pillar, index) => (
@@ -303,9 +236,9 @@ export default function ServicesPage() {
       ))}
 
       <CTASection
-        heading="Ready to Architect Your Organization?"
+        heading="Ready to Strengthen Your Organization?"
         description="Every strong organization starts with a conversation about what's possible."
-        buttonText="Schedule a Strategic Conversation"
+        buttonText="Get a Pillar Assessment"
       />
     </>
   )

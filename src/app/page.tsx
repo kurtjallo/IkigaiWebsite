@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { pillars } from '@/lib/data/pillars'
 import {
   FadeIn,
@@ -19,9 +20,10 @@ import {
 function HeroSection() {
   return (
     <section
+      className="hero-section"
       style={{
         position: 'relative',
-        minHeight: '90vh',
+        minHeight: '75vh',
         display: 'flex',
         alignItems: 'center',
         backgroundColor: tokens.deepGreen,
@@ -136,7 +138,7 @@ function ProblemSection() {
     },
     {
       title: 'Program Drift',
-      desc: 'Programs launched with passion but no logic model. Impact assumed, never measured.',
+      desc: 'Programs launched with passion but no logic model (a visual map showing how your programs create change). Impact assumed, never measured.',
     },
     {
       title: 'Leadership Burnout',
@@ -190,7 +192,7 @@ function ProblemSection() {
             >
               Purpose-driven organizations are built on powerful missions -- but
               too often, they operate on fragile infrastructure. The passion is
-              there. The structure isn&apos;t. Without architectural integrity,
+              there. The structure isn&apos;t. Without structural integrity,
               even the strongest mission cracks under pressure.
             </p>
           </FadeIn>
@@ -261,7 +263,7 @@ function SolutionSection() {
     {
       num: '01',
       name: 'Blueprint',
-      desc: 'Assess. Diagnose. Map your organizational architecture.',
+      desc: 'Assess. Diagnose. Map your organization\u2019s foundations.',
     },
     {
       num: '02',
@@ -276,7 +278,7 @@ function SolutionSection() {
     {
       num: '04',
       name: 'Sustain',
-      desc: 'Ongoing support, evaluation, and adaptive capacity building.',
+      desc: 'Ongoing support, evaluation, and building the ability to adapt and grow.',
     },
   ]
 
@@ -457,8 +459,8 @@ function PillarsGrid() {
               marginBottom: '3rem',
             }}
           >
-            Each pillar represents a critical structural element. Together, they
-            form a complete architectural framework for organizational
+            Each pillar addresses a core area of organizational health.
+            Together, they form a complete integrated framework for lasting
             excellence.
           </p>
         </FadeIn>
@@ -542,6 +544,23 @@ function PillarsGrid() {
                   >
                     {pillar.description.slice(0, 140)}...
                   </p>
+                  <Link
+                    href={`/services#${pillar.slug}`}
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontSize: '0.8125rem',
+                      fontWeight: 500,
+                      color: tokens.archGoldTextLight,
+                      textDecoration: 'none',
+                      marginTop: '1rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                    }}
+                  >
+                    Learn More
+                    <span aria-hidden="true">&rarr;</span>
+                  </Link>
                 </div>
               </StaggerItem>
             ))}
@@ -559,11 +578,16 @@ function PillarsGrid() {
 export default function ConceptMergedPage() {
   return (
     <>
+      <style>{`
+        @media (min-width: 769px) {
+          .hero-section { min-height: 90vh !important; }
+        }
+      `}</style>
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
       <PillarsGrid />
-      <CTASection />
+      <CTASection buttonText="Book Your Strategy Call" />
     </>
   )
 }
