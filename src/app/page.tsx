@@ -572,6 +572,363 @@ function PillarsGrid() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  WHO WE SERVE SECTION                                               */
+/* ------------------------------------------------------------------ */
+
+function WhoWeServeSection() {
+  const audiences = [
+    'NGOs & Charities',
+    'Social Service Agencies',
+    'Faith-Based Organizations',
+    'Women-Led & Justice-Centered Initiatives',
+    'Boards & Executive Teams',
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.deepGreen,
+        padding: '6rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <SectionLabel label="04 / Audience" dark />
+
+        <FadeIn delay={0.1}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              color: tokens.parchment,
+              maxWidth: '36rem',
+              marginBottom: '3rem',
+            }}
+          >
+            Built for Leaders Who Carry{' '}
+            <em style={{ fontStyle: 'italic' }}>Mission.</em>
+          </h2>
+        </FadeIn>
+
+        <StaggerWrap staggerDelay={0.1}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 14rem), 1fr))',
+              gap: '1.5rem 2rem',
+            }}
+          >
+            {audiences.map((audience) => (
+              <StaggerItem key={audience}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                  }}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <path
+                      d="M2 8.5L6 12.5L14 3.5"
+                      fill="none"
+                      stroke={tokens.archGold}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontWeight: 400,
+                      fontSize: '1rem',
+                      color: tokens.parchment,
+                    }}
+                  >
+                    {audience}
+                  </span>
+                </div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerWrap>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  SOCIAL PROOF SECTION                                               */
+/* ------------------------------------------------------------------ */
+
+function SocialProofSection() {
+  const stats = [
+    { value: '85%', label: 'Board Attendance Increase' },
+    { value: '$200K', label: 'New Funding Secured' },
+    { value: '8', label: 'Programs Restructured' },
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.bone,
+        padding: '6rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <SectionLabel label="05 / Proof" />
+
+        {/* Stat bar */}
+        <FadeIn delay={0.1}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 12rem), 1fr))',
+              gap: '2rem',
+              marginBottom: '4rem',
+            }}
+          >
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                style={{
+                  textAlign: 'center',
+                  padding: '1.5rem 1rem',
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: 'block',
+                    width: '40px',
+                    height: '2px',
+                    backgroundColor: tokens.archGold,
+                    margin: '0 auto 1.25rem',
+                  }}
+                />
+                <p
+                  style={{
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: 'clamp(2rem, 4vw, 3rem)',
+                    fontWeight: 400,
+                    color: tokens.deepGreen,
+                    lineHeight: 1.1,
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  {stat.value}
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontSize: '0.8rem',
+                    fontWeight: 400,
+                    color: tokens.charcoal,
+                    letterSpacing: '0.03em',
+                  }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        {/* Testimonial */}
+        <FadeIn delay={0.25}>
+          <blockquote
+            style={{
+              maxWidth: '48rem',
+              margin: '0 auto',
+              textAlign: 'center',
+              position: 'relative',
+              padding: '0 1rem',
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                fontFamily: 'var(--font-instrument-serif)',
+                fontSize: '5rem',
+                lineHeight: 1,
+                color: tokens.archGold,
+                display: 'block',
+                marginBottom: '-1.5rem',
+              }}
+            >
+              &ldquo;
+            </span>
+            <p
+              style={{
+                fontFamily: 'var(--font-instrument-serif)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)',
+                fontWeight: 400,
+                lineHeight: 1.7,
+                color: tokens.deepGreen,
+                marginBottom: '1.5rem',
+              }}
+            >
+              Before working with Ikigai, our board meetings felt like a
+              formality. Now our directors arrive prepared, ask strategic
+              questions, and actually drive the organization forward.
+            </p>
+            <footer>
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  color: tokens.deepGreen,
+                }}
+              >
+                Margaret Chen
+              </p>
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontSize: '0.8125rem',
+                  fontWeight: 300,
+                  color: tokens.charcoal,
+                  marginTop: '0.25rem',
+                }}
+              >
+                Board Chair &mdash; Hamilton Community Services Alliance
+              </p>
+            </footer>
+          </blockquote>
+        </FadeIn>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  WHY IKIGAI SECTION                                                 */
+/* ------------------------------------------------------------------ */
+
+function WhyIkigaiSection() {
+  const differentiators = [
+    {
+      title: 'Deep Sector Expertise',
+      description:
+        "Two decades working exclusively with Ontario\u2019s nonprofit and social service sector. We understand your funding landscape, your governance realities, and the communities you serve.",
+    },
+    {
+      title: 'Full-Cycle Model',
+      description:
+        "Most consultants deliver a report and leave. Our Blueprint \u2192 Build \u2192 Strengthen \u2192 Sustain model means we stay until the transformation is embedded in your organization\u2019s DNA.",
+    },
+    {
+      title: 'Measurable Results',
+      description:
+        'Every engagement produces concrete, trackable outcomes. From board attendance rates to funder confidence scores, we measure what matters.',
+    },
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: tokens.boneDark,
+        padding: '6rem 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <SectionLabel label="06 / Differentiation" />
+
+        <FadeIn delay={0.1}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              color: tokens.deepGreen,
+              maxWidth: '36rem',
+              marginBottom: '0.75rem',
+            }}
+          >
+            Why <em style={{ fontStyle: 'italic' }}>Ikigai</em>
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontWeight: 300,
+              fontSize: '1.0625rem',
+              lineHeight: 1.8,
+              color: tokens.charcoal,
+              maxWidth: '40rem',
+              marginBottom: '3rem',
+            }}
+          >
+            What sets us apart from traditional consulting.
+          </p>
+        </FadeIn>
+
+        <StaggerWrap staggerDelay={0.12}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 18rem), 1fr))',
+              gap: '2.5rem',
+            }}
+          >
+            {differentiators.map((item) => (
+              <StaggerItem key={item.title}>
+                <div>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      display: 'block',
+                      width: '40px',
+                      height: '2px',
+                      backgroundColor: tokens.archGold,
+                      marginBottom: '1.25rem',
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontSize: '1.125rem',
+                      fontWeight: 600,
+                      color: tokens.deepGreen,
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontWeight: 300,
+                      fontSize: '0.9375rem',
+                      lineHeight: 1.7,
+                      color: tokens.charcoal,
+                    }}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerWrap>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -587,6 +944,9 @@ export default function ConceptMergedPage() {
       <ProblemSection />
       <SolutionSection />
       <PillarsGrid />
+      <WhoWeServeSection />
+      <SocialProofSection />
+      <WhyIkigaiSection />
       <CTASection buttonText="Book Your Strategy Call" />
     </>
   )
