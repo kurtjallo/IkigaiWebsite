@@ -174,6 +174,7 @@ function AccordionServicesSection() {
                         {pillar.title}
                       </span>
                       <span
+                        className="mobile-min-text mobile-tight-tracking"
                         style={{
                           fontFamily: 'var(--font-ibm-plex-mono)',
                           fontSize: '0.6875rem',
@@ -239,6 +240,7 @@ function AccordionServicesSection() {
 
                               <Link
                                 href="/contact"
+                                className="mobile-cta-text"
                                 style={{
                                   display: 'inline-block',
                                   fontFamily: 'var(--font-ibm-plex-sans)',
@@ -410,7 +412,7 @@ export default function ServicesPage() {
       <CTASection
         heading="Ready to Strengthen Your Organization?"
         description="Every strong organization starts with a conversation about what's possible."
-        buttonText="Get a Pillar Assessment"
+        buttonText="Book a Strategy Call"
       />
     </>
   )

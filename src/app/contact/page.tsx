@@ -230,12 +230,12 @@ function ContactFormSection() {
                     {/* Challenge */}
                     <div>
                       <label htmlFor="contact-challenge" style={labelStyle}>
-                        Tell us about your challenge
+                        Tell us about your challenge (optional)
                       </label>
                       <textarea
                         id="contact-challenge"
-                        required
                         rows={5}
+                        placeholder="Optional — or we can discuss on the call"
                         value={challenge}
                         onChange={(e) => setChallenge(e.target.value)}
                         onFocus={() => setFocusedField('challenge')}
@@ -286,6 +286,7 @@ function ContactFormSection() {
                     <button
                       type="submit"
                       disabled={status === 'submitting'}
+                      className="mobile-cta-text"
                       style={{
                         fontFamily: 'var(--font-ibm-plex-sans)',
                         fontSize: '0.85rem',
@@ -376,6 +377,7 @@ function CalendarBookingSection() {
           <button
             type="button"
             onClick={() => window.open(calendlyUrl, '_blank')}
+            className="mobile-cta-text"
             style={{
               display: 'inline-block',
               fontFamily: 'var(--font-ibm-plex-sans)',

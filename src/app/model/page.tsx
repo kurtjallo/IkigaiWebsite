@@ -366,25 +366,25 @@ function PhasesDeepDive() {
       num: '01',
       name: 'Blueprint',
       description:
-        'We begin by mapping your organization as it exists today. Through comprehensive assessments, stakeholder interviews, and document analysis, we diagnose structural gaps, misalignments, and untapped potential. This phase produces a clear blueprint \u2014 an honest, evidence-based picture of where you are and where you need to be.',
+        'You get an honest, evidence-based picture of where your organization stands. Through assessments, stakeholder interviews, and document analysis, we diagnose structural gaps and untapped potential.',
     },
     {
       num: '02',
       name: 'Build',
       description:
-        'With a clear blueprint in hand, we design the systems, structures, and frameworks your organization needs. Whether it\u2019s a governance framework, a strategic plan, a program evaluation system, or a leadership development pipeline, every element is custom-designed to align with your mission and organizational reality.',
+        'You get the governance frameworks, strategic plans, and operational systems your organization needs \u2014 custom-designed to align with your mission and organizational reality.',
     },
     {
       num: '03',
       name: 'Strengthen',
       description:
-        'Implementation without capacity building doesn\u2019t last. We develop your people, refine your operations, and embed accountability at every level. This phase includes coaching, training, workshop facilitation, and hands-on support as your organization grows into its new structure.',
+        'Your people grow into the new structure through coaching, training, and hands-on support. We refine operations and embed accountability at every level.',
     },
     {
       num: '04',
       name: 'Sustain',
       description:
-        'Transformation isn\u2019t a project \u2014 it\u2019s an ongoing commitment. We provide continued evaluation, adaptive support, and strategic check-ins to ensure your organization remains resilient as conditions change. We don\u2019t just build and leave. We build to last.',
+        'You get continued evaluation, adaptive support, and strategic check-ins to stay resilient as conditions change. We don\u2019t build and leave \u2014 we build to last.',
     },
   ]
 
@@ -450,6 +450,7 @@ function PhasesDeepDive() {
                   }}
                 >
                   <span
+                    className="mobile-min-text mobile-tight-tracking"
                     style={{
                       fontFamily: 'var(--font-ibm-plex-mono)',
                       fontSize: '0.6875rem',
@@ -585,6 +586,7 @@ function PillarIntegration() {
                     }}
                   >
                     <span
+                      className="mobile-min-text mobile-tight-tracking"
                       style={{
                         fontFamily: 'var(--font-ibm-plex-mono)',
                         fontSize: '0.6875rem',
@@ -608,6 +610,7 @@ function PillarIntegration() {
                       {pillar.title}
                     </h3>
                     <p
+                      className="mobile-min-text"
                       style={{
                         fontFamily: 'var(--font-ibm-plex-mono)',
                         fontSize: '0.6875rem',
@@ -772,6 +775,135 @@ export default function ModelPage() {
         heading="A Blueprint for Organizational Excellence"
         description="Our proprietary framework moves organizations from assessment through sustained transformation. Four phases. Seven pillars. One integrated system."
       />
+
+      {/* Outcomes proof block */}
+      <section
+        style={{
+          backgroundColor: tokens.boneDark,
+          padding: '3rem 2rem',
+        }}
+      >
+        <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+          <FadeIn delay={0.1}>
+            <p
+              className="mobile-min-text mobile-tight-tracking"
+              style={{
+                fontFamily: 'var(--font-ibm-plex-mono)',
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: tokens.archGold,
+                marginBottom: '1.5rem',
+                textAlign: 'center',
+              }}
+            >
+              Proven results from the Ikigai Architecture Model
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <div
+              className="model-proof-strip"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '3rem',
+                marginBottom: '1.5rem',
+              }}
+            >
+              {[
+                { value: '85%', label: 'Board Attendance Increase' },
+                { value: '$200K', label: 'Funding Secured' },
+                { value: '3', label: 'Internal Successors Developed' },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  style={{
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    ...(i > 0
+                      ? {
+                          borderLeft: `1px solid ${tokens.structuralLine}`,
+                          paddingLeft: '3rem',
+                        }
+                      : {}),
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      display: 'block',
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: tokens.archGold,
+                      marginBottom: '0.5rem',
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-instrument-serif)',
+                      fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                      fontWeight: 400,
+                      color: tokens.deepGreen,
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span
+                    className="mobile-min-text"
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontSize: '0.8rem',
+                      fontWeight: 400,
+                      color: tokens.charcoal,
+                    }}
+                  >
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <p style={{ textAlign: 'center' }}>
+              <Link
+                href="/impact"
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  color: tokens.archGoldTextLight,
+                  textDecoration: 'none',
+                }}
+              >
+                See all case studies &rarr;
+              </Link>
+            </p>
+          </FadeIn>
+        </div>
+
+        <style>{`
+          @media (max-width: 768px) {
+            .model-proof-strip {
+              flex-direction: column !important;
+              gap: 1.5rem !important;
+              align-items: center !important;
+            }
+            .model-proof-strip > div {
+              border-left: none !important;
+              padding-left: 0 !important;
+            }
+          }
+        `}</style>
+      </section>
+
       <ModelDiagramSection />
       <PhasesDeepDive />
       <PillarIntegration />
@@ -780,7 +912,7 @@ export default function ModelPage() {
         tagline="Ready to Begin?"
         heading="Your Organization Deserves Structural Excellence."
         description="Let&rsquo;s start with a conversation about where you are and where your mission needs to go."
-        buttonText="See How This Applies to You"
+        buttonText="Book a Strategy Call"
       />
     </>
   )

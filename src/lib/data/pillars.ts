@@ -15,7 +15,7 @@ export const pillars: Pillar[] = [
     title: 'Strategic Architecture',
     subtitle: 'Vision-to-Action Alignment',
     description:
-      'Designing strategic scaffolding that translates mission into measurable outcomes. We work with leadership and stakeholders to create living strategic plans that drive daily decisions, not documents that gather dust on shelves.',
+      'We create living strategic plans that drive daily decisions — not documents that gather dust. Working with leadership and stakeholders, we translate your mission into clear priorities and measurable outcomes.',
     outcomes: [
       'Aligned strategic plan with clear priorities',
       'Clear 3-year roadmap with milestones',
@@ -29,14 +29,14 @@ export const pillars: Pillar[] = [
       'Implementation roadmap with accountability checkpoints',
     ],
     icon: 'compass',
-    ctaText: 'Explore Strategic Architecture',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'governance',
     title: 'Governance Architecture',
     subtitle: 'Building Boards That Lead, Not Just Meet',
     description:
-      'Structuring governance systems for accountability, clarity, and strategic oversight. We help boards move from passive attendance to active leadership, with clear roles, robust policies, and meaningful engagement.',
+      'We help boards move from passive attendance to active leadership — with clear roles, robust policies, and meaningful engagement that drives organizational accountability.',
     outcomes: [
       'Comprehensive governance framework',
       'Role clarity for board and staff',
@@ -50,14 +50,14 @@ export const pillars: Pillar[] = [
       'Succession planning for board leadership',
     ],
     icon: 'building',
-    ctaText: 'Strengthen Your Governance',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'operational',
     title: 'Operational Architecture',
     subtitle: 'Systems That Sustain, Not Just Survive',
     description:
-      'Designing operational infrastructure that supports growth without burning out your people. We build the systems, processes, and workflows that allow mission-driven organizations to scale their impact sustainably.',
+      'We build the systems, processes, and workflows that let mission-driven organizations scale their impact — without burning out their people.',
     outcomes: [
       'Streamlined workflows and clear processes',
       'Documented standard operating procedures',
@@ -71,14 +71,14 @@ export const pillars: Pillar[] = [
       'Capacity planning for sustainable growth',
     ],
     icon: 'settings',
-    ctaText: 'Architect Your Operations',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'program',
     title: 'Program Architecture',
     subtitle: 'Impact by Design, Not by Accident',
     description:
-      'Structuring programs for measurable community impact with built-in evaluation. We ensure every program has a clear logic model, defined outcomes, and the data infrastructure to demonstrate its value to funders and communities.',
+      'Every program gets a clear logic model, defined outcomes, and the data infrastructure to prove its value to funders and communities. Impact measured, not assumed.',
     outcomes: [
       'Logic model alignment across all programs',
       'Outcome measurement framework',
@@ -92,14 +92,14 @@ export const pillars: Pillar[] = [
       'Stakeholder feedback systems',
     ],
     icon: 'layers',
-    ctaText: 'Design for Impact',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'leadership',
     title: 'Leadership Architecture',
     subtitle: 'Leaders Who Build Leaders',
     description:
-      'Developing leadership pipelines and cultures that sustain organizations beyond any single leader. We design systems that identify, develop, and support emerging leaders at every level of your organization.',
+      'We design systems that identify, develop, and support emerging leaders at every level — building pipelines that sustain your organization beyond any single leader.',
     outcomes: [
       'Leadership development plan',
       'Mentorship and coaching framework',
@@ -113,14 +113,14 @@ export const pillars: Pillar[] = [
       'Team alignment and culture sessions',
     ],
     icon: 'users',
-    ctaText: 'Develop Your Leaders',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'accountability',
     title: 'Accountability Architecture',
     subtitle: 'What Gets Measured Gets Strengthened',
     description:
-      'Building transparent reporting and accountability systems that demonstrate impact to funders and communities. We create the dashboards, frameworks, and reporting structures that turn data into stories of meaningful change.',
+      'We create the dashboards, reporting structures, and accountability frameworks that turn your data into stories of measurable change — for funders, boards, and communities.',
     outcomes: [
       'Performance dashboard with key indicators',
       'Comprehensive reporting framework',
@@ -134,14 +134,14 @@ export const pillars: Pillar[] = [
       'Funder reporting alignment and streamlining',
     ],
     icon: 'bar-chart',
-    ctaText: 'Build Accountability Systems',
+    ctaText: 'Book a Strategy Call',
   },
   {
     slug: 'community',
     title: 'Community Architecture',
     subtitle: 'Rooted in the Communities You Serve',
     description:
-      'Designing authentic community engagement strategies that move beyond consultation to genuine partnership. We help organizations build trust, listen deeply, and create structures for shared decision-making with the communities they serve.',
+      'We help organizations move beyond consultation to genuine partnership — building trust, listening deeply, and creating structures for shared decision-making with the communities you serve.',
     outcomes: [
       'Community engagement strategy',
       'Partnership framework with clear expectations',
@@ -155,6 +155,6 @@ export const pillars: Pillar[] = [
       'Partnership agreements and shared governance models (decision-making structures that include community voices)',
     ],
     icon: 'heart-handshake',
-    ctaText: 'Engage Your Community',
+    ctaText: 'Book a Strategy Call',
   },
 ]

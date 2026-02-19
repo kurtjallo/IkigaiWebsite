@@ -45,6 +45,7 @@ function HeroSection() {
       >
         <FadeIn delay={0.1}>
           <p
+            className="mobile-min-text mobile-tight-tracking"
             style={{
               fontFamily: 'var(--font-ibm-plex-mono)',
               fontSize: '0.75rem',
@@ -88,15 +89,15 @@ function HeroSection() {
               marginBottom: '2.5rem',
             }}
           >
-            We design the structural foundations that turn mission-driven
-            organizations into enduring institutions. Strategy. Governance.
-            Operations. Leadership. Built to last.
+            We help Ontario nonprofits strengthen governance, strategy, and
+            operations &mdash; with measurable results.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.55}>
           <Link
             href="/contact"
+            className="mobile-cta-text"
             style={{
               display: 'inline-block',
               fontFamily: 'var(--font-ibm-plex-sans)',
@@ -112,10 +113,93 @@ function HeroSection() {
               textDecoration: 'none',
             }}
           >
-            Schedule a Strategic Conversation
+            Book a Strategy Call
           </Link>
         </FadeIn>
+
+        {/* Credibility strip */}
+        <FadeIn delay={0.7}>
+          <div
+            className="hero-credibility-strip"
+            style={{
+              display: 'flex',
+              gap: '2rem',
+              marginTop: '3rem',
+              paddingTop: '2rem',
+              borderTop: `1px solid rgba(255,255,255,0.12)`,
+            }}
+          >
+            {[
+              { value: '20+', label: 'Years Experience' },
+              { value: '85%', label: 'Board Attendance Increase' },
+              { value: '$200K', label: 'New Funding Secured' },
+            ].map((stat, i) => (
+              <div
+                key={stat.label}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.25rem',
+                  ...(i > 0
+                    ? {
+                        borderLeft: `1px solid rgba(255,255,255,0.12)`,
+                        paddingLeft: '2rem',
+                      }
+                    : {}),
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: '1.5rem',
+                    fontWeight: 400,
+                    color: tokens.archGoldTextDark,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className="mobile-min-text mobile-tight-tracking"
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-mono)',
+                    fontSize: '0.6875rem',
+                    fontWeight: 400,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: tokens.boneDark,
+                    opacity: 0.8,
+                  }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-credibility-strip {
+            flex-direction: column !important;
+            gap: 1.25rem !important;
+          }
+          .hero-credibility-strip > div {
+            border-left: none !important;
+            padding-left: 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 1.25rem;
+            flex-direction: row !important;
+            align-items: baseline !important;
+            gap: 0.75rem !important;
+          }
+          .hero-credibility-strip > div:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+        }
+      `}</style>
     </section>
   )
 }
@@ -128,23 +212,23 @@ function ProblemSection() {
   const painPoints = [
     {
       title: 'Strategic Plans on Shelves',
-      desc: 'Beautifully bound documents that never translate into daily decisions or measurable outcomes.',
+      desc: 'Documents that never translate into daily decisions or measurable outcomes.',
     },
     {
       title: 'Governance Confusion',
-      desc: "Boards that meet but don't lead. Unclear roles, outdated policies, passive oversight.",
+      desc: "Boards that meet but don't lead. Unclear roles, passive oversight.",
     },
     {
       title: 'Operational Misalignment',
-      desc: 'Teams working hard but pulling in different directions. Systems built to survive, not to sustain.',
+      desc: 'Teams pulling in different directions. Systems built to survive, not sustain.',
     },
     {
       title: 'Program Drift',
-      desc: 'Programs launched with passion but no logic model (a visual map showing how your programs create change). Impact assumed, never measured.',
+      desc: 'Programs launched without clear outcomes. Impact assumed, never measured.',
     },
     {
       title: 'Leadership Burnout',
-      desc: 'Founders carrying organizations on their backs. No succession. No pipeline. No sustainability.',
+      desc: 'Founders carrying everything. No succession plan. No pipeline.',
     },
   ]
 
@@ -192,10 +276,9 @@ function ProblemSection() {
                 color: tokens.charcoal,
               }}
             >
-              Purpose-driven organizations are built on powerful missions -- but
-              too often, they operate on fragile infrastructure. The passion is
-              there. The structure isn&apos;t. Without structural integrity,
-              even the strongest mission cracks under pressure.
+              The passion is there. The structure isn&apos;t. Without strong
+              governance, clear strategy, and sound operations, even the
+              strongest mission cracks under pressure.
             </p>
           </FadeIn>
 
@@ -350,6 +433,7 @@ function SolutionSection() {
                   }}
                 >
                   <span
+                    className="mobile-min-text mobile-tight-tracking"
                     style={{
                       fontFamily: 'var(--font-ibm-plex-mono)',
                       fontSize: '0.6875rem',
@@ -503,6 +587,7 @@ function PillarsGrid() {
                   }}
                 >
                   <span
+                    className="mobile-min-text mobile-tight-tracking"
                     style={{
                       fontFamily: 'var(--font-ibm-plex-mono)',
                       fontSize: '0.6875rem',
@@ -526,6 +611,7 @@ function PillarsGrid() {
                     {pillar.title}
                   </h3>
                   <p
+                    className="mobile-min-text"
                     style={{
                       fontFamily: 'var(--font-ibm-plex-mono)',
                       fontSize: '0.6875rem',
@@ -729,6 +815,7 @@ function SocialProofSection() {
                   {stat.value}
                 </p>
                 <p
+                  className="mobile-min-text"
                   style={{
                     fontFamily: 'var(--font-ibm-plex-sans)',
                     fontSize: '0.8rem',
@@ -950,7 +1037,7 @@ export default function ConceptMergedPage() {
       <WhoWeServeSection />
       <SocialProofSection />
       <WhyIkigaiSection />
-      <CTASection buttonText="Book Your Strategy Call" />
+      <CTASection />
     </>
   )
 }

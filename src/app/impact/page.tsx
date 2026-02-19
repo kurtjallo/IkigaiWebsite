@@ -475,7 +475,7 @@ export default function ImpactPage() {
       <CTASection
         heading="Let&rsquo;s Build Your Organization&rsquo;s Future."
         description="Every resilient organization starts with a conversation about where you are and where you need to be."
-        buttonText="Get Results Like These"
+        buttonText="Book a Strategy Call"
       />
     </>
   )
