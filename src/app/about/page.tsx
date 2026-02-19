@@ -149,9 +149,10 @@ function FounderBioSection() {
                   marginBottom: '1.5rem',
                 }}
               >
-                With over two decades of experience working alongside nonprofit
-                leaders, boards, and community organizations across Ontario,
-                Nilda Bastone founded Ikigai Consulting Group on a simple
+                With over two decades of experience in Ontario&rsquo;s nonprofit
+                and social services sector &mdash; including leadership at
+                Catholic Community Services of York Region &mdash; Nilda
+                Bastone founded Ikigai Consulting Group on a simple
                 conviction: purpose-driven organizations deserve the same
                 structural excellence as any Fortune 500 company.
               </p>
@@ -169,6 +170,23 @@ function FounderBioSection() {
                 deep respect for the communities these organizations serve.
                 Every engagement begins with listening &mdash; to staff, to
                 boards, to the communities at the heart of the mission.
+              </p>
+
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontWeight: 300,
+                  fontSize: '1.0625rem',
+                  lineHeight: 1.8,
+                  color: tokens.charcoal,
+                  marginTop: '1.5rem',
+                }}
+              >
+                Nilda&rsquo;s work has earned the trust of leaders across
+                Ontario&rsquo;s nonprofit community, with 37 professional
+                recommendations from colleagues and sector partners who
+                describe her as a thoughtful, compassionate leader who
+                builds welcoming and empowering organizational environments.
               </p>
             </div>
           </FadeIn>
