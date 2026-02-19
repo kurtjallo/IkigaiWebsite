@@ -94,3 +94,25 @@
     @apply font-serif;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  Mobile typography minimums (Task 8 — UX audit)                     */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  /* Enforce 0.875rem (14px) minimum on small labels/captions */
+  .mobile-min-text {
+    font-size: 0.875rem !important;
+  }
+
+  /* Reduce letter-spacing on uppercase text for mobile readability */
+  .mobile-tight-tracking {
+    letter-spacing: 0.08em !important;
+  }
+
+  /* Bump CTA buttons to 1rem on mobile */
+  .mobile-cta-text {
+    font-size: 1rem !important;
+    padding: 1rem 2rem !important;
+  }
+}

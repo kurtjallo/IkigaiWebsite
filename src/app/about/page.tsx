@@ -315,7 +315,7 @@ export default function AboutPage() {
       <CTASection
         heading="Ready to Build Together?"
         description="Let's start a conversation about what your organization needs to thrive."
-        buttonText="Work With Nilda"
+        buttonText="Book a Strategy Call"
       />
     </>
   )

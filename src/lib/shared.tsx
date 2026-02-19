@@ -216,6 +216,7 @@ export function SectionLabel({ label, dark = false }: { label: string; dark?: bo
         }}
       >
         <span
+          className="mobile-min-text mobile-tight-tracking"
           style={{
             fontFamily: 'var(--font-ibm-plex-mono)',
             fontSize: '0.75rem',
@@ -277,6 +278,7 @@ export function PageHeader({
       >
         <FadeIn delay={0.1}>
           <p
+            className="mobile-min-text mobile-tight-tracking"
             style={{
               fontFamily: 'var(--font-ibm-plex-mono)',
               fontSize: '0.75rem',
@@ -332,9 +334,9 @@ export function PageHeader({
 
 export function CTASection({
   tagline = 'Begin the Conversation',
-  heading = "Let\u2019s Transform Your Organization.",
-  description = "Whether you\u2019re building from the ground up or strengthening existing structures, we\u2019re ready to listen, assess, and design.",
-  buttonText = 'Book Your Strategy Call',
+  heading = "Let\u2019s Build Something That Lasts.",
+  description = "Whether you\u2019re starting from scratch or strengthening what exists, it begins with a conversation.",
+  buttonText = 'Book a Strategy Call',
   buttonHref = '/contact',
 }: {
   tagline?: string
@@ -381,6 +383,7 @@ export function CTASection({
               }}
             />
             <span
+              className="mobile-min-text mobile-tight-tracking"
               style={{
                 fontFamily: 'var(--font-ibm-plex-mono)',
                 fontSize: '0.75rem',
@@ -436,6 +439,7 @@ export function CTASection({
         <FadeIn delay={0.4}>
           <Link
             href={buttonHref}
+            className="mobile-cta-text"
             style={{
               display: 'inline-block',
               fontFamily: 'var(--font-ibm-plex-sans)',
