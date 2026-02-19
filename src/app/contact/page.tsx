@@ -169,7 +169,8 @@ function ContactFormSection() {
                       color: '#2E7D32',
                     }}
                   >
-                    We&apos;ll be in touch within 2 business days.
+                    You&apos;ll receive a calendar link to schedule your
+                    30-minute call within 2 business days.
                   </p>
                 </div>
               ) : (
@@ -365,8 +366,9 @@ function CalendarBookingSection() {
               marginBottom: '2.5rem',
             }}
           >
-            Skip the form and book a strategic conversation directly on our
-            calendar.
+            A free, 30-minute conversation with Nilda to discuss your
+            organization&apos;s challenges and explore whether Ikigai is the
+            right fit.
           </p>
         </FadeIn>
 
@@ -389,7 +391,7 @@ function CalendarBookingSection() {
               cursor: 'pointer',
             }}
           >
-            Open Calendar
+            Book a Free 30-Min Call
           </button>
         </FadeIn>
       </div>
@@ -490,7 +492,7 @@ export default function ContactPage() {
       <PageHeader
         tagline="Get in Touch"
         heading="Begin the Conversation."
-        description="Ready to architect a stronger organization? Tell us about your challenge and we'll respond within 2 business days."
+        description="Ready to build a stronger organization? Tell us about your challenge and we'll respond within 2 business days."
       />
       <ContactFormSection />
       <CalendarBookingSection />

@@ -23,8 +23,8 @@ export const pillars: Pillar[] = [
       'Stakeholder-endorsed organizational direction',
     ],
     included: [
-      'Strategic assessment and environmental scan',
-      'Stakeholder engagement sessions',
+      'Strategic assessment and environmental scan (a review of external trends affecting your org)',
+      'Conversations with your team, board, and community',
       'Strategic plan development',
       'Implementation roadmap with accountability checkpoints',
     ],
@@ -65,7 +65,7 @@ export const pillars: Pillar[] = [
       'Reduced operational friction and staff burnout',
     ],
     included: [
-      'Operational assessment and capacity analysis',
+      'Operational assessment and capacity analysis (understanding what your team can realistically handle)',
       'Process mapping and documentation',
       'Workflow redesign and optimization',
       'Capacity planning for sustainable growth',
@@ -107,7 +107,7 @@ export const pillars: Pillar[] = [
       'Strengthened team alignment and collaboration',
     ],
     included: [
-      'Leadership assessment and 360 feedback',
+      'Leadership assessment and 360 feedback (input from peers, reports, and supervisors)',
       'Executive coaching and mentorship',
       'Leadership development program design',
       'Team alignment and culture sessions',
@@ -152,7 +152,7 @@ export const pillars: Pillar[] = [
       'Community asset mapping',
       'Stakeholder analysis and prioritization',
       'Engagement strategy development',
-      'Partnership agreements and shared governance models',
+      'Partnership agreements and shared governance models (decision-making structures that include community voices)',
     ],
     icon: 'heart-handshake',
     ctaText: 'Engage Your Community',

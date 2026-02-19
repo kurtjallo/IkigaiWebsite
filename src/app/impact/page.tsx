@@ -1,7 +1,7 @@
 'use client'
 
 import { caseStudies } from '@/lib/data/case-studies'
-import { testimonials } from '@/lib/data/testimonials'
+import { testimonials, type Testimonial } from '@/lib/data/testimonials'
 import {
   FadeIn,
   StaggerWrap,
@@ -13,15 +13,30 @@ import {
 } from '@/lib/shared'
 
 /* ------------------------------------------------------------------ */
+/*  Testimonial-to-case-study mapping (by organization name)           */
+/* ------------------------------------------------------------------ */
+
+const testimonialByOrg = new Map<string, Testimonial>(
+  testimonials.map((t) => [t.organization, t])
+)
+
+// Amara Williams (Peel Region Youth Services) has no matching case study
+const standaloneTestimonial = testimonials.find(
+  (t) => t.organization === 'Peel Region Youth Services'
+)!
+
+/* ------------------------------------------------------------------ */
 /*  CASE STUDY SECTION                                                 */
 /* ------------------------------------------------------------------ */
 
 function CaseStudySection({
   study,
   index,
+  testimonial,
 }: {
   study: (typeof caseStudies)[number]
   index: number
+  testimonial?: Testimonial
 }) {
   const bgColors = [tokens.bone, tokens.boneDark, tokens.bone]
   const bg = bgColors[index % bgColors.length]
@@ -60,12 +75,37 @@ function CaseStudySection({
               fontWeight: 400,
               letterSpacing: '0.05em',
               color: tokens.archGoldTextLight,
-              marginBottom: '3rem',
+              marginBottom: '2rem',
             }}
           >
             {study.organization} &middot; {study.sector}
           </p>
         </FadeIn>
+
+        {/* Case study image */}
+        {study.image && (
+          <FadeIn delay={0.2}>
+            <div
+              style={{
+                marginBottom: '3rem',
+                overflow: 'hidden',
+                borderRadius: '2px',
+                border: `1px solid ${tokens.structuralLine}`,
+              }}
+            >
+              <img
+                src={study.image}
+                alt={`${study.organization} — ${study.title}`}
+                style={{
+                  width: '100%',
+                  height: '20rem',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </FadeIn>
+        )}
 
         {/* Challenge + Approach two-column */}
         <div
@@ -229,6 +269,79 @@ function CaseStudySection({
           </div>
         </StaggerWrap>
 
+        {/* Embedded testimonial */}
+        {testimonial && (
+          <FadeIn delay={0.5}>
+            <blockquote
+              style={{
+                marginTop: '3rem',
+                padding: '2rem',
+                borderLeft: `3px solid ${tokens.archGold}`,
+                backgroundColor: tokens.boneLight,
+              }}
+            >
+              <svg
+                aria-hidden="true"
+                width="28"
+                height="22"
+                viewBox="0 0 36 28"
+                style={{
+                  marginBottom: '0.75rem',
+                  flexShrink: 0,
+                }}
+              >
+                <text
+                  x="0"
+                  y="28"
+                  style={{
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: '40px',
+                    fill: tokens.archGold,
+                  }}
+                >
+                  &ldquo;
+                </text>
+              </svg>
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontWeight: 300,
+                  fontSize: '0.9375rem',
+                  lineHeight: 1.75,
+                  color: tokens.charcoal,
+                  fontStyle: 'italic',
+                  marginBottom: '1rem',
+                }}
+              >
+                {testimonial.quote}
+              </p>
+              <footer>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontWeight: 500,
+                    fontSize: '0.875rem',
+                    color: tokens.deepGreen,
+                    marginBottom: '0.125rem',
+                  }}
+                >
+                  {testimonial.name}
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontWeight: 300,
+                    fontSize: '0.8125rem',
+                    color: tokens.charcoal,
+                  }}
+                >
+                  {testimonial.role}, {testimonial.organization}
+                </p>
+              </footer>
+            </blockquote>
+          </FadeIn>
+        )}
+
         {/* Gold structural divider (except on last) */}
         {!isLast && (
           <FadeIn delay={0.5}>
@@ -249,125 +362,87 @@ function CaseStudySection({
 }
 
 /* ------------------------------------------------------------------ */
-/*  TESTIMONIALS SECTION                                               */
+/*  STANDALONE TESTIMONIAL SECTION                                     */
 /* ------------------------------------------------------------------ */
 
-function TestimonialsSection() {
+function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonial }) {
   return (
     <section
       style={{
-        position: 'relative',
         backgroundColor: tokens.deepGreen,
-        padding: '6rem 2rem',
-        overflow: 'hidden',
+        padding: '5rem 2rem',
       }}
     >
-      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-        <SectionLabel label="What Our Clients Say" dark />
-
+      <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
         <FadeIn delay={0.1}>
-          <h2
+          <blockquote
             style={{
-              fontFamily: 'var(--font-instrument-serif)',
-              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              fontWeight: 400,
-              lineHeight: 1.15,
-              color: tokens.parchment,
-              marginBottom: '3.5rem',
+              margin: 0,
+              textAlign: 'center',
             }}
           >
-            Voices of <em style={{ fontStyle: 'italic' }}>Transformation</em>
-          </h2>
+            <svg
+              aria-hidden="true"
+              width="36"
+              height="28"
+              viewBox="0 0 36 28"
+              style={{
+                marginBottom: '1.5rem',
+                display: 'inline-block',
+              }}
+            >
+              <text
+                x="0"
+                y="28"
+                style={{
+                  fontFamily: 'var(--font-instrument-serif)',
+                  fontSize: '48px',
+                  fill: tokens.archGoldTextDark,
+                }}
+              >
+                &ldquo;
+              </text>
+            </svg>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontWeight: 300,
+                fontSize: '1.125rem',
+                lineHeight: 1.8,
+                color: tokens.parchment,
+                fontStyle: 'italic',
+                marginBottom: '2rem',
+              }}
+            >
+              {testimonial.quote}
+            </p>
+
+            <footer>
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontWeight: 500,
+                  fontSize: '0.9375rem',
+                  color: tokens.parchment,
+                  marginBottom: '0.25rem',
+                }}
+              >
+                {testimonial.name}
+              </p>
+              <p
+                style={{
+                  fontFamily: 'var(--font-ibm-plex-sans)',
+                  fontWeight: 300,
+                  fontSize: '0.8125rem',
+                  color: tokens.boneDark,
+                }}
+              >
+                {testimonial.role}, {testimonial.organization}
+              </p>
+            </footer>
+          </blockquote>
         </FadeIn>
-
-        <StaggerWrap staggerDelay={0.1}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 22rem), 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {testimonials.map((t) => (
-              <StaggerItem key={t.name}>
-                <blockquote
-                  style={{
-                    position: 'relative',
-                    backgroundColor: 'rgba(27, 58, 42, 0.5)',
-                    border: `1px solid ${tokens.structuralLine}25`,
-                    padding: '2.5rem 2rem 2rem',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    margin: 0,
-                  }}
-                >
-                  {/* Decorative gold quotation mark */}
-                  <svg
-                    aria-hidden="true"
-                    width="36"
-                    height="28"
-                    viewBox="0 0 36 28"
-                    style={{
-                      marginBottom: '1.25rem',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <text
-                      x="0"
-                      y="28"
-                      style={{
-                        fontFamily: 'var(--font-instrument-serif)',
-                        fontSize: '48px',
-                        fill: tokens.archGoldTextDark,
-                      }}
-                    >
-                      &ldquo;
-                    </text>
-                  </svg>
-
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-ibm-plex-sans)',
-                      fontWeight: 300,
-                      fontSize: '0.9375rem',
-                      lineHeight: 1.75,
-                      color: tokens.parchment,
-                      flex: 1,
-                      marginBottom: '1.5rem',
-                    }}
-                  >
-                    {t.quote}
-                  </p>
-
-                  <footer>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-ibm-plex-sans)',
-                        fontWeight: 500,
-                        fontSize: '0.875rem',
-                        color: tokens.parchment,
-                        marginBottom: '0.25rem',
-                      }}
-                    >
-                      {t.name}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-ibm-plex-sans)',
-                        fontWeight: 300,
-                        fontSize: '0.8125rem',
-                        color: tokens.boneDark,
-                      }}
-                    >
-                      {t.role}, {t.organization}
-                    </p>
-                  </footer>
-                </blockquote>
-              </StaggerItem>
-            ))}
-          </div>
-        </StaggerWrap>
       </div>
     </section>
   )
@@ -382,20 +457,25 @@ export default function ImpactPage() {
     <>
       <PageHeader
         tagline="Our Impact"
-        heading="Architecture in Action."
+        heading="Impact in Action."
         description="Real organizations. Real challenges. Real results. See how the Ikigai Architecture Model&trade; transforms purpose-driven organizations from fragile to resilient."
       />
 
       {caseStudies.map((study, idx) => (
-        <CaseStudySection key={study.slug} study={study} index={idx} />
+        <CaseStudySection
+          key={study.slug}
+          study={study}
+          index={idx}
+          testimonial={testimonialByOrg.get(study.organization)}
+        />
       ))}
 
-      <TestimonialsSection />
+      <StandaloneTestimonialSection testimonial={standaloneTestimonial} />
 
       <CTASection
-        heading="Let&rsquo;s Architect Your Organization."
+        heading="Let&rsquo;s Build Your Organization&rsquo;s Future."
         description="Every resilient organization starts with a conversation about where you are and where you need to be."
-        buttonText="Begin the Conversation"
+        buttonText="Get Results Like These"
       />
     </>
   )

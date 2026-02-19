@@ -22,40 +22,48 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 
 ### 1. Homepage ("Authority + Clarity")
 
-- **Hero:** "Architecting Purpose-Driven Organizations to Thrive" with gold CTA "Schedule a Strategic Conversation"
+- **Hero:** "Architecting Purpose-Driven Organizations to Thrive" with gold CTA "Book Your Strategy Call" (75vh mobile, 90vh desktop)
 - **Problem Section:** "Strong Missions. Fragile Structures." -- Two-column layout addressing strategic plans on shelves, governance confusion, operational misalignment, program drift, burnout
 - **Solution Section:** "We Are Organizational Architects." with Ikigai Architecture Model visual (7 pillars)
-- **7 Pillars Grid:** 3x3 or 4+3 layout, each with icon, title, description, "Learn More" link, gold hover accent
-- **Who We Serve:** "Built for Leaders Who Carry Mission." -- NGOs, social service agencies, faith-based orgs, women-led initiatives, boards
-- **Why Ikigai:** Three columns -- Authority, Full-Cycle Architecture, Measurable Impact
-- **CTA:** "Let's Architect Your Organization." with "Book Your Strategy Call" button
+- **7 Pillars Grid:** 3x3 or 4+3 layout, each with icon, title, description, "Learn More →" link to `/services#[slug]`, gold hover accent
+- **Who We Serve:** "Built for Leaders Who Carry Mission." -- 5 audience segments with gold checkmarks on deep green bg
+- **Social Proof Bar:** 3 key metrics (85% board attendance, $200K funding, 8 programs) + Margaret Chen testimonial blockquote
+- **Why Ikigai:** Three columns -- Deep Sector Expertise, Full-Cycle Model, Measurable Results
+- **CTA:** "Let's Transform Your Organization." with "Book Your Strategy Call" button
 
 ### 2. About Page ("Credibility & Trust")
 
 - Founder intro with professional photo of Nilda Bastone
-- Philosophy section: "Why Ikigai?" -- alignment, integrity, human-centered leadership, structural excellence
 - Values: Integrity, Accountability, Social Justice, Excellence, Courageous Leadership (icon row)
+- CTA: "Work With Nilda"
 
 ### 3. Services Page ("Clarity & Authority")
 
-- One section per pillar: Description, What's Included, Outcomes, CTA
-- Alternating backgrounds (white / soft green), gold divider lines
+- Accordion UI: 7 pillars as collapsible rows (one open at a time, AnimatePresence animation)
+- Expanded view: Description + 2 Outcomes + proof point linking to case study + CTA button
+- ARIA: aria-expanded, aria-controls, role="region" on panels
+- CTA: "Get a Pillar Assessment"
 
 ### 4. The Ikigai Model Page (Thought Leadership)
 
-- Large visual diagram of Ikigai Architecture Model
+- Large visual diagram of Ikigai Architecture Model with explanation paragraph below
 - Flow explanation: Blueprint > Build > Strengthen > Sustain
 - Integration of all pillars, why it works
+- CTA: "See How This Applies to You"
 
 ### 5. Case Studies / Impact Page
 
-- "Architecture in Action." -- Challenge, Approach, Outcome, Measurable Results
-- Testimonials section
+- "Impact in Action." -- Challenge, Approach, Outcome, Measurable Results
+- Testimonials embedded in matching case study cards (not a separate section)
+- Standalone testimonial for Amara Williams (Peel Region Youth Services) below case studies
+- CTA: "Get Results Like These"
 
 ### 6. Contact Page
 
 - "Begin the Conversation." -- Fields: Name, Organization, Email, Challenge description
-- Calendar booking integration
+- "Strategic Conversation" defined: free 30-minute call with Nilda
+- Calendar booking: "Book a Free 30-Min Call" button
+- Form success message includes next steps (calendar link within 2 business days)
 
 ## Target Audience
 
@@ -78,21 +86,40 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 9: SEO + Structured Data -- COMPLETE** (2026-02-17)
 **Phase 10: Accessibility + Performance Audit -- COMPLETE** (2026-02-17)
 
-### Concept-Merged Redesign (in progress)
+### Concept-Merged Redesign (MERGED to main site)
 
-Full site built in "Architectural Blueprint" design concept at `/concept-merged/*`:
-
-- **`src/app/concept-merged/shared.tsx`** -- Shared components: FadeIn, StaggerWrap, StaggerItem, BlueprintGridPattern, CornerBrackets, SectionLabel, PageHeader, ConceptNav, CTASection, tokens object
-- **`src/app/concept-merged/layout.tsx`** -- Layout wrapper: font variables (Instrument Serif, IBM Plex Sans, IBM Plex Mono), CSS design tokens, ConceptNav
-- **`src/app/concept-merged/fonts.ts`** -- Font config (Instrument Serif, IBM Plex Sans, IBM Plex Mono)
-- **`src/app/concept-merged/page.tsx`** -- Homepage: Hero, Problem, Solution, Pillars Grid, CTA
-- **`src/app/concept-merged/about/page.tsx`** -- Founder bio, philosophy, values with SVG icons
-- **`src/app/concept-merged/services/page.tsx`** -- 7 service pillar sections with included/outcomes
-- **`src/app/concept-merged/model/page.tsx`** -- SVG architecture diagram, 4-phase deep dive, pillar grid, why-it-works
-- **`src/app/concept-merged/impact/page.tsx`** -- 3 case study cards, testimonials section
-- **`src/app/concept-merged/contact/page.tsx`** -- Formspree form, Calendly booking, location info
+"Architectural Blueprint" design concept merged into main site routes. Shared components in `src/lib/shared.tsx`.
 
 Design system: bone/parchment backgrounds, deep-green/archGold accents, blueprint blue folio numbers, inline CSS styles (not Tailwind), `motion/react` animations
+
+### UX Audit -- Wave 1 Complete (2026-02-19)
+
+Per `.planning/UX-AUDIT.md`, Wave 1 (10 items) shipped:
+- CTA text varies per page (Homepage/About/Services/Model/Impact each unique)
+- "Architecture" metaphor reduced ~50% outside brand tagline + pillar names (rotated to design/build/structure/framework/system)
+- "What's Included" removed from Services page; outcomes limited to 2 per pillar
+- Philosophy section removed from About page (merged into Values)
+- Testimonials embedded in case study cards on Impact page; standalone Amara Williams testimonial
+- "Learn More →" links on homepage pillar cards → `/services#[slug]`
+- Hero 75vh on mobile, 90vh desktop
+- Diagram explanation paragraph on Model page
+- "Strategic Conversation" defined on Contact page (free 30-min call)
+- De-jargon pass: parentheticals for logic model, environmental scan, 360 feedback, capacity analysis, shared governance; plain-language replacements for worst offenders
+
+### UX Audit -- Wave 2 Complete (2026-02-19)
+
+Per `.planning/UX-AUDIT.md`, Wave 2 (5 items) shipped:
+- Homepage: "Who We Serve" section (5 audience segments, gold checkmarks, deep green bg)
+- Homepage: Social Proof bar (3 metrics: 85% board attendance, $200K funding, 8 programs + Margaret Chen testimonial)
+- Homepage: "Why Ikigai" section (3 differentiator columns: Deep Sector Expertise, Full-Cycle Model, Measurable Results)
+- Services page: Accordion UI replacing 7 identical full-width sections (AnimatePresence, one open at a time, ARIA)
+- Services page: Proof point per pillar linking to real case study results on Impact page
+
+### UX Audit -- Wave 3 Partial (2026-02-19)
+
+Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client input):
+- About page: Founder credentials added (Catholic Community Services of York Region, 37 recommendations)
+- Still blocked: specific org count for "Proven with X organizations", 4th case study for Peel Region
 
 ### Tech Stack
 
@@ -161,25 +188,30 @@ Design system: bone/parchment backgrounds, deep-green/archGold accents, blueprin
 - **BlueprintGrid** -- subtle repeating grid pattern for backgrounds
 - **StructuralFrame** -- beam/truss decorative divider (horizontal/vertical)
 
-### Homepage Sections (`src/components/sections/`)
+### Homepage Sections (inline in `src/app/page.tsx`)
 
-- **HeroSection** -- hunter-green bg, min-h-[80vh], serif heading, gold CTA button
-- **ProblemSection** -- white bg, two-column layout (narrative + pain points with gold dashes)
-- **SolutionSection** -- light-green bg, Blueprint > Build > Strengthen > Sustain flow, TM symbol
-- **PillarsGrid** -- white bg, responsive 1/2/3 col grid, Card + PillarIcon + strategic CTAs
-- **WhoWeServe** -- hunter-green bg, 5 audience segments, no gold text
-- **WhyIkigai** -- light-green bg, 3 columns (Authority, Full-Cycle, Measurable Impact)
-- **CTASection** -- black bg, configurable props, gold button, reusable on other pages
+- **HeroSection** -- deepGreen bg, 75vh mobile / 90vh desktop, serif heading, gold CTA button
+- **ProblemSection** -- bone bg, two-column layout (narrative + pain points with gold dashes)
+- **SolutionSection** -- boneDark bg, Blueprint > Build > Strengthen > Sustain flow, TM symbol
+- **PillarsGrid** -- bone bg, responsive grid, "Learn More →" links to `/services#[slug]`
+- **WhoWeServeSection** -- deepGreen bg, 5 audience segments with gold checkmarks
+- **SocialProofSection** -- bone bg, 3 stat metrics + Margaret Chen testimonial blockquote
+- **WhyIkigaiSection** -- boneDark bg, 3 columns (Deep Sector Expertise, Full-Cycle Model, Measurable Results)
+- **CTASection** -- deepGreen950 bg, configurable props, gold button, reusable on other pages (from shared.tsx)
 
 ### About Page Sections (`src/components/sections/`)
 
 - **FounderBio** -- white bg, two-column (bio text + gold-bordered blockquote), photo-ready via optional `imageSrc` prop
-- **Philosophy** -- light-green bg, "Why Ikigai?" with 4 philosophy pillars in 2x2 Card grid
 - **ValuesRow** -- hunter-green bg, 5 values with Lucide icons (gold), responsive 2/3/5 col grid
+- Philosophy section removed (Wave 1 UX audit -- merged into Values)
 
-### Services Page Sections (`src/components/sections/`)
+### Services Page (inline in `src/app/services/page.tsx`)
 
-- **ServicePillar** -- reusable per-pillar section, two-column (description + included/outcomes lists), alternating bg, anchor ID via slug
+- **AccordionServicesSection** -- Single section with 7 collapsible pillar rows (one open at a time, default first open)
+  - Collapsed: number + title + subtitle + rotating chevron
+  - Expanded: description + 2 outcomes + proof point (links to case study) + CTA button
+  - AnimatePresence expand/collapse, ARIA (aria-expanded, aria-controls, role="region")
+  - Proof points link to `/impact#[case-study-slug]` with real metrics
 
 ### Model Page Sections (`src/components/sections/`)
 
@@ -188,8 +220,9 @@ Design system: bone/parchment backgrounds, deep-green/archGold accents, blueprin
 
 ### Impact Page Sections (`src/components/sections/`)
 
-- **CaseStudyCard** -- structured article (Challenge + Approach side-by-side, Outcome, Measurable Results with gold dots), alternating bg
-- **Testimonials** -- hunter-green bg, blockquote elements, decorative gold quotation marks, full attribution grid
+- **CaseStudyCard** -- structured article (Challenge + Approach side-by-side, Outcome, Measurable Results with gold dots, embedded testimonial quote), alternating bg
+- **StandaloneTestimonial** -- Amara Williams standalone testimonial below case studies (deep-green bg)
+- Separate Testimonials section removed (Wave 1 UX audit -- embedded in case study cards)
 
 ### Contact Page Sections (`src/components/sections/`)
 
@@ -198,10 +231,10 @@ Design system: bone/parchment backgrounds, deep-green/archGold accents, blueprin
 
 ### Page Routes
 
-- `src/app/about/page.tsx` -- FounderBio > Philosophy > ValuesRow > CTASection
+- `src/app/about/page.tsx` -- FounderBio > ValuesRow > CTASection (Philosophy removed)
 - `src/app/services/page.tsx` -- hunter-green intro + 7 ServicePillar sections (data-driven from pillars.ts) + CTASection
 - `src/app/model/page.tsx` -- ModelDiagram > ModelFlow (thought leadership page)
-- `src/app/impact/page.tsx` -- page header + 3 CaseStudyCards + Testimonials + CTASection
+- `src/app/impact/page.tsx` -- page header + 3 CaseStudyCards (with embedded testimonials) + standalone Amara Williams testimonial + CTASection
 - `src/app/contact/page.tsx` -- ContactForm + CalendarBooking + location info
 - `src/app/privacy/page.tsx` -- PIPEDA-compliant privacy policy (Server Component, static content)
 - `src/app/not-found.tsx` -- Branded 404 page (noindex, gold CTA to homepage)
