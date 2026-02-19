@@ -1,9 +1,9 @@
 'use client'
 
-import { motion, useReducedMotion } from 'motion/react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Design Token Object (for reuse in inline styles)                   */
@@ -41,6 +41,8 @@ export function FadeIn({
   className?: string
 }) {
   const shouldReduceMotion = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const offsets: Record<string, { x?: number; y?: number }> = {
     up: { y: 30 },
     down: { y: -30 },
@@ -54,10 +56,10 @@ export function FadeIn({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       initial={{ opacity: 0, ...offsets[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : undefined}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
@@ -75,6 +77,8 @@ export function StaggerWrap({
   staggerDelay?: number
 }) {
   const shouldReduceMotion = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>
@@ -82,10 +86,10 @@ export function StaggerWrap({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.12 }}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: staggerDelay } },
