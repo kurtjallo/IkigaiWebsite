@@ -95,7 +95,8 @@ function HeroSection() {
         </FadeIn>
 
         <FadeIn delay={0.55}>
-          <span
+          <Link
+            href="/contact"
             style={{
               display: 'inline-block',
               fontFamily: 'var(--font-ibm-plex-sans)',
@@ -108,10 +109,11 @@ function HeroSection() {
               color: tokens.ink,
               borderRadius: '1px',
               cursor: 'pointer',
+              textDecoration: 'none',
             }}
           >
             Schedule a Strategic Conversation
-          </span>
+          </Link>
         </FadeIn>
       </div>
     </section>
