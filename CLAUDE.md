@@ -26,8 +26,9 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 - **Problem Section:** "Strong Missions. Fragile Structures." -- Two-column layout addressing strategic plans on shelves, governance confusion, operational misalignment, program drift, burnout
 - **Solution Section:** "We Are Organizational Architects." with Ikigai Architecture Model visual (7 pillars)
 - **7 Pillars Grid:** 3x3 or 4+3 layout, each with icon, title, description, "Learn More →" link to `/services#[slug]`, gold hover accent
-- **Who We Serve:** "Built for Leaders Who Carry Mission." -- NGOs, social service agencies, faith-based orgs, women-led initiatives, boards
-- **Why Ikigai:** Three columns -- Authority, Full-Cycle Architecture, Measurable Impact
+- **Who We Serve:** "Built for Leaders Who Carry Mission." -- 5 audience segments with gold checkmarks on deep green bg
+- **Social Proof Bar:** 3 key metrics (85% board attendance, $200K funding, 8 programs) + Margaret Chen testimonial blockquote
+- **Why Ikigai:** Three columns -- Deep Sector Expertise, Full-Cycle Model, Measurable Results
 - **CTA:** "Let's Transform Your Organization." with "Book Your Strategy Call" button
 
 ### 2. About Page ("Credibility & Trust")
@@ -38,8 +39,9 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 
 ### 3. Services Page ("Clarity & Authority")
 
-- One section per pillar: Description + 2 best Outcomes (no "What's Included")
-- Alternating backgrounds (white / soft green), gold divider lines
+- Accordion UI: 7 pillars as collapsible rows (one open at a time, AnimatePresence animation)
+- Expanded view: Description + 2 Outcomes + proof point linking to case study + CTA button
+- ARIA: aria-expanded, aria-controls, role="region" on panels
 - CTA: "Get a Pillar Assessment"
 
 ### 4. The Ikigai Model Page (Thought Leadership)
@@ -103,6 +105,15 @@ Per `.planning/UX-AUDIT.md`, Wave 1 (10 items) shipped:
 - Diagram explanation paragraph on Model page
 - "Strategic Conversation" defined on Contact page (free 30-min call)
 - De-jargon pass: parentheticals for logic model, environmental scan, 360 feedback, capacity analysis, shared governance; plain-language replacements for worst offenders
+
+### UX Audit -- Wave 2 Complete (2026-02-19)
+
+Per `.planning/UX-AUDIT.md`, Wave 2 (5 items) shipped:
+- Homepage: "Who We Serve" section (5 audience segments, gold checkmarks, deep green bg)
+- Homepage: Social Proof bar (3 metrics: 85% board attendance, $200K funding, 8 programs + Margaret Chen testimonial)
+- Homepage: "Why Ikigai" section (3 differentiator columns: Deep Sector Expertise, Full-Cycle Model, Measurable Results)
+- Services page: Accordion UI replacing 7 identical full-width sections (AnimatePresence, one open at a time, ARIA)
+- Services page: Proof point per pillar linking to real case study results on Impact page
 
 ### Tech Stack
 
@@ -171,15 +182,16 @@ Per `.planning/UX-AUDIT.md`, Wave 1 (10 items) shipped:
 - **BlueprintGrid** -- subtle repeating grid pattern for backgrounds
 - **StructuralFrame** -- beam/truss decorative divider (horizontal/vertical)
 
-### Homepage Sections (`src/components/sections/`)
+### Homepage Sections (inline in `src/app/page.tsx`)
 
-- **HeroSection** -- hunter-green bg, min-h-[80vh], serif heading, gold CTA button
-- **ProblemSection** -- white bg, two-column layout (narrative + pain points with gold dashes)
-- **SolutionSection** -- light-green bg, Blueprint > Build > Strengthen > Sustain flow, TM symbol
-- **PillarsGrid** -- white bg, responsive 1/2/3 col grid, Card + PillarIcon + strategic CTAs
-- **WhoWeServe** -- hunter-green bg, 5 audience segments, no gold text
-- **WhyIkigai** -- light-green bg, 3 columns (Authority, Full-Cycle, Measurable Impact)
-- **CTASection** -- black bg, configurable props, gold button, reusable on other pages
+- **HeroSection** -- deepGreen bg, 75vh mobile / 90vh desktop, serif heading, gold CTA button
+- **ProblemSection** -- bone bg, two-column layout (narrative + pain points with gold dashes)
+- **SolutionSection** -- boneDark bg, Blueprint > Build > Strengthen > Sustain flow, TM symbol
+- **PillarsGrid** -- bone bg, responsive grid, "Learn More →" links to `/services#[slug]`
+- **WhoWeServeSection** -- deepGreen bg, 5 audience segments with gold checkmarks
+- **SocialProofSection** -- bone bg, 3 stat metrics + Margaret Chen testimonial blockquote
+- **WhyIkigaiSection** -- boneDark bg, 3 columns (Deep Sector Expertise, Full-Cycle Model, Measurable Results)
+- **CTASection** -- deepGreen950 bg, configurable props, gold button, reusable on other pages (from shared.tsx)
 
 ### About Page Sections (`src/components/sections/`)
 
@@ -187,9 +199,13 @@ Per `.planning/UX-AUDIT.md`, Wave 1 (10 items) shipped:
 - **ValuesRow** -- hunter-green bg, 5 values with Lucide icons (gold), responsive 2/3/5 col grid
 - Philosophy section removed (Wave 1 UX audit -- merged into Values)
 
-### Services Page Sections (`src/components/sections/`)
+### Services Page (inline in `src/app/services/page.tsx`)
 
-- **ServicePillar** -- reusable per-pillar section, two-column (description + included/outcomes lists), alternating bg, anchor ID via slug
+- **AccordionServicesSection** -- Single section with 7 collapsible pillar rows (one open at a time, default first open)
+  - Collapsed: number + title + subtitle + rotating chevron
+  - Expanded: description + 2 outcomes + proof point (links to case study) + CTA button
+  - AnimatePresence expand/collapse, ARIA (aria-expanded, aria-controls, role="region")
+  - Proof points link to `/impact#[case-study-slug]` with real metrics
 
 ### Model Page Sections (`src/components/sections/`)
 
