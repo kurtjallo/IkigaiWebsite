@@ -4,6 +4,10 @@ export const BASE_URL = 'https://ikigaiconsulting.ca'
 
 export const siteMetadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  icons: {
+    icon: '/images/favicon.ico',
+    apple: '/apple-icon',
+  },
   title: {
     template: '%s | Ikigai Consulting Group',
     default:
