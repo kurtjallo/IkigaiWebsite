@@ -149,6 +149,18 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 1 item from pre-launch risk lens (7 proposed, 6 rejected as already addressed or not worth trade-off):
 - Soft qualifier line added to CTA microcopy: "For leaders ready to strengthen their organization's foundations." (second line under "Free 30-minute call with Nilda." on all 3 booking CTAs)
 
+### Brand Logo Update (2026-02-20)
+
+- Nav wordmark replaced with actual Ikigai logo image (`public/images/ikigai-nav.png`, green-dot variant, 42px height)
+- Favicon: static `public/images/favicon.ico` (branded serif "I" + green dot, multi-size ICO) -- replaced default Vercel favicon
+- Apple touch icon updated to match (transparent bg, serif "I" + green dot + gold accent)
+- Explicit `<link rel="icon">` tags in `layout.tsx` `<head>` + `icons` field in metadata
+- Deleted `src/app/icon.tsx` (ImageResponse route handler removed in favor of static file)
+- Deleted leftover Next.js defaults: `vercel.svg`, `next.svg`, `globe.svg`, `file.svg`, `window.svg`
+- Deleted unused logo files: `logo-dark.png`, `logo-original.jpg`, `ikigai.png`, `ikigai-fullword.png`
+- Nav hover animations: gold underline slides in from left on links, CTA button lifts with gold shadow
+- Structured data logo reference updated to `ikigai-nav.png`
+
 ### Tech Stack
 
 - Next.js 16 with TypeScript (strict mode), static export (`output: 'export'`)
@@ -168,8 +180,8 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 - `src/app/not-found.tsx` -- Branded 404 page with design system components, noindex metadata
 - `src/app/sitemap.ts` -- Auto-generated sitemap.xml with all 7 pages, priorities, change frequencies
 - `src/app/robots.ts` -- Auto-generated robots.txt allowing all crawlers, referencing sitemap
-- `src/app/icon.tsx` -- 32x32 favicon (ImageResponse, hunter-green bg + gold "I")
-- `src/app/apple-icon.tsx` -- 180x180 Apple touch icon (ImageResponse)
+- `public/images/favicon.ico` -- Static favicon (branded "I" + green dot, 16/32/48px multi-size ICO)
+- `src/app/apple-icon.tsx` -- 180x180 Apple touch icon (ImageResponse, transparent bg)
 - `src/app/opengraph-image.tsx` -- 1200x630 OG image (ImageResponse)
 - `src/lib/fonts.ts` -- Font config (exports `playfairDisplay`, `inter`)
 - `src/lib/utils.ts` -- `cn()` utility
@@ -185,7 +197,7 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 
 ### Layout Chrome (`src/components/layout/`)
 
-- **Navigation** -- sticky top bar, "IKIGAI" wordmark, desktop links (lg+), hamburger (below lg), current page gold underline + `aria-current="page"`, `aria-controls="mobile-menu"`, `'use client'`
+- **Navigation** -- sticky top bar, Ikigai logo image (`ikigai-nav.png`, 42px height), desktop links (lg+) with gold underline slide-in hover animation, hamburger (below lg), current page gold underline, "Book a Call" CTA with lift+glow hover, `'use client'`
 - **MobileMenu** -- full-screen overlay, Escape to close, body scroll lock, `role="dialog"`, `id="mobile-menu"`, focus management (auto-focus close button, return focus on close), `'use client'`
 - **SkipNav** -- sr-only skip link targeting #main-content, visible on focus
 - **Footer** -- dark bg (neutral-950), nav links, contact info, copyright, Server Component
@@ -285,6 +297,7 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 - Homepage background rhythm: hunter-green > white > light-green > white > hunter-green > light-green > black
 - No stock photography -- use architectural SVGs and geometric motifs for visual identity
 - Photo-ready sections: About and Case Studies pages should look complete without photos but have slots that accept real photos (Nilda headshot, team/event shots) when available later
+- Favicon uses static ICO file in `public/images/` with explicit `<link>` tags in layout.tsx (not ImageResponse route)
 - ImageResponse files need `export const dynamic = 'force-static'` for static export compatibility
 - Navigation is a client component (usePathname), layout.tsx stays Server Component
 - Animation wrappers are Client Components imported by Server Component sections (correct Next.js pattern -- no need for 'use client' on section files)
