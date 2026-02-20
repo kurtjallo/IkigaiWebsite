@@ -15,27 +15,38 @@ export default function AppleIcon() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#355E3B',
-          borderRadius: '24px',
+          background: 'transparent',
         }}
       >
+        {/* Green dot (matching logo's i-dot) */}
+        <div
+          style={{
+            width: '16px',
+            height: '16px',
+            borderRadius: '50%',
+            background: '#1B6B2E',
+            marginBottom: '2px',
+          }}
+        />
+        {/* Serif I */}
         <span
           style={{
-            fontSize: '100px',
+            fontSize: '110px',
             fontWeight: 700,
-            color: '#D4A843',
+            color: '#1A1A1A',
             fontFamily: 'Georgia, serif',
-            lineHeight: 1,
+            lineHeight: 0.8,
           }}
         >
           I
         </span>
+        {/* Gold accent line */}
         <div
           style={{
             width: '50px',
-            height: '2px',
-            background: '#D4A843',
-            marginTop: '4px',
+            height: '3px',
+            background: '#C9A84C',
+            marginTop: '8px',
           }}
         />
       </div>

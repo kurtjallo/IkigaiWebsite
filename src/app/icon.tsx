@@ -12,18 +12,30 @@ export default function Icon() {
           width: '100%',
           height: '100%',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#355E3B',
-          borderRadius: '4px',
+          background: 'transparent',
         }}
       >
+        {/* Green dot (matching logo's i-dot) */}
+        <div
+          style={{
+            width: '5px',
+            height: '5px',
+            borderRadius: '50%',
+            background: '#1B6B2E',
+            marginBottom: '1px',
+          }}
+        />
+        {/* Serif I */}
         <span
           style={{
             fontSize: '22px',
             fontWeight: 700,
-            color: '#D4A843',
+            color: '#1A1A1A',
             fontFamily: 'Georgia, serif',
+            lineHeight: 0.8,
           }}
         >
           I

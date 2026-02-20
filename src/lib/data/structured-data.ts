@@ -8,7 +8,7 @@ export const organizationSchema = {
   description:
     'Organizational Architects for Purpose-Driven Organizations. We design governance, strategy, operations, and leadership systems for Ontario nonprofits and NGOs.',
   url: BASE_URL,
-  logo: `${BASE_URL}/images/logo-dark.png`,
+  logo: `${BASE_URL}/images/ikigai-nav.png`,
   founder: {
     '@type': 'Person',
     name: 'Nilda Bastone',
@@ -42,7 +42,7 @@ export const localBusinessSchema = {
   description:
     'Organizational consulting firm specializing in governance, strategy, and operational architecture for nonprofits and NGOs in Ontario, Canada.',
   url: BASE_URL,
-  logo: `${BASE_URL}/images/logo-dark.png`,
+  logo: `${BASE_URL}/images/ikigai-nav.png`,
   image: `${BASE_URL}/opengraph-image.png`,
   founder: {
     '@type': 'Person',
