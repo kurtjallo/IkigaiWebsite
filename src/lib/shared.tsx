@@ -541,14 +541,19 @@ export function SiteNav() {
         <Link
           href="/"
           style={{
-            fontFamily: 'var(--font-instrument-serif)',
-            fontSize: '1.5rem',
-            color: tokens.deepGreen,
-            letterSpacing: '0.08em',
+            display: 'flex',
+            alignItems: 'center',
             textDecoration: 'none',
           }}
         >
-          IKIGAI
+          <img
+            src="/images/ikigai-nav.png"
+            alt="Ikigai Consulting Group"
+            style={{
+              height: '42px',
+              width: 'auto',
+            }}
+          />
         </Link>
 
         {/* Desktop links */}
@@ -564,6 +569,7 @@ export function SiteNav() {
             <Link
               key={link.label}
               href={link.href}
+              className={isActive(link.href) ? 'nav-link nav-link--active' : 'nav-link'}
               style={{
                 fontFamily: 'var(--font-ibm-plex-sans)',
                 fontSize: '0.75rem',
@@ -572,8 +578,8 @@ export function SiteNav() {
                 textTransform: 'uppercase',
                 color: isActive(link.href) ? tokens.deepGreen : tokens.charcoal,
                 textDecoration: 'none',
-                borderBottom: isActive(link.href) ? `2px solid ${tokens.archGold}` : '2px solid transparent',
-                paddingBottom: '2px',
+                position: 'relative',
+                paddingBottom: '4px',
               }}
             >
               {link.label}
@@ -581,6 +587,7 @@ export function SiteNav() {
           ))}
           <Link
             href="/contact"
+            className="nav-cta"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: '0.75rem',
@@ -681,8 +688,36 @@ export function SiteNav() {
         </div>
       )}
 
-      {/* Responsive styles */}
+      {/* Responsive + hover styles */}
       <style>{`
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: ${tokens.archGold};
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link:hover::after {
+          transform: scaleX(1);
+        }
+        .nav-link--active::after {
+          transform: scaleX(1);
+        }
+        .nav-link:hover {
+          color: ${tokens.deepGreen} !important;
+        }
+        .nav-cta {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .nav-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
         @media (max-width: 768px) {
           .concept-nav-desktop { display: none !important; }
           .concept-nav-mobile-btn { display: block !important; }
