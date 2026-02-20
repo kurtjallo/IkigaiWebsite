@@ -1,6 +1,8 @@
 # Ikigai Consulting Group
 
-Marketing website for **Ikigai Consulting Group**, an organizational consulting firm serving Ontario's nonprofit ecosystem.
+Marketing website for **Ikigai Consulting Group**, an organizational consulting firm founded by Nilda Bastone. Ikigai positions itself as "Organizational Architects for Purpose-Driven Organizations," helping Ontario nonprofits, charities, and social service agencies strengthen governance, strategy, and operations.
+
+The firm's signature offering is the **Ikigai Architecture Model** -- a structured framework built on 7 organizational pillars (Strategic, Governance, Operational, Program, Leadership, Accountability, and Community Architecture) delivered through a four-phase engagement: Blueprint, Build, Strengthen, and Sustain.
 
 ## Tech Stack
 
