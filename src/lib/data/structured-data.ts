@@ -11,7 +11,7 @@ export const organizationSchema = {
   logo: `${BASE_URL}/images/ikigai-nav.png`,
   founder: {
     '@type': 'Person',
-    name: 'Nilda Bastone',
+    name: 'Ikigai Consulting Group',
     jobTitle: 'Founder & Principal Consultant',
   },
   areaServed: {
@@ -45,8 +45,8 @@ export const localBusinessSchema = {
   logo: `${BASE_URL}/images/ikigai-nav.png`,
   image: `${BASE_URL}/opengraph-image.png`,
   founder: {
-    '@type': 'Person',
-    name: 'Nilda Bastone',
+    '@type': 'Organization',
+    name: 'Ikigai Consulting Group',
   },
   address: {
     '@type': 'PostalAddress',

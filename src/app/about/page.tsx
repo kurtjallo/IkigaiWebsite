@@ -123,7 +123,7 @@ function FounderBioSection() {
                   marginBottom: '0.5rem',
                 }}
               >
-                Nilda Bastone
+                Our Founder
               </h2>
               <p
                 style={{
@@ -150,9 +150,9 @@ function FounderBioSection() {
                 }}
               >
                 With over two decades of experience in Ontario&rsquo;s nonprofit
-                and social services sector &mdash; including leadership at
-                Catholic Community Services of York Region &mdash; Nilda
-                Bastone founded Ikigai Consulting Group on a simple
+                and social services sector &mdash; including executive
+                leadership at multiple community organizations &mdash; our
+                founder established Ikigai Consulting Group on a simple
                 conviction: purpose-driven organizations deserve the same
                 structural excellence as any Fortune 500 company.
               </p>
@@ -182,34 +182,42 @@ function FounderBioSection() {
                   marginTop: '1.5rem',
                 }}
               >
-                Nilda&rsquo;s work has earned the trust of leaders across
-                Ontario&rsquo;s nonprofit community, with 37 professional
-                recommendations from colleagues and sector partners who
-                describe her as a thoughtful, compassionate leader who
-                builds welcoming and empowering organizational environments.
+                Our founder&rsquo;s work has earned the trust of leaders across
+                Ontario&rsquo;s nonprofit community, recognized by dozens of
+                colleagues and sector partners as a thoughtful, compassionate
+                leader who builds welcoming and empowering organizational
+                environments.
               </p>
             </div>
           </FadeIn>
 
-          {/* Right column: Founder photo */}
+          {/* Right column: decorative accent */}
           <FadeIn delay={0.25}>
             <div
               style={{
-                overflow: 'hidden',
-                border: `2px solid ${tokens.archGold}`,
                 maxWidth: '24rem',
+                padding: '2rem',
+                border: `2px solid ${tokens.archGold}`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '16rem',
               }}
             >
-              <img
-                src="/images/founder.png"
-                alt="Nilda Bastone, Founder & Principal Consultant at Ikigai Consulting Group"
+              <blockquote
                 style={{
-                  width: '100%',
-                  aspectRatio: '4 / 5',
-                  objectFit: 'cover',
-                  display: 'block',
+                  fontFamily: 'var(--font-instrument-serif)',
+                  fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)',
+                  fontStyle: 'italic',
+                  lineHeight: 1.6,
+                  color: tokens.deepGreen,
+                  textAlign: 'center',
+                  margin: 0,
                 }}
-              />
+              >
+                &ldquo;Purpose-driven organizations deserve the same structural
+                excellence as any Fortune 500 company.&rdquo;
+              </blockquote>
             </div>
           </FadeIn>
         </div>

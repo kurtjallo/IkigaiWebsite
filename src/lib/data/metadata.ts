@@ -33,8 +33,8 @@ export const siteMetadata: Metadata = {
     card: 'summary_large_image',
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 }
 
@@ -57,11 +57,11 @@ export const pageMetadata: Record<string, Metadata> = {
   about: {
     title: 'About Us',
     description:
-      'Founded by Nilda Bastone, Ikigai Consulting Group brings deep organizational architecture expertise to Ontario nonprofits and purpose-driven organizations.',
+      'Ikigai Consulting Group brings deep organizational architecture expertise to Ontario nonprofits and purpose-driven organizations.',
     openGraph: {
       title: 'About Us | Ikigai Consulting Group',
       description:
-        'Founded by Nilda Bastone, Ikigai Consulting Group brings deep organizational architecture expertise to Ontario nonprofits and purpose-driven organizations.',
+        'Ikigai Consulting Group brings deep organizational architecture expertise to Ontario nonprofits and purpose-driven organizations.',
       url: `${BASE_URL}/about`,
     },
     alternates: {

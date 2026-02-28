@@ -469,7 +469,7 @@ export function CTASection({
                 lineHeight: 1.5,
               }}
             >
-              Free 30-minute call with Nilda.
+              Free 30-minute strategy call.
               <br />
               <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
                 For leaders ready to strengthen their organization&rsquo;s foundations.

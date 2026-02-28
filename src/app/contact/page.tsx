@@ -619,7 +619,7 @@ function CalendarBookingSection() {
               marginBottom: '2.5rem',
             }}
           >
-            A free, 30-minute conversation with Nilda to discuss your
+            A free, 30-minute conversation to discuss your
             organization&apos;s challenges and explore whether Ikigai is the
             right fit.
           </p>
@@ -659,7 +659,7 @@ function CalendarBookingSection() {
                 lineHeight: 1.5,
               }}
             >
-              Free 30-minute call with Nilda.
+              Free 30-minute strategy call.
               <br />
               <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
                 For leaders ready to strengthen their organization&rsquo;s foundations.
