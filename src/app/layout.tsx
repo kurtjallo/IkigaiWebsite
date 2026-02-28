@@ -5,6 +5,7 @@ import {
   organizationSchema,
   localBusinessSchema,
 } from '@/lib/data/structured-data'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata = siteMetadata
@@ -63,6 +64,7 @@ export default function RootLayout({
         <main id="main-content">
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   )
