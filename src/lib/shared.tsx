@@ -6,6 +6,17 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
 /* ------------------------------------------------------------------ */
+/*  Calendly URL                                                       */
+/* ------------------------------------------------------------------ */
+
+const CALENDLY_URL =
+  process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com'
+
+function openCalendly() {
+  window.open(CALENDLY_URL, '_blank')
+}
+
+/* ------------------------------------------------------------------ */
 /*  Design Token Object (for reuse in inline styles)                   */
 /* ------------------------------------------------------------------ */
 
@@ -337,13 +348,11 @@ export function CTASection({
   heading = "Let\u2019s Build Something That Lasts.",
   description = "Whether you\u2019re starting from scratch or strengthening what exists, it begins with a conversation.",
   buttonText = 'Book a Strategy Call',
-  buttonHref = '/contact',
 }: {
   tagline?: string
   heading?: string
   description?: string
   buttonText?: string
-  buttonHref?: string
 }) {
   return (
     <section
@@ -438,8 +447,9 @@ export function CTASection({
 
         <FadeIn delay={0.4}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.625rem' }}>
-            <Link
-              href={buttonHref}
+            <button
+              type="button"
+              onClick={openCalendly}
               className="mobile-cta-text"
               style={{
                 display: 'inline-block',
@@ -452,12 +462,12 @@ export function CTASection({
                 backgroundColor: tokens.archGold,
                 color: tokens.ink,
                 borderRadius: '1px',
+                border: 'none',
                 cursor: 'pointer',
-                textDecoration: 'none',
               }}
             >
               {buttonText}
-            </Link>
+            </button>
             <span
               style={{
                 fontFamily: 'var(--font-ibm-plex-sans)',
@@ -585,8 +595,9 @@ export function SiteNav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <button
+            type="button"
+            onClick={openCalendly}
             className="nav-cta"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
@@ -598,11 +609,12 @@ export function SiteNav() {
               backgroundColor: tokens.archGold,
               color: tokens.ink,
               borderRadius: '1px',
-              textDecoration: 'none',
+              border: 'none',
+              cursor: 'pointer',
             }}
           >
             Book a Call
-          </Link>
+          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -666,9 +678,9 @@ export function SiteNav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            onClick={() => setMobileOpen(false)}
+          <button
+            type="button"
+            onClick={() => { setMobileOpen(false); openCalendly() }}
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: '0.875rem',
@@ -678,13 +690,14 @@ export function SiteNav() {
               padding: '0.75rem 1.25rem',
               backgroundColor: tokens.archGold,
               color: tokens.ink,
-              textDecoration: 'none',
+              border: 'none',
+              cursor: 'pointer',
               textAlign: 'center',
               marginTop: '0.5rem',
             }}
           >
             Book a Call
-          </Link>
+          </button>
         </div>
       )}
 
