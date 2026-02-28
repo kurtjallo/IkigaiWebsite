@@ -96,8 +96,9 @@ function HeroSection() {
 
         <FadeIn delay={0.55}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <Link
-              href="/contact"
+            <button
+              type="button"
+              onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com', '_blank')}
               className="mobile-cta-text"
               style={{
                 display: 'inline-block',
@@ -110,13 +111,13 @@ function HeroSection() {
                 backgroundColor: tokens.archGold,
                 color: tokens.ink,
                 borderRadius: '1px',
+                border: 'none',
                 cursor: 'pointer',
-                textDecoration: 'none',
                 alignSelf: 'flex-start',
               }}
             >
               Book a Strategy Call
-            </Link>
+            </button>
             <span
               style={{
                 fontFamily: 'var(--font-ibm-plex-sans)',

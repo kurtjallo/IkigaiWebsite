@@ -238,8 +238,9 @@ function AccordionServicesSection() {
                                 {pillar.description}
                               </p>
 
-                              <Link
-                                href="/contact"
+                              <button
+                                type="button"
+                                onClick={() => window.open(process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com', '_blank')}
                                 className="mobile-cta-text"
                                 style={{
                                   display: 'inline-block',
@@ -252,12 +253,12 @@ function AccordionServicesSection() {
                                   backgroundColor: tokens.archGold,
                                   color: tokens.ink,
                                   borderRadius: '1px',
+                                  border: 'none',
                                   cursor: 'pointer',
-                                  textDecoration: 'none',
                                 }}
                               >
                                 {pillar.ctaText}
-                              </Link>
+                              </button>
                             </div>
 
                             {/* Right: Outcomes + Proof Point */}
