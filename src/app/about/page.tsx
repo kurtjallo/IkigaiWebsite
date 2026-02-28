@@ -201,7 +201,7 @@ function FounderBioSection() {
               }}
             >
               <img
-                src="/images/founder.jpg"
+                src="/images/founder.png"
                 alt="Nilda Bastone, Founder & Principal Consultant at Ikigai Consulting Group"
                 style={{
                   width: '100%',
