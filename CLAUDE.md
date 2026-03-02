@@ -33,7 +33,7 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 
 ### 2. About Page ("Credibility & Trust")
 
-- Founder intro with professional photo of Nilda Bastone
+- Founder intro with actual photo of Nilda Bastone (`public/images/founder.png`)
 - Values: Integrity, Accountability, Social Justice, Excellence, Courageous Leadership (icon row)
 - CTA: "Book a Strategy Call"
 
@@ -170,6 +170,7 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 - Icons: lucide-react (Menu, X, Shield, Target, Scale, Award, Compass, Check) + custom SVG pillar icons
 - Animation: motion (v12.x, imported from `motion/react`) for scroll reveals, stagger, hover effects
 - Integrations: react-calendly (Calendly popup booking), Formspree (contact form backend)
+- CI: GitHub Actions (`.github/workflows/ci.yml`) -- lint + build on push to main and PRs
 - Dev tools: @axe-core/cli (automated accessibility checking)
 
 ### Key Files

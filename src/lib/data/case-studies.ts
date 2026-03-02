@@ -8,7 +8,6 @@ export interface CaseStudy {
   outcome: string
   metrics: string[]
   pillarsApplied: string[]
-  image?: string
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -30,7 +29,6 @@ export const caseStudies: CaseStudy[] = [
       '$200K in new funding secured within one year',
     ],
     pillarsApplied: ['governance', 'strategic'],
-    image: '/images/case-study-governance.jpg',
   },
   {
     slug: 'from-program-drift-to-impact-clarity',
@@ -50,7 +48,6 @@ export const caseStudies: CaseStudy[] = [
       '2 programs restructured based on evidence-informed review',
     ],
     pillarsApplied: ['program', 'accountability'],
-    image: '/images/case-study-programs.jpg',
   },
   {
     slug: 'building-leadership-beyond-the-founder',
@@ -70,6 +67,5 @@ export const caseStudies: CaseStudy[] = [
       'Board-adopted succession plan with 24-month timeline',
     ],
     pillarsApplied: ['leadership', 'operational', 'community'],
-    image: '/images/case-study-leadership.jpg',
   },
 ]
