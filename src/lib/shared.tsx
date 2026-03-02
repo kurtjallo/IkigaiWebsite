@@ -535,17 +535,19 @@ export function SiteNav() {
         zIndex: 50,
         backgroundColor: tokens.bone,
         borderBottom: `2px solid ${tokens.charcoal}`,
+        overflow: 'visible',
       }}
     >
       <div
+        className="concept-nav-container"
         style={{
           maxWidth: '72rem',
           margin: '0 auto',
-          padding: '0 1.5rem',
+          padding: '0.25rem 1.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '4rem',
+          height: '5rem',
         }}
       >
         <Link
@@ -554,14 +556,18 @@ export function SiteNav() {
             display: 'flex',
             alignItems: 'center',
             textDecoration: 'none',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
           <img
             src="/images/ikigai-nav.png"
             alt="Ikigai Consulting Group"
+            className="nav-logo"
             style={{
-              height: '42px',
+              height: '8rem',
               width: 'auto',
+              marginTop: '1.25rem',
             }}
           />
         </Link>
@@ -735,6 +741,8 @@ export function SiteNav() {
           .concept-nav-desktop { display: none !important; }
           .concept-nav-mobile-btn { display: block !important; }
           .concept-nav-mobile-menu { display: flex !important; }
+          .concept-nav-container { height: 5rem !important; }
+          .nav-logo { height: 4.5rem !important; }
         }
       `}</style>
     </nav>
