@@ -34,6 +34,12 @@ export const tokens = {
   charcoal: '#2C2C2C',
   ink: '#1A1A1A',
   structuralLine: '#D5CFC4',
+  // v2.0 tokens
+  cardSurface: '#F3F6F5',
+  bodyGray: '#5E6B64',
+  pillBg: '#F0F0F0',
+  pillBorder: '#D4D4D4',
+  deepGreenV2: '#13261B',
 } as const
 
 /* ------------------------------------------------------------------ */
@@ -250,6 +256,47 @@ export function SectionLabel({ label, dark = false }: { label: string; dark?: bo
         />
       </div>
     </FadeIn>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Pill Label (v2.0 section badge above headings)                    */
+/* ------------------------------------------------------------------ */
+
+export function PillLabel({
+  label,
+  centered = false,
+}: {
+  label: string
+  centered?: boolean
+}) {
+  return (
+    <div
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: centered ? 'center' : 'flex-start',
+        width: centered ? '100%' : 'auto',
+        marginBottom: '1rem',
+      }}
+    >
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '0.375rem 0.875rem',
+          backgroundColor: tokens.pillBg,
+          border: `1px solid ${tokens.pillBorder}`,
+          borderRadius: '9999px',
+          fontFamily: 'var(--font-ibm-plex-sans)',
+          fontSize: '0.8125rem',
+          fontWeight: 500,
+          color: tokens.charcoal,
+          letterSpacing: '0.01em',
+        }}
+      >
+        {label}
+      </span>
+    </div>
   )
 }
 
