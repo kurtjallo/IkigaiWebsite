@@ -265,18 +265,24 @@ export function SectionLabel({ label, dark = false }: { label: string; dark?: bo
 
 export function PillLabel({
   label,
+  children,
   centered = false,
+  center = false,
 }: {
-  label: string
+  label?: string
+  children?: React.ReactNode
   centered?: boolean
+  center?: boolean
 }) {
+  const isCentered = centered || center
+  const text = label || children
   return (
     <div
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: centered ? 'center' : 'flex-start',
-        width: centered ? '100%' : 'auto',
+        justifyContent: isCentered ? 'center' : 'flex-start',
+        width: isCentered ? '100%' : 'auto',
         marginBottom: '1rem',
       }}
     >
@@ -294,7 +300,7 @@ export function PillLabel({
           letterSpacing: '0.01em',
         }}
       >
-        {label}
+        {text}
       </span>
     </div>
   )
@@ -1057,10 +1063,16 @@ export function RoundedCTACard({
 
 export function BentoCard({
   children,
+  icon,
+  title,
+  description,
   className = '',
   style = {},
 }: {
-  children: React.ReactNode
+  children?: React.ReactNode
+  icon?: React.ReactNode
+  title?: string
+  description?: string
   className?: string
   style?: React.CSSProperties
 }) {
@@ -1074,7 +1086,46 @@ export function BentoCard({
         ...style,
       }}
     >
-      {children}
+      {children || (
+        <>
+          {icon && (
+            <div style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '10px',
+              backgroundColor: '#ffffff',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '2rem',
+            }}>
+              {icon}
+            </div>
+          )}
+          {title && (
+            <h3 style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: '1.375rem',
+              fontWeight: 400,
+              color: tokens.ink,
+              marginBottom: '0.5rem',
+            }}>
+              {title}
+            </h3>
+          )}
+          {description && (
+            <p style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: '0.9375rem',
+              color: tokens.bodyGray,
+              lineHeight: 1.6,
+            }}>
+              {description}
+            </p>
+          )}
+        </>
+      )}
     </div>
   )
 }
