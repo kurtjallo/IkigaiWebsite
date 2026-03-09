@@ -166,6 +166,13 @@ function HeroSection() {
 /*  2. IMAGE GALLERY STRIP                                             */
 /* ------------------------------------------------------------------ */
 
+const galleryImages = [
+  { src: '/images/gallery-1.png', alt: 'Governance workshop session' },
+  { src: '/images/gallery-2.png', alt: 'Strategic planning session' },
+  { src: '/images/gallery-3.png', alt: 'Community building event' },
+  { src: '/images/gallery-4.png', alt: 'Leadership development program' },
+]
+
 function GalleryStrip() {
   return (
     <section
@@ -183,22 +190,26 @@ function GalleryStrip() {
           gap: '1rem',
         }}
       >
-        {[0, 1, 2, 3].map((i) => (
+        {galleryImages.map((img, i) => (
           <div
             key={i}
             style={{
-              backgroundColor: tokens.deepGreen,
               borderRadius: '16px 16px 0 0',
               aspectRatio: '4 / 3',
               position: 'relative',
               overflow: 'hidden',
-              color: tokens.archGoldTextDark,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
           >
-            <TilePattern variant={i} />
+            <img
+              src={img.src}
+              alt={img.alt}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+              }}
+            />
           </div>
         ))}
       </div>
