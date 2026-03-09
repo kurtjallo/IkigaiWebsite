@@ -1,5 +1,5 @@
 import { instrumentSerif, ibmPlexSans, ibmPlexMono } from '@/lib/fonts'
-import { SiteNav } from '@/lib/shared'
+import { SiteNav, SiteFooter } from '@/lib/shared'
 import { siteMetadata } from '@/lib/data/metadata'
 import {
   organizationSchema,
@@ -64,6 +64,7 @@ export default function RootLayout({
         <main id="main-content">
           {children}
         </main>
+        <SiteFooter />
         <Analytics />
       </body>
     </html>
