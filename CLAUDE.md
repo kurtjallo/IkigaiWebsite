@@ -87,6 +87,16 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 9: SEO + Structured Data -- COMPLETE** (2026-02-17)
 **Phase 10: Accessibility + Performance Audit -- COMPLETE** (2026-02-17)
 
+### v2.0 Greenleaf-Inspired Redesign
+
+**Phase 12: Design System Overhaul -- COMPLETE** (2026-03-07)
+**Phase 13: Homepage Redesign -- COMPLETE** (2026-03-07)
+**Phase 14: About Page Redesign -- COMPLETE** (2026-03-07)
+**Phase 15: Services Page Redesign -- COMPLETE** (2026-03-07)
+**Phase 16: Model + Case Studies Redesign -- COMPLETE** (2026-03-07)
+**Phase 17: Contact + Policy Redesign -- COMPLETE** (2026-03-07)
+**Phase 18: Animation + Polish -- COMPLETE** (2026-03-08)
+
 ### Concept-Merged Redesign (MERGED to main site)
 
 "Architectural Blueprint" design concept merged into main site routes. Shared components in `src/lib/shared.tsx`.
@@ -203,12 +213,17 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 - **SkipNav** -- sr-only skip link targeting #main-content, visible on focus
 - **Footer** -- dark bg (neutral-950), nav links, contact info, copyright, Server Component
 
-### Animation Components (`src/components/animation/`)
+### Animation Components (`src/lib/shared.tsx` + `src/components/animation/`)
 
-- **FadeIn** -- Scroll-triggered fade-up reveal (configurable direction: up/down/left/right, delay), `whileInView` with `viewport={{ once: true }}`, `'use client'`
-- **StaggerChildren / StaggerItem** -- Sequential grid animation wrapper using variants + `staggerChildren`, `'use client'`
-- **HoverAccent** -- Gold accent line that scales in from left on hover via `scaleX` transform, `'use client'`
+- **FadeIn** -- Scroll-triggered fade-up reveal (configurable direction: up/down/left/right, delay), `useInView` with `once: true`
+- **StaggerWrap / StaggerItem** -- Sequential grid animation wrapper using variants + `staggerChildren`
+- **WordReveal** -- Scroll-triggered word opacity animation (words fade from 15% to 100% as user scrolls through), used on homepage About teaser heading
+- **HoverAccent** -- Gold accent line that scales in from left on hover via `scaleX` transform
+- **BentoCard hover** -- CSS `.bento-card-hover` class adds subtle lift (-3px) + shadow on hover
+- **Testimonial card hover** -- CSS `.testimonial-card-hover` class adds subtle lift (-2px) + shadow on hover
+- **Floating CTA shadow** -- `.btn-pill-primary` has `--btn-float-shadow` (0 12px 28px dark green blur)
 - All use `useReducedMotion()` from `motion/react` -- animations disabled when OS prefers reduced motion
+- CSS hover effects also disabled via `@media (prefers-reduced-motion: reduce)` in globals.css
 - All animate only `transform` + `opacity` (GPU-composited, no layout shift)
 
 ### Content Data (`src/lib/data/`)
