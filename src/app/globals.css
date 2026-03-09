@@ -116,3 +116,119 @@
     padding: 1rem 2rem !important;
   }
 }
+
+/* ============================================================
+   v2.0 Greenleaf-Inspired Design System Variables
+   ============================================================ */
+
+:root {
+  /* Section gaps — generous whitespace matching Greenleaf reference */
+  --section-gap: 10rem;       /* 160px desktop */
+  --section-gap-md: 7.5rem;   /* 120px tablet */
+  --section-gap-sm: 5rem;     /* 80px mobile */
+
+  /* Floating button shadow — signature Greenleaf CTA effect */
+  --btn-float-shadow: 0 12px 28px -4px rgba(19, 38, 27, 0.35);
+
+  /* Card styles */
+  --card-radius: 1.25rem;     /* 20px — bento cards, values cards */
+  --card-radius-lg: 1.5rem;   /* 24px — CTA card, footer */
+  --card-radius-img: 1rem;    /* 16px — image cards */
+}
+
+/* Responsive section gap adjustments */
+@media (max-width: 1024px) {
+  :root {
+    --section-gap: var(--section-gap-md);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-gap: var(--section-gap-sm);
+  }
+}
+
+/* v2.0 pill button base */
+.btn-pill {
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-pill:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-pill-primary {
+  background-color: #13261B;
+  color: #ffffff;
+  box-shadow: var(--btn-float-shadow);
+}
+
+/* v2.0 section wrapper */
+.section-v2 {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+/* Bento card hover — subtle lift + shadow */
+.bento-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Testimonial card hover */
+.testimonial-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Respect reduced motion for CSS hover effects */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card-hover:hover,
+  .testimonial-card-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-pill:hover {
+    transform: none;
+  }
+  .services-card-cta:hover,
+  .services-sidebar-cta:hover {
+    transform: none;
+  }
+}
+
+/* Bento rows — responsive stacking */
+@media (max-width: 768px) {
+  .bento-row,
+  .bento-row-triple {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Who We Serve — responsive 5-column grid */
+.hp-serve-grid {
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .hp-serve-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hp-serve-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

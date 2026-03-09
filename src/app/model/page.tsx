@@ -8,10 +8,163 @@ import {
   StaggerItem,
   BlueprintGridPattern,
   SectionLabel,
-  PageHeader,
-  CTASection,
+  PillLabel,
+  RoundedCTACard,
   tokens,
 } from '@/lib/shared'
+
+/* ------------------------------------------------------------------ */
+/*  PAGE HERO                                                          */
+/* ------------------------------------------------------------------ */
+
+function ModelHero() {
+  return (
+    <section
+      style={{
+        backgroundColor: '#ffffff',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem clamp(2rem, 4vw, 3rem)',
+        textAlign: 'center',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <PillLabel center>The Ikigai Model</PillLabel>
+
+        <FadeIn delay={0.1}>
+          <h1
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+              fontWeight: 400,
+              lineHeight: 1.1,
+              color: tokens.ink,
+              marginBottom: '1.25rem',
+            }}
+          >
+            The Ikigai Architecture Model&trade;
+          </h1>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontWeight: 300,
+              fontSize: '1.0625rem',
+              lineHeight: 1.7,
+              color: tokens.bodyGray,
+              maxWidth: '35rem',
+              margin: '0 auto',
+            }}
+          >
+            Our proprietary framework moves organizations from assessment through
+            sustained transformation. Four phases. Seven pillars. One integrated
+            system.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  EDITORIAL STATS BLOCK                                              */
+/* ------------------------------------------------------------------ */
+
+function EditorialStats() {
+  const stats = [
+    {
+      value: '85%',
+      label: 'Average board attendance after governance work',
+    },
+    {
+      value: '$200K+',
+      label: 'Funding secured for clients through program architecture',
+    },
+    {
+      value: '3',
+      label: 'Internal successors developed and promoted',
+    },
+  ]
+
+  return (
+    <section
+      style={{
+        backgroundColor: '#ffffff',
+        padding: '0 2rem clamp(3rem, 6vw, 5rem)',
+      }}
+    >
+      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+        <FadeIn delay={0.1}>
+          <div
+            className="editorial-stats-row"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '2rem',
+              marginBottom: '2rem',
+            }}
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} style={{ textAlign: 'center' }}>
+                <span
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: 'clamp(3rem, 6vw, 4.5rem)',
+                    fontWeight: 300,
+                    lineHeight: 1.1,
+                    color: tokens.ink,
+                    marginBottom: '0.75rem',
+                  }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontSize: '0.8125rem',
+                    fontWeight: 400,
+                    lineHeight: 1.5,
+                    color: tokens.bodyGray,
+                  }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <p style={{ textAlign: 'center' }}>
+            <Link
+              href="/impact"
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+                color: tokens.archGoldTextLight,
+                textDecoration: 'none',
+              }}
+            >
+              &rarr; See all case studies
+            </Link>
+          </p>
+        </FadeIn>
+      </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .editorial-stats-row {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+        }
+      `}</style>
+    </section>
+  )
+}
 
 /* ------------------------------------------------------------------ */
 /*  MODEL DIAGRAM SECTION                                              */
@@ -33,7 +186,7 @@ function ModelDiagramSection() {
     <section
       style={{
         backgroundColor: tokens.bone,
-        padding: '6rem 2rem',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem',
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
@@ -392,10 +545,11 @@ function PhasesDeepDive() {
     <section
       style={{
         backgroundColor: tokens.boneDark,
-        padding: '6rem 2rem',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem',
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <PillLabel>Our Process</PillLabel>
         <SectionLabel label="02 / The Process" />
 
         <FadeIn delay={0.1}>
@@ -505,7 +659,7 @@ function PillarIntegration() {
     <section
       style={{
         backgroundColor: tokens.bone,
-        padding: '6rem 2rem',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem',
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
@@ -673,7 +827,7 @@ function WhyItWorks() {
       style={{
         position: 'relative',
         backgroundColor: tokens.deepGreen,
-        padding: '6rem 2rem',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem',
         overflow: 'hidden',
       }}
     >
@@ -770,149 +924,17 @@ function WhyItWorks() {
 export default function ModelPage() {
   return (
     <>
-      <PageHeader
-        tagline="The Ikigai Architecture Model"
-        heading="A Blueprint for Organizational Excellence"
-        description="Our proprietary framework moves organizations from assessment through sustained transformation. Four phases. Seven pillars. One integrated system."
-      />
-
-      {/* Outcomes proof block */}
-      <section
-        style={{
-          backgroundColor: tokens.boneDark,
-          padding: '3rem 2rem',
-        }}
-      >
-        <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-          <FadeIn delay={0.1}>
-            <p
-              className="mobile-min-text mobile-tight-tracking"
-              style={{
-                fontFamily: 'var(--font-ibm-plex-mono)',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: tokens.archGold,
-                marginBottom: '1.5rem',
-                textAlign: 'center',
-              }}
-            >
-              Proven results from the Ikigai Architecture Model
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.2}>
-            <div
-              className="model-proof-strip"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '3rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              {[
-                { value: '85%', label: 'Board Attendance Increase' },
-                { value: '$200K', label: 'Funding Secured' },
-                { value: '3', label: 'Internal Successors Developed' },
-              ].map((stat, i) => (
-                <div
-                  key={stat.label}
-                  style={{
-                    textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    ...(i > 0
-                      ? {
-                          borderLeft: `1px solid ${tokens.structuralLine}`,
-                          paddingLeft: '3rem',
-                        }
-                      : {}),
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      display: 'block',
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      backgroundColor: tokens.archGold,
-                      marginBottom: '0.5rem',
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-instrument-serif)',
-                      fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-                      fontWeight: 400,
-                      color: tokens.deepGreen,
-                      lineHeight: 1.1,
-                    }}
-                  >
-                    {stat.value}
-                  </span>
-                  <span
-                    className="mobile-min-text"
-                    style={{
-                      fontFamily: 'var(--font-ibm-plex-sans)',
-                      fontSize: '0.8rem',
-                      fontWeight: 400,
-                      color: tokens.charcoal,
-                    }}
-                  >
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <p style={{ textAlign: 'center' }}>
-              <Link
-                href="/impact"
-                style={{
-                  fontFamily: 'var(--font-ibm-plex-sans)',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: tokens.archGoldTextLight,
-                  textDecoration: 'none',
-                }}
-              >
-                See all case studies &rarr;
-              </Link>
-            </p>
-          </FadeIn>
-        </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .model-proof-strip {
-              flex-direction: column !important;
-              gap: 1.5rem !important;
-              align-items: center !important;
-            }
-            .model-proof-strip > div {
-              border-left: none !important;
-              padding-left: 0 !important;
-            }
-          }
-        `}</style>
-      </section>
-
+      <ModelHero />
+      <EditorialStats />
       <ModelDiagramSection />
       <PhasesDeepDive />
       <PillarIntegration />
       <WhyItWorks />
-      <CTASection
-        tagline="Ready to Begin?"
-        heading="Your Organization Deserves Structural Excellence."
-        description="Let&rsquo;s start with a conversation about where you are and where your mission needs to go."
+      <RoundedCTACard
+        heading="Ready to apply this model to your organization?"
+        description="Book a strategy call to explore how the Ikigai Architecture Model maps to your specific needs."
         buttonText="Book a Strategy Call"
+        microcopy="Free 30-minute call with Nilda. For leaders ready to strengthen their organization's foundations."
       />
     </>
   )

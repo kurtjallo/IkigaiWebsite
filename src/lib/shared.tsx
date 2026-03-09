@@ -3,7 +3,7 @@
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Calendly URL                                                       */
@@ -34,6 +34,12 @@ export const tokens = {
   charcoal: '#2C2C2C',
   ink: '#1A1A1A',
   structuralLine: '#D5CFC4',
+  // v2.0 tokens
+  cardSurface: '#F3F6F5',
+  bodyGray: '#5E6B64',
+  pillBg: '#F0F0F0',
+  pillBorder: '#D4D4D4',
+  deepGreenV2: '#13261B',
 } as const
 
 /* ------------------------------------------------------------------ */
@@ -138,6 +144,74 @@ export function StaggerItem({
     >
       {children}
     </motion.div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Word Opacity Reveal (scroll-triggered, words activate as visible)  */
+/* ------------------------------------------------------------------ */
+
+export function WordReveal({
+  text,
+  className = '',
+  style = {},
+}: {
+  text: string
+  className?: string
+  style?: React.CSSProperties
+}) {
+  const shouldReduceMotion = useReducedMotion()
+  const containerRef = useRef<HTMLSpanElement>(null)
+  const [progress, setProgress] = useState(0)
+
+  const words = useMemo(() => text.split(/\s+/), [text])
+
+  useEffect(() => {
+    if (shouldReduceMotion || !containerRef.current) return
+
+    const el = containerRef.current
+
+    const handleScroll = () => {
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      // Start when element enters bottom 80% of viewport, complete at 30%
+      const start = vh * 0.8
+      const end = vh * 0.3
+      const rawProgress = (start - rect.top) / (start - end)
+      setProgress(Math.max(0, Math.min(1, rawProgress)))
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // initial check
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [shouldReduceMotion])
+
+  if (shouldReduceMotion) {
+    return <span className={className} style={style}>{text}</span>
+  }
+
+  return (
+    <span ref={containerRef} className={className} style={{ ...style, display: 'inline' }}>
+      {words.map((word, i) => {
+        // Each word activates at a different progress threshold
+        const wordProgress = i / words.length
+        const opacity = progress > wordProgress
+          ? Math.min(1, 0.15 + (progress - wordProgress) * (words.length / 1.5) * 0.85)
+          : 0.15
+        return (
+          <span
+            key={i}
+            style={{
+              opacity,
+              transition: 'opacity 0.3s ease',
+              display: 'inline',
+            }}
+          >
+            {word}{i < words.length - 1 ? ' ' : ''}
+          </span>
+        )
+      })}
+    </span>
   )
 }
 
@@ -250,6 +324,53 @@ export function SectionLabel({ label, dark = false }: { label: string; dark?: bo
         />
       </div>
     </FadeIn>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Pill Label (v2.0 section badge above headings)                    */
+/* ------------------------------------------------------------------ */
+
+export function PillLabel({
+  label,
+  children,
+  centered = false,
+  center = false,
+}: {
+  label?: string
+  children?: React.ReactNode
+  centered?: boolean
+  center?: boolean
+}) {
+  const isCentered = centered || center
+  const text = label || children
+  return (
+    <div
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: isCentered ? 'center' : 'flex-start',
+        width: isCentered ? '100%' : 'auto',
+        marginBottom: '1rem',
+      }}
+    >
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '0.375rem 0.875rem',
+          backgroundColor: tokens.pillBg,
+          border: `1px solid ${tokens.pillBorder}`,
+          borderRadius: '9999px',
+          fontFamily: 'var(--font-ibm-plex-sans)',
+          fontSize: '0.8125rem',
+          fontWeight: 500,
+          color: tokens.charcoal,
+          letterSpacing: '0.01em',
+        }}
+      >
+        {text}
+      </span>
+    </div>
   )
 }
 
@@ -450,7 +571,7 @@ export function CTASection({
             <button
               type="button"
               onClick={openCalendly}
-              className="mobile-cta-text"
+              className="mobile-cta-text btn-pill btn-pill-primary"
               style={{
                 display: 'inline-block',
                 fontFamily: 'var(--font-ibm-plex-sans)',
@@ -461,7 +582,6 @@ export function CTASection({
                 padding: '0.875rem 2.5rem',
                 backgroundColor: tokens.archGold,
                 color: tokens.ink,
-                borderRadius: '1px',
                 border: 'none',
                 cursor: 'pointer',
               }}
@@ -499,6 +619,7 @@ export function CTASection({
 export function SiteNav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const navLinks = [
     { label: 'About', href: '/about' },
@@ -509,6 +630,13 @@ export function SiteNav() {
   ]
 
   const isActive = (href: string) => pathname === href
+
+  // Scroll detection for border
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   // Body scroll lock + Escape to close
   useEffect(() => {
@@ -533,8 +661,9 @@ export function SiteNav() {
         position: 'sticky',
         top: 0,
         zIndex: 50,
-        backgroundColor: tokens.bone,
-        borderBottom: `2px solid ${tokens.charcoal}`,
+        backgroundColor: '#ffffff',
+        borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
+        transition: 'border-color 0.3s ease',
         overflow: 'visible',
       }}
     >
@@ -585,17 +714,13 @@ export function SiteNav() {
             <Link
               key={link.label}
               href={link.href}
-              className={isActive(link.href) ? 'nav-link nav-link--active' : 'nav-link'}
+              className="nav-link-v2"
               style={{
                 fontFamily: 'var(--font-ibm-plex-sans)',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: isActive(link.href) ? tokens.deepGreen : tokens.charcoal,
+                fontSize: '0.9375rem',
+                fontWeight: isActive(link.href) ? 600 : 500,
+                color: '#111111',
                 textDecoration: 'none',
-                position: 'relative',
-                paddingBottom: '4px',
               }}
             >
               {link.label}
@@ -604,19 +729,11 @@ export function SiteNav() {
           <button
             type="button"
             onClick={openCalendly}
-            className="nav-cta"
+            className="btn-pill btn-pill-primary"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '0.5rem 1.25rem',
-              backgroundColor: tokens.archGold,
-              color: tokens.ink,
-              borderRadius: '1px',
-              border: 'none',
-              cursor: 'pointer',
+              fontSize: '0.8125rem',
+              padding: '0.625rem 1.5rem',
             }}
           >
             Book a Call
@@ -638,7 +755,7 @@ export function SiteNav() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={tokens.charcoal} strokeWidth="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2">
             {mobileOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
@@ -660,8 +777,8 @@ export function SiteNav() {
             flexDirection: 'column',
             padding: '1rem 1.5rem 1.5rem',
             gap: '0.75rem',
-            borderTop: `1px solid ${tokens.structuralLine}`,
-            backgroundColor: tokens.bone,
+            borderTop: '1px solid rgba(0,0,0,0.06)',
+            backgroundColor: '#ffffff',
           }}
         >
           {navLinks.map((link) => (
@@ -671,14 +788,12 @@ export function SiteNav() {
               onClick={() => setMobileOpen(false)}
               style={{
                 fontFamily: 'var(--font-ibm-plex-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: isActive(link.href) ? tokens.deepGreen : tokens.charcoal,
+                fontSize: '0.9375rem',
+                fontWeight: isActive(link.href) ? 600 : 500,
+                color: '#111111',
                 textDecoration: 'none',
-                padding: '0.5rem 0',
-                borderBottom: `1px solid ${tokens.structuralLine}`,
+                padding: '0.625rem 0',
+                borderBottom: '1px solid rgba(0,0,0,0.06)',
               }}
             >
               {link.label}
@@ -687,18 +802,12 @@ export function SiteNav() {
           <button
             type="button"
             onClick={() => { setMobileOpen(false); openCalendly() }}
+            className="btn-pill btn-pill-primary"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
-              fontSize: '0.875rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '0.75rem 1.25rem',
-              backgroundColor: tokens.archGold,
-              color: tokens.ink,
-              border: 'none',
-              cursor: 'pointer',
+              fontSize: '0.9375rem',
               textAlign: 'center',
+              justifyContent: 'center',
               marginTop: '0.5rem',
             }}
           >
@@ -707,35 +816,13 @@ export function SiteNav() {
         </div>
       )}
 
-      {/* Responsive + hover styles */}
+      {/* Responsive styles */}
       <style>{`
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: ${tokens.archGold};
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .nav-link-v2 {
+          transition: opacity 0.2s ease;
         }
-        .nav-link:hover::after {
-          transform: scaleX(1);
-        }
-        .nav-link--active::after {
-          transform: scaleX(1);
-        }
-        .nav-link:hover {
-          color: ${tokens.deepGreen} !important;
-        }
-        .nav-cta {
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .nav-cta:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        .nav-link-v2:hover {
+          opacity: 0.65;
         }
         @media (max-width: 768px) {
           .concept-nav-desktop { display: none !important; }
@@ -746,5 +833,367 @@ export function SiteNav() {
         }
       `}</style>
     </nav>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Site Footer (v2.0 rounded-top dark green card)                     */
+/* ------------------------------------------------------------------ */
+
+export function SiteFooter() {
+  const footerLinks = {
+    pages: [
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about' },
+      { label: 'Services', href: '/services' },
+      { label: 'The Ikigai Model', href: '/model' },
+      { label: 'Impact', href: '/impact' },
+      { label: 'Contact', href: '/contact' },
+    ],
+    information: [
+      { label: 'Privacy Policy', href: '/privacy' },
+    ],
+  }
+
+  return (
+    <footer style={{ backgroundColor: '#ffffff', padding: '0 1rem' }}>
+      <div
+        style={{
+          maxWidth: '76rem',
+          margin: '0 auto',
+          backgroundColor: tokens.deepGreenV2,
+          borderRadius: '24px 24px 0 0',
+          padding: 'clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 4rem)',
+        }}
+      >
+        {/* Row 1: Logo + Nav columns */}
+        <div
+          className="footer-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1.2fr 1fr 0.8fr',
+            gap: '3rem',
+            paddingBottom: '2.5rem',
+          }}
+        >
+          {/* Logo area */}
+          <div>
+            <img
+              src="/images/ikigai-nav.png"
+              alt="Ikigai Consulting Group"
+              style={{ height: '80px', width: 'auto', marginBottom: '1rem', filter: 'brightness(10)' }}
+            />
+            <p
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.875rem',
+                color: 'rgba(255,255,255,0.6)',
+                lineHeight: 1.6,
+                maxWidth: '280px',
+              }}
+            >
+              Organizational Architects for Purpose-Driven Organizations
+            </p>
+          </div>
+
+          {/* Pages column */}
+          <div>
+            <h3
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.8125rem',
+                fontWeight: 600,
+                color: '#ffffff',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                marginBottom: '1.25rem',
+              }}
+            >
+              Pages
+            </h3>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              {footerLinks.pages.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="footer-link"
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontSize: '0.875rem',
+                      color: 'rgba(255,255,255,0.7)',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s ease',
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Information column */}
+          <div>
+            <h3
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '0.8125rem',
+                fontWeight: 600,
+                color: '#ffffff',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                marginBottom: '1.25rem',
+              }}
+            >
+              Information
+            </h3>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              {footerLinks.information.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="footer-link"
+                    style={{
+                      fontFamily: 'var(--font-ibm-plex-sans)',
+                      fontSize: '0.875rem',
+                      color: 'rgba(255,255,255,0.7)',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s ease',
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={openCalendly}
+                  className="footer-link"
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontSize: '0.875rem',
+                    color: 'rgba(255,255,255,0.7)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                    textAlign: 'left',
+                  }}
+                >
+                  Book a Strategy Call
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Row 2: Copyright bar */}
+        <div
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            paddingTop: '1.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+          }}
+        >
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: '0.8125rem',
+              color: 'rgba(255,255,255,0.45)',
+              margin: 0,
+            }}
+          >
+            © {new Date().getFullYear()} Ikigai Consulting Group. All rights reserved.
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: '0.8125rem',
+              color: 'rgba(255,255,255,0.45)',
+              margin: 0,
+            }}
+          >
+            Serving Ontario&rsquo;s Nonprofit Sector
+          </p>
+        </div>
+      </div>
+
+      {/* Footer responsive + hover styles */}
+      <style>{`
+        .footer-link:hover {
+          color: rgba(255,255,255,1) !important;
+        }
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+      `}</style>
+    </footer>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  RoundedCTACard (v2.0 final CTA for all redesigned pages)          */
+/* ------------------------------------------------------------------ */
+
+export function RoundedCTACard({
+  heading,
+  description,
+  buttonText = 'Book a Strategy Call',
+  microcopy,
+}: {
+  heading: string
+  description?: string
+  buttonText?: string
+  microcopy?: string
+}) {
+  return (
+    <section
+      style={{
+        padding: `0 2rem var(--section-gap)`,
+        backgroundColor: '#ffffff',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '72rem',
+          margin: '0 auto',
+          backgroundColor: tokens.cardSurface,
+          borderRadius: 'var(--card-radius-lg)',
+          padding: 'clamp(2.5rem, 5vw, 4rem)',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '2rem',
+          flexWrap: 'wrap',
+        }}
+      >
+        <div style={{ flex: 1, minWidth: '280px' }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+              fontWeight: 400,
+              color: tokens.ink,
+              lineHeight: 1.2,
+              marginBottom: description ? '0.75rem' : 0,
+            }}
+          >
+            {heading}
+          </h2>
+          {description && (
+            <p
+              style={{
+                fontFamily: 'var(--font-ibm-plex-sans)',
+                fontSize: '1rem',
+                color: tokens.bodyGray,
+                lineHeight: 1.65,
+                maxWidth: '480px',
+              }}
+            >
+              {description}
+            </p>
+          )}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+          <button
+            type="button"
+            onClick={openCalendly}
+            className="btn-pill btn-pill-primary"
+          >
+            {buttonText} →
+          </button>
+          {microcopy && (
+            <p style={{ fontSize: '0.8125rem', color: tokens.bodyGray, paddingLeft: '0.25rem', margin: 0 }}>
+              {microcopy}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  BentoCard (v2.0 asymmetric card for benefits/features grids)      */
+/* ------------------------------------------------------------------ */
+
+export function BentoCard({
+  children,
+  icon,
+  title,
+  description,
+  className = '',
+  style = {},
+}: {
+  children?: React.ReactNode
+  icon?: React.ReactNode
+  title?: string
+  description?: string
+  className?: string
+  style?: React.CSSProperties
+}) {
+  return (
+    <div
+      className={`bento-card-hover ${className}`}
+      style={{
+        backgroundColor: tokens.cardSurface,
+        borderRadius: 'var(--card-radius)',
+        padding: '2rem 2.5rem',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        ...style,
+      }}
+    >
+      {children || (
+        <>
+          {icon && (
+            <div style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '10px',
+              backgroundColor: '#ffffff',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '2rem',
+            }}>
+              {icon}
+            </div>
+          )}
+          {title && (
+            <h3 style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: '1.375rem',
+              fontWeight: 400,
+              color: tokens.ink,
+              marginBottom: '0.5rem',
+            }}>
+              {title}
+            </h3>
+          )}
+          {description && (
+            <p style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontSize: '0.9375rem',
+              color: tokens.bodyGray,
+              lineHeight: 1.6,
+            }}>
+              {description}
+            </p>
+          )}
+        </>
+      )}
+    </div>
   )
 }

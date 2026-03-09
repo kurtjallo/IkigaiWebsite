@@ -7,8 +7,8 @@ import {
   StaggerWrap,
   StaggerItem,
   SectionLabel,
-  PageHeader,
-  CTASection,
+  PillLabel,
+  RoundedCTACard,
   tokens,
 } from '@/lib/shared'
 
@@ -26,6 +26,59 @@ const standaloneTestimonial = testimonials.find(
 )!
 
 /* ------------------------------------------------------------------ */
+/*  PAGE HERO                                                          */
+/* ------------------------------------------------------------------ */
+
+function ImpactHero() {
+  return (
+    <section
+      style={{
+        backgroundColor: '#ffffff',
+        padding: 'clamp(4rem, 8vw, 6rem) 2rem clamp(2rem, 4vw, 3rem)',
+        textAlign: 'center',
+      }}
+    >
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <PillLabel center>Impact</PillLabel>
+
+        <FadeIn delay={0.1}>
+          <h1
+            style={{
+              fontFamily: 'var(--font-instrument-serif)',
+              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+              fontWeight: 400,
+              lineHeight: 1.1,
+              color: tokens.ink,
+              marginBottom: '1.25rem',
+            }}
+          >
+            Impact in Action.
+          </h1>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <p
+            style={{
+              fontFamily: 'var(--font-ibm-plex-sans)',
+              fontWeight: 300,
+              fontSize: '1.0625rem',
+              lineHeight: 1.7,
+              color: tokens.bodyGray,
+              maxWidth: '35rem',
+              margin: '0 auto',
+            }}
+          >
+            Real organizations. Real challenges. Real results. See how the
+            Ikigai Architecture Model&trade; transforms purpose-driven
+            organizations from fragile to resilient.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  RESULTS SNAPSHOT                                                   */
 /* ------------------------------------------------------------------ */
 
@@ -41,11 +94,18 @@ function ResultsSnapshot() {
   return (
     <section
       style={{
-        backgroundColor: tokens.boneDark,
-        padding: '5rem 2rem',
+        backgroundColor: tokens.cardSurface,
+        padding: 'clamp(3rem, 6vw, 5rem) 2rem',
       }}
     >
-      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+      <div
+        style={{
+          maxWidth: '72rem',
+          margin: '0 auto',
+          backgroundColor: tokens.cardSurface,
+          borderRadius: '1rem',
+        }}
+      >
         <SectionLabel label="At a Glance" />
 
         <FadeIn delay={0.1}>
@@ -71,18 +131,21 @@ function ResultsSnapshot() {
                   href={`#${row.slug}`}
                   style={{
                     display: 'block',
-                    backgroundColor: tokens.boneLight,
+                    backgroundColor: '#ffffff',
                     borderLeft: `3px solid ${tokens.archGold}`,
                     padding: '1.75rem 2rem',
                     textDecoration: 'none',
                     color: 'inherit',
-                    transition: 'border-color 0.2s ease',
+                    borderRadius: '0.5rem',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
                     ;(e.currentTarget as HTMLElement).style.borderLeftColor = tokens.deepGreen
+                    ;(e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'
                   }}
                   onMouseLeave={(e) => {
                     ;(e.currentTarget as HTMLElement).style.borderLeftColor = tokens.archGold
+                    ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
                   }}
                 >
                   {/* Top line: org + sector */}
@@ -118,7 +181,7 @@ function ResultsSnapshot() {
                       fontWeight: 300,
                       fontSize: '0.875rem',
                       lineHeight: 1.6,
-                      color: tokens.charcoal,
+                      color: tokens.bodyGray,
                       marginBottom: '0.875rem',
                     }}
                   >
@@ -172,7 +235,7 @@ function CaseStudySection({
   index: number
   testimonial?: Testimonial
 }) {
-  const bgColors = [tokens.bone, tokens.boneDark, tokens.bone]
+  const bgColors = ['#ffffff', tokens.cardSurface, '#ffffff']
   const bg = bgColors[index % bgColors.length]
   const isLast = index === caseStudies.length - 1
 
@@ -181,12 +244,12 @@ function CaseStudySection({
       id={study.slug}
       style={{
         backgroundColor: bg,
-        padding: '5rem 2rem',
+        padding: 'clamp(3.5rem, 7vw, 5rem) 2rem',
         scrollMarginTop: '5rem',
       }}
     >
       <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-        <SectionLabel label={`Case Study ${String(index + 1).padStart(2, '0')}`} />
+        <PillLabel>{`Case Study ${String(index + 1).padStart(2, '0')}`}</PillLabel>
 
         <FadeIn delay={0.1}>
           <h2
@@ -195,7 +258,7 @@ function CaseStudySection({
               fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 400,
               lineHeight: 1.15,
-              color: tokens.deepGreen,
+              color: tokens.ink,
               marginBottom: '0.75rem',
             }}
           >
@@ -210,7 +273,7 @@ function CaseStudySection({
               fontSize: '0.8125rem',
               fontWeight: 400,
               letterSpacing: '0.05em',
-              color: tokens.archGoldTextLight,
+              color: tokens.bodyGray,
               marginBottom: '2rem',
             }}
           >
@@ -249,7 +312,7 @@ function CaseStudySection({
                   fontWeight: 300,
                   fontSize: '0.9375rem',
                   lineHeight: 1.75,
-                  color: tokens.charcoal,
+                  color: tokens.bodyGray,
                 }}
               >
                 {study.challenge}
@@ -278,7 +341,7 @@ function CaseStudySection({
                   fontWeight: 300,
                   fontSize: '0.9375rem',
                   lineHeight: 1.75,
-                  color: tokens.charcoal,
+                  color: tokens.bodyGray,
                 }}
               >
                 {study.approach}
@@ -309,7 +372,7 @@ function CaseStudySection({
                 fontWeight: 300,
                 fontSize: '0.9375rem',
                 lineHeight: 1.75,
-                color: tokens.charcoal,
+                color: tokens.bodyGray,
                 maxWidth: '52rem',
               }}
             >
@@ -389,7 +452,8 @@ function CaseStudySection({
                 marginTop: '3rem',
                 padding: '2rem',
                 borderLeft: `3px solid ${tokens.archGold}`,
-                backgroundColor: tokens.boneLight,
+                backgroundColor: index % 2 === 0 ? tokens.cardSurface : '#ffffff',
+                borderRadius: '0.5rem',
               }}
             >
               <svg
@@ -420,7 +484,7 @@ function CaseStudySection({
                   fontWeight: 300,
                   fontSize: '0.9375rem',
                   lineHeight: 1.75,
-                  color: tokens.charcoal,
+                  color: tokens.bodyGray,
                   fontStyle: 'italic',
                   marginBottom: '1rem',
                 }}
@@ -444,7 +508,7 @@ function CaseStudySection({
                     fontFamily: 'var(--font-ibm-plex-sans)',
                     fontWeight: 300,
                     fontSize: '0.8125rem',
-                    color: tokens.charcoal,
+                    color: tokens.bodyGray,
                   }}
                 >
                   {testimonial.role}, {testimonial.organization}
@@ -474,84 +538,116 @@ function CaseStudySection({
 }
 
 /* ------------------------------------------------------------------ */
-/*  STANDALONE TESTIMONIAL SECTION                                     */
+/*  STANDALONE TESTIMONIAL SECTION (v2.0 open-format)                  */
 /* ------------------------------------------------------------------ */
 
 function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonial }) {
   return (
     <section
       style={{
-        backgroundColor: tokens.deepGreen,
-        padding: '5rem 2rem',
+        backgroundColor: '#ffffff',
+        padding: 'clamp(4rem, 8vw, 5rem) 2rem',
       }}
     >
-      <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
+      <div style={{ maxWidth: '44rem', margin: '0 auto', textAlign: 'center' }}>
         <FadeIn delay={0.1}>
-          <blockquote
+          {/* Five amber stars */}
+          <div
+            aria-label="5 out of 5 stars"
             style={{
-              margin: 0,
-              textAlign: 'center',
+              marginBottom: '1.5rem',
+              fontSize: '1.5rem',
+              letterSpacing: '0.25em',
+              color: '#d97706',
             }}
           >
-            <svg
-              aria-hidden="true"
-              width="36"
-              height="28"
-              viewBox="0 0 36 28"
-              style={{
-                marginBottom: '1.5rem',
-                display: 'inline-block',
-              }}
-            >
-              <text
-                x="0"
-                y="28"
-                style={{
-                  fontFamily: 'var(--font-instrument-serif)',
-                  fontSize: '48px',
-                  fill: tokens.archGoldTextDark,
-                }}
-              >
-                &ldquo;
-              </text>
-            </svg>
+            &#9733;&#9733;&#9733;&#9733;&#9733;
+          </div>
 
+          <blockquote style={{ margin: 0 }}>
             <p
               style={{
-                fontFamily: 'var(--font-ibm-plex-sans)',
-                fontWeight: 300,
-                fontSize: '1.125rem',
-                lineHeight: 1.8,
-                color: tokens.parchment,
+                fontFamily: 'var(--font-instrument-serif)',
+                fontWeight: 400,
+                fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)',
+                lineHeight: 1.7,
+                color: tokens.ink,
                 fontStyle: 'italic',
                 marginBottom: '2rem',
+                maxWidth: '44rem',
               }}
             >
-              {testimonial.quote}
+              &ldquo;{testimonial.quote}&rdquo;
             </p>
 
-            <footer>
-              <p
+            <footer
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem',
+              }}
+            >
+              {/* Circle placeholder avatar */}
+              <div
+                aria-hidden="true"
                 style={{
-                  fontFamily: 'var(--font-ibm-plex-sans)',
-                  fontWeight: 500,
-                  fontSize: '0.9375rem',
-                  color: tokens.parchment,
-                  marginBottom: '0.25rem',
+                  width: '3rem',
+                  height: '3rem',
+                  borderRadius: '50%',
+                  backgroundColor: tokens.cardSurface,
+                  border: `1px solid ${tokens.structuralLine}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
                 }}
               >
-                {testimonial.name}
-              </p>
-              <p
+                <span
+                  style={{
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: '1.125rem',
+                    color: tokens.bodyGray,
+                    fontWeight: 400,
+                  }}
+                >
+                  {testimonial.name.charAt(0)}
+                </span>
+              </div>
+
+              {/* Vertical divider */}
+              <div
+                aria-hidden="true"
                 style={{
-                  fontFamily: 'var(--font-ibm-plex-sans)',
-                  fontWeight: 300,
-                  fontSize: '0.8125rem',
-                  color: tokens.boneDark,
+                  width: '1px',
+                  height: '2.5rem',
+                  backgroundColor: tokens.structuralLine,
                 }}
-              >
-                {testimonial.role}, {testimonial.organization}
-              </p>
+              />
+
+              <div style={{ textAlign: 'left' }}>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontWeight: 500,
+                    fontSize: '0.9375rem',
+                    color: tokens.ink,
+                    marginBottom: '0.125rem',
+                  }}
+                >
+                  {testimonial.name}
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-ibm-plex-sans)',
+                    fontWeight: 300,
+                    fontSize: '0.8125rem',
+                    color: tokens.bodyGray,
+                  }}
+                >
+                  {testimonial.role}, {testimonial.organization}
+                </p>
+              </div>
             </footer>
           </blockquote>
         </FadeIn>
@@ -567,12 +663,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
 export default function ImpactPage() {
   return (
     <>
-      <PageHeader
-        tagline="Our Impact"
-        heading="Impact in Action."
-        description="Real organizations. Real challenges. Real results. See how the Ikigai Architecture Model&trade; transforms purpose-driven organizations from fragile to resilient."
-      />
-
+      <ImpactHero />
       <ResultsSnapshot />
 
       {caseStudies.map((study, idx) => (
@@ -586,10 +677,11 @@ export default function ImpactPage() {
 
       <StandaloneTestimonialSection testimonial={standaloneTestimonial} />
 
-      <CTASection
-        heading="Let&rsquo;s Build Your Organization&rsquo;s Future."
-        description="Every resilient organization starts with a conversation about where you are and where you need to be."
+      <RoundedCTACard
+        heading="Ready to create your own impact story?"
+        description="Let's talk about what's possible for your organization."
         buttonText="Book a Strategy Call"
+        microcopy="Free 30-minute call with Nilda."
       />
     </>
   )
