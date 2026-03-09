@@ -179,3 +179,31 @@
   padding-top: var(--section-gap);
   padding-bottom: var(--section-gap);
 }
+
+/* Bento card hover — subtle lift + shadow */
+.bento-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Testimonial card hover */
+.testimonial-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Respect reduced motion for CSS hover effects */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card-hover:hover,
+  .testimonial-card-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-pill:hover {
+    transform: none;
+  }
+  .services-card-cta:hover,
+  .services-sidebar-cta:hover {
+    transform: none;
+  }
+}

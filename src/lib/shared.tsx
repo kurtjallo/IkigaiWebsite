@@ -3,7 +3,7 @@
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 
 /* ------------------------------------------------------------------ */
 /*  Calendly URL                                                       */
@@ -144,6 +144,74 @@ export function StaggerItem({
     >
       {children}
     </motion.div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Word Opacity Reveal (scroll-triggered, words activate as visible)  */
+/* ------------------------------------------------------------------ */
+
+export function WordReveal({
+  text,
+  className = '',
+  style = {},
+}: {
+  text: string
+  className?: string
+  style?: React.CSSProperties
+}) {
+  const shouldReduceMotion = useReducedMotion()
+  const containerRef = useRef<HTMLSpanElement>(null)
+  const [progress, setProgress] = useState(0)
+
+  const words = useMemo(() => text.split(/\s+/), [text])
+
+  useEffect(() => {
+    if (shouldReduceMotion || !containerRef.current) return
+
+    const el = containerRef.current
+
+    const handleScroll = () => {
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      // Start when element enters bottom 80% of viewport, complete at 30%
+      const start = vh * 0.8
+      const end = vh * 0.3
+      const rawProgress = (start - rect.top) / (start - end)
+      setProgress(Math.max(0, Math.min(1, rawProgress)))
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // initial check
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [shouldReduceMotion])
+
+  if (shouldReduceMotion) {
+    return <span className={className} style={style}>{text}</span>
+  }
+
+  return (
+    <span ref={containerRef} className={className} style={{ ...style, display: 'inline' }}>
+      {words.map((word, i) => {
+        // Each word activates at a different progress threshold
+        const wordProgress = i / words.length
+        const opacity = progress > wordProgress
+          ? Math.min(1, 0.15 + (progress - wordProgress) * (words.length / 1.5) * 0.85)
+          : 0.15
+        return (
+          <span
+            key={i}
+            style={{
+              opacity,
+              transition: 'opacity 0.3s ease',
+              display: 'inline',
+            }}
+          >
+            {word}{i < words.length - 1 ? ' ' : ''}
+          </span>
+        )
+      })}
+    </span>
   )
 }
 
@@ -503,7 +571,7 @@ export function CTASection({
             <button
               type="button"
               onClick={openCalendly}
-              className="mobile-cta-text"
+              className="mobile-cta-text btn-pill btn-pill-primary"
               style={{
                 display: 'inline-block',
                 fontFamily: 'var(--font-ibm-plex-sans)',
@@ -514,7 +582,6 @@ export function CTASection({
                 padding: '0.875rem 2.5rem',
                 backgroundColor: tokens.archGold,
                 color: tokens.ink,
-                borderRadius: '1px',
                 border: 'none',
                 cursor: 'pointer',
               }}
@@ -1078,11 +1145,12 @@ export function BentoCard({
 }) {
   return (
     <div
-      className={className}
+      className={`bento-card-hover ${className}`}
       style={{
         backgroundColor: tokens.cardSurface,
         borderRadius: 'var(--card-radius)',
         padding: '2rem 2.5rem',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         ...style,
       }}
     >

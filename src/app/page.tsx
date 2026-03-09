@@ -12,6 +12,7 @@ import {
   PillLabel,
   RoundedCTACard,
   BentoCard,
+  WordReveal,
   tokens,
 } from '@/lib/shared'
 
@@ -127,25 +128,14 @@ function HeroSection() {
           <button
             type="button"
             onClick={openCalendly}
+            className="btn-pill btn-pill-primary"
             style={{
               fontFamily: 'var(--font-ibm-plex-sans)',
               fontSize: '0.9375rem',
               fontWeight: 600,
               padding: '0.875rem 2.25rem',
-              backgroundColor: tokens.deepGreen,
-              color: '#FFFFFF',
-              borderRadius: '999px',
               border: 'none',
               cursor: 'pointer',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-1px)'
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(27, 58, 42, 0.25)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
             }}
           >
             Book a Strategy Call
@@ -236,22 +226,20 @@ function AboutTeaser() {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.2}>
-        <h2
-          style={{
-            fontFamily: 'var(--font-instrument-serif)',
-            fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
-            fontWeight: 400,
-            color: tokens.ink,
-            lineHeight: 1.15,
-            maxWidth: '36rem',
-            marginBottom: '1.5rem',
-            letterSpacing: '-0.01em',
-          }}
-        >
-          We are organizational architects for purpose-driven organizations.
-        </h2>
-      </FadeIn>
+      <h2
+        style={{
+          fontFamily: 'var(--font-instrument-serif)',
+          fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
+          fontWeight: 400,
+          color: tokens.ink,
+          lineHeight: 1.15,
+          maxWidth: '36rem',
+          marginBottom: '1.5rem',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        <WordReveal text="We are organizational architects for purpose-driven organizations." />
+      </h2>
 
       <FadeIn delay={0.3}>
         <p
@@ -672,6 +660,7 @@ function TestimonialsSection() {
           {displayTestimonials.map((t) => (
             <StaggerItem key={t.name}>
               <div
+                className="testimonial-card-hover"
                 style={{
                   backgroundColor: tokens.cardSurface,
                   borderRadius: 'var(--card-radius, 20px)',
@@ -680,6 +669,7 @@ function TestimonialsSection() {
                   flexDirection: 'column',
                   gap: '1rem',
                   height: '100%',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 }}
               >
                 {/* 5 stars */}

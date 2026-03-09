@@ -642,7 +642,7 @@ export default function ServicesPage() {
               <button
                 type="button"
                 onClick={openCalendly}
-                className="services-sidebar-cta"
+                className="btn-pill btn-pill-primary services-sidebar-cta"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -652,9 +652,6 @@ export default function ServicesPage() {
                   fontWeight: 600,
                   letterSpacing: '0.04em',
                   padding: '0.75rem 1.75rem',
-                  backgroundColor: tokens.deepGreen,
-                  color: tokens.parchment,
-                  borderRadius: '100px',
                   border: 'none',
                   cursor: 'pointer',
                 }}
