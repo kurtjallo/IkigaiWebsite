@@ -630,7 +630,12 @@ export default function AboutPage() {
       {/* ============================================================ */}
       {/* 7. ROUNDED CTA CARD                                           */}
       {/* ============================================================ */}
-      <RoundedCTACard heading="Ready to architect your organization's future?" />
+      <RoundedCTACard
+        heading="Ready to architect your organization's future?"
+        description="Every strong organization starts with a conversation about what's possible."
+        buttonText="Book a Strategy Call"
+        microcopy="Free 30-minute call with Nilda. For leaders ready to strengthen their organization's foundations."
+      />
 
       {/* ============================================================ */}
       {/* Responsive styles                                             */}
