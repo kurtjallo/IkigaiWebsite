@@ -197,7 +197,7 @@ export default function AboutPage() {
           <FadeIn direction="right" delay={0.15}>
             <div style={{ position: 'relative' }}>
               <img
-                src="/images/founder.png"
+                src="/images/founder.jpg"
                 alt="Nilda Bastone, Founder of Ikigai Consulting Group"
                 style={{
                   width: '100%',
@@ -436,7 +436,7 @@ export default function AboutPage() {
           {/* LEFT: photo */}
           <FadeIn direction="left">
             <img
-              src="/images/founder.png"
+              src="/images/founder.jpg"
               alt="Nilda Bastone"
               style={{
                 width: '100%',

@@ -167,10 +167,10 @@ function HeroSection() {
 /* ------------------------------------------------------------------ */
 
 const galleryImages = [
-  { src: '/images/gallery-1.png', alt: 'Governance workshop session' },
-  { src: '/images/gallery-2.png', alt: 'Strategic planning session' },
-  { src: '/images/gallery-3.png', alt: 'Community building event' },
-  { src: '/images/gallery-4.png', alt: 'Leadership development program' },
+  { src: '/images/gallery-1.jpg', alt: 'Governance workshop session' },
+  { src: '/images/gallery-2.jpg', alt: 'Strategic planning session' },
+  { src: '/images/gallery-3.jpg', alt: 'Community building event' },
+  { src: '/images/gallery-4.jpg', alt: 'Leadership development program' },
 ]
 
 function GalleryStrip() {
