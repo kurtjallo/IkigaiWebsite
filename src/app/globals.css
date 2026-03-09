@@ -207,3 +207,28 @@
     transform: none;
   }
 }
+
+/* Bento rows — responsive stacking */
+@media (max-width: 768px) {
+  .bento-row,
+  .bento-row-triple {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Who We Serve — responsive 5-column grid */
+.hp-serve-grid {
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .hp-serve-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hp-serve-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

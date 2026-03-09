@@ -881,7 +881,7 @@ export function SiteFooter() {
             <img
               src="/images/ikigai-nav.png"
               alt="Ikigai Consulting Group"
-              style={{ height: '52px', width: 'auto', marginBottom: '1rem', filter: 'brightness(10)' }}
+              style={{ height: '80px', width: 'auto', marginBottom: '1rem', filter: 'brightness(10)' }}
             />
             <p
               style={{
