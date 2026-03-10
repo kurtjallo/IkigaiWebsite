@@ -3,6 +3,12 @@ CLAUDE.md
 .claude/
 .planning/
 
+# scratch files (root-level notes, plans, screenshots)
+/*.md
+!README.md
+/*.png
+/*.pdf
+
 # dependencies
 /node_modules
 /.pnp

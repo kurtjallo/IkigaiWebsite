@@ -185,8 +185,8 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 
 - Next.js 16 with TypeScript (strict mode), static export (`output: 'export'`)
 - Tailwind CSS 4 with CSS-first config (`@theme` in globals.css, no tailwind.config.ts)
-- Fonts: Playfair Display (serif headlines) + Inter (sans body) via next/font/google
-- Utilities: clsx + tailwind-merge (`cn()` in `src/lib/utils.ts`)
+- Fonts: Instrument Serif (headlines) + IBM Plex Sans (body) + IBM Plex Mono (accents) via next/font/google
+- Utilities: clsx + tailwind-merge
 - Icons: lucide-react (Menu, X, Shield, Target, Scale, Award, Compass, Check) + custom SVG pillar icons
 - Animation: motion (v12.x, imported from `motion/react`) for scroll reveals, stagger, hover effects
 - Integrations: react-calendly (Calendly popup booking), Formspree (contact form backend)
@@ -204,26 +204,18 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 - `public/images/favicon.ico` -- Static favicon (branded "I" + green dot, 16/32/48px multi-size ICO)
 - `src/app/apple-icon.tsx` -- 180x180 Apple touch icon (ImageResponse, transparent bg)
 - `src/app/opengraph-image.tsx` -- 1200x630 OG image (ImageResponse)
-- `src/lib/fonts.ts` -- Font config (exports `playfairDisplay`, `inter`)
-- `src/lib/utils.ts` -- `cn()` utility
+- `src/lib/fonts.ts` -- Font config (exports `instrumentSerif`, `ibmPlexSans`, `ibmPlexMono`)
+- `src/lib/shared.tsx` -- All shared components: tokens, animations, nav, footer, CTA cards, labels (1,199 lines)
 
-### UI Primitives (`src/components/ui/`)
+### Shared Components (all in `src/lib/shared.tsx`)
 
-- **Button** -- gold/outline/ghost variants, sm/md/lg sizes, Link or button via `href` prop
-- **Container** -- max-width wrapper (72rem default, 48rem narrow)
-- **SectionHeading** -- serif heading + tagline + gold accent line + description, `dark` prop
-- **Card** -- white bg, shadow, optional gold hover border, HoverAccent gold line on hover ('use client')
-- **Divider** -- gold horizontal line
-- **Section** -- background variants (white/light-green/hunter-green/black), auto text color, wraps Container, optional `ariaLabel` prop
+- **SiteNav** -- sticky top bar, Ikigai logo image (`ikigai-nav.png`, 42px height), desktop links (lg+) with gold underline slide-in hover animation, hamburger (below lg), current page gold underline, "Book a Call" CTA with lift+glow hover
+- **SiteFooter** -- dark bg, nav links, contact info, copyright
+- **RoundedCTACard** -- reusable CTA card with heading, description, microcopy + qualifier
+- **PillLabel** -- pill-shaped label component
+- **tokens** -- design tokens object (colors, spacing, etc.)
 
-### Layout Chrome (`src/components/layout/`)
-
-- **Navigation** -- sticky top bar, Ikigai logo image (`ikigai-nav.png`, 42px height), desktop links (lg+) with gold underline slide-in hover animation, hamburger (below lg), current page gold underline, "Book a Call" CTA with lift+glow hover, `'use client'`
-- **MobileMenu** -- full-screen overlay, Escape to close, body scroll lock, `role="dialog"`, `id="mobile-menu"`, focus management (auto-focus close button, return focus on close), `'use client'`
-- **SkipNav** -- sr-only skip link targeting #main-content, visible on focus
-- **Footer** -- dark bg (neutral-950), nav links, contact info, copyright, Server Component
-
-### Animation Components (`src/lib/shared.tsx` + `src/components/animation/`)
+### Animation Components (in `src/lib/shared.tsx`)
 
 - **FadeIn** -- Scroll-triggered fade-up reveal (configurable direction: up/down/left/right, delay), `useInView` with `once: true`
 - **StaggerWrap / StaggerItem** -- Sequential grid animation wrapper using variants + `staggerChildren`
@@ -238,21 +230,12 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 
 ### Content Data (`src/lib/data/`)
 
-- **navigation.ts** -- 6 page links (`NavigationLink[]`) + `ctaNav` object
 - **pillars.ts** -- 7 pillars with slug, title, subtitle, description, outcomes, included, icon, ctaText
 - **values.ts** -- 5 company values with name, description, icon key
 - **case-studies.ts** -- 3 placeholder case studies (Challenge > Approach > Outcome > Metrics)
 - **testimonials.ts** -- 4 placeholder testimonials with specific outcomes
 - **metadata.ts** -- BASE_URL, siteMetadata (OG, Twitter, robots), pageMetadata per route with Ontario/nonprofit SEO keywords, canonical URLs
 - **structured-data.ts** -- JSON-LD schemas: organizationSchema, localBusinessSchema, getServiceSchemas() for 7 pillars
-
-### SVG Components (`src/components/svg/`)
-
-- **Logo** -- SVG wordmark with dark/light variants, showTagline prop, gold accent line
-- **PillarIcon** -- 7 custom line-art icons (24x24 viewBox, currentColor stroke, no fill), selected by slug
-- **CornerAccent** -- L-shaped decorative bracket for section corners
-- **BlueprintGrid** -- subtle repeating grid pattern for backgrounds
-- **StructuralFrame** -- beam/truss decorative divider (horizontal/vertical)
 
 ### Homepage Sections (inline in `src/app/page.tsx`)
 
