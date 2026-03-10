@@ -97,6 +97,16 @@ Website for **Ikigai Consulting Group**, an organizational consulting firm found
 **Phase 17: Contact + Policy Redesign -- COMPLETE** (2026-03-07)
 **Phase 18: Animation + Polish -- COMPLETE** (2026-03-08)
 
+### Spec Alignment Audit (2026-03-08)
+
+Thorough audit of all pages against CLAUDE.md spec. Fixes applied:
+- Impact page: StandaloneTestimonialSection bg changed from white to deepGreen (per spec), CTA qualifier microcopy added
+- About page: RoundedCTACard now includes description + microcopy + qualifier (was missing all three)
+- Contact page: Added BestFitSection (4 positive-framing cards), CalendarBookingSection (deepGreen, gold CTA), LocationInfoSection (email + GTA location) -- all three were missing from v2.0 redesign
+- Homepage: Added WhoWeServeSection (5 audience segments, deepGreen bg, gold checkmarks) and HowWeWorkSection (4-step engagement model with gold-topped cards, 3–12 month timeline) -- both specified in UX audit passes but dropped during v2.0 redesign
+- All CTA microcopy unified with qualifier line "For leaders ready to strengthen their organization's foundations."
+- CLAUDE.md section descriptions updated to reflect actual current v2.0 component structure
+
 ### Concept-Merged Redesign (MERGED to main site)
 
 "Architectural Blueprint" design concept merged into main site routes. Shared components in `src/lib/shared.tsx`.
@@ -187,7 +197,7 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 
 - `src/app/globals.css` -- Design tokens: Hunter Green/Gold palettes (50-900), type scale, spacing
 - `src/app/layout.tsx` -- Root layout: SkipNav + Navigation + main#main-content + Footer, flex column min-h-screen, Organization + LocalBusiness JSON-LD
-- `src/app/page.tsx` -- Homepage composing 7 section components
+- `src/app/page.tsx` -- Homepage composing 10 section components
 - `src/app/not-found.tsx` -- Branded 404 page with design system components, noindex metadata
 - `src/app/sitemap.ts` -- Auto-generated sitemap.xml with all 7 pages, priorities, change frequencies
 - `src/app/robots.ts` -- Auto-generated robots.txt allowing all crawlers, referencing sitemap
@@ -246,56 +256,70 @@ Per `.planning/UX-AUDIT.md`, Wave 3 (partially shipped, rest blocked on client i
 
 ### Homepage Sections (inline in `src/app/page.tsx`)
 
-- **HeroSection** -- deepGreen bg, 75vh mobile / 90vh desktop, serif heading, gold CTA button
-- **ProblemSection** -- bone bg, two-column layout (narrative + pain points with gold dashes)
-- **SolutionSection** -- boneDark bg, Blueprint > Build > Strengthen > Sustain flow, TM symbol
-- **PillarsGrid** -- bone bg, responsive grid, "Learn More →" links to `/services#[slug]`
-- **WhoWeServeSection** -- deepGreen bg, 5 audience segments with gold checkmarks
-- **SocialProofSection** -- bone bg, 3 stat metrics + Margaret Chen testimonial blockquote
-- **HowWeWorkSection** -- boneDark bg, 4-step engagement model (Discovery Call, Custom Blueprint, Hands-On Implementation, Sustained Support) with 3–12 month timeline, bordered column layout
-- **CTASection** -- deepGreen950 bg, configurable props, gold button + "Free 30-minute call with Nilda." microcopy, reusable on other pages (from shared.tsx)
+- **HeroSection** -- white bg, 75vh mobile / 90vh desktop, serif heading, dark pill CTA button, PillLabel "Serving Ontario NGOs for 20+ years", microcopy with qualifier
+- **GalleryStrip** -- 4-image gallery strip with rounded tops, hidden on mobile, stock photos
+- **AboutTeaser** -- white bg, WordReveal heading "We are organizational architects...", link to /about
+- **ServicesSection** -- white bg, sticky left panel + scrolling pillar cards (7 cards with SVG tile patterns, deep-green headers, "Learn More →" links to `/services#[slug]`)
+- **BenefitsBento** -- white bg, 4-card asymmetric bento grid (Deep Sector Expertise, Full-Cycle Framework, Measurable Results, Hands-On Partnership) with icon boxes
+- **WhoWeServeSection** -- deepGreen bg, 5 audience segments with gold checkmark icons in translucent cards
+- **HowWeWorkSection** -- cardSurface bg, 4-step engagement model (Discovery Call, Custom Blueprint, Hands-On Implementation, Sustained Support) with gold-topped cards, 3–12 month timeline note
+- **TestimonialsSection** -- white bg, 3 testimonial cards with 5-star ratings, quotes truncated at 200 chars
+- **FAQSection** -- white bg, 5-item accordion (AnimatePresence, rotating + icon, ARIA)
+- **RoundedCTACard** -- cardSurface bg, "Let's Build Something That Lasts." with microcopy + qualifier
 
-### About Page Sections (`src/components/sections/`)
+### About Page Sections (inline in `src/app/about/page.tsx`)
 
-- **FounderBio** -- white bg, two-column (bio text + gold-bordered blockquote), photo-ready via optional `imageSrc` prop
-- **ValuesRow** -- hunter-green bg, 5 values with Lucide icons (gold), responsive 2/3/5 col grid
-- Philosophy section removed (Wave 1 UX audit -- merged into Values)
+- **PageHero** -- white bg, centered "The architect behind the work", PillLabel "About us"
+- **WhoWeAre** -- 2-column grid (text left, founder photo right with floating badges "20+ Years Experience" / "Ontario Nonprofit Expert"), trust bar placeholders
+- **ValuesGrid** -- 5 values as BentoCards with Lucide icons (Shield, Target, Scale, Award, Compass), 2-column grid
+- **StatsBar** -- 4 editorial stats (20+, 85%, $200K+, 8 Programs) in 4-column grid
+- **FounderProfile** -- 2-column (photo left, bio right) with credentials, 37 recommendations
+- **StandaloneTestimonial** -- Margaret Chen testimonial with 5 stars, circle avatar, divider
+- **RoundedCTACard** -- "Ready to architect your organization's future?" with description + microcopy + qualifier
 
 ### Services Page (inline in `src/app/services/page.tsx`)
 
-- **AccordionServicesSection** -- Single section with 7 collapsible pillar rows (one open at a time, default first open)
-  - Collapsed: number + title + subtitle + rotating chevron
-  - Expanded: description + 2 outcomes + proof point (links to case study) + CTA button
-  - AnimatePresence expand/collapse, ARIA (aria-expanded, aria-controls, role="region")
+- **PageHero** -- white bg, centered "Seven Pillars of Organizational Excellence", PillLabel "Services"
+- **Sticky-Scroll Layout** -- 1fr/2fr grid: sticky left sidebar ("Your guide to organizational health" + CTA) with scrolling pillar cards on right
+  - **PillarCard** -- 7 cards with deep-green header (unique SVG pattern per pillar), pillar number, arrow link, title, description, 2 outcomes with gold dots, proof point linking to case study, gold CTA button
   - Proof points link to `/impact#[case-study-slug]` with real metrics
+  - Mobile: single column, sidebar unsticks
+- **RoundedCTACard** -- "Ready to strengthen your organization?"
 
-### Model Page Sections (`src/components/sections/`)
+### Model Page Sections (inline in `src/app/model/page.tsx`)
 
-- **ModelDiagram** -- white bg, inline architectural SVG diagram (7 columns + 4 phase strata), role="img" + aria-label, TM branding
-- **ModelFlow** -- 3 sub-sections: 4-phase flow (light-green), pillar integration grid (white), why-it-works (hunter-green) with CTA
+- **ModelHero** -- white bg, centered "The Ikigai Architecture Model™", PillLabel
+- **EditorialStats** -- 3 stats (85%, $200K+, 3 successors) + "See all case studies →" link to /impact
+- **ModelDiagramSection** -- bone bg, SectionLabel "01 / The Framework", SVG matrix diagram (4 phases × 7 pillars with nodes/connectors), explanation paragraph below
+- **PhasesDeepDive** -- boneDark bg, SectionLabel "02 / The Process", 4 phases with gold left-border cards (Blueprint, Build, Strengthen, Sustain) using "you get" framing
+- **PillarIntegration** -- bone bg, SectionLabel "03 / The Pillars", 7-pillar grid linking to `/services#[slug]` with hover gold border
+- **WhyItWorks** -- deepGreen bg, SectionLabel "04 / Why It Works", BlueprintGridPattern, 3-column (Holistic, Adaptive, Sustainable)
+- **RoundedCTACard** -- "Ready to apply this model to your organization?" with microcopy + qualifier
 
 ### Impact Page Sections (inline in `src/app/impact/page.tsx`)
 
-- **ResultsSnapshot** -- boneDark bg, 3-column table (Organization | Challenge | Key Result), header row hides on mobile, rows anchor-link to case studies, responsive stacked cards
-- **CaseStudySection** -- structured article (Challenge + Approach side-by-side, Outcome, Measurable Results with gold dots, embedded testimonial quote), alternating bg, `id` for anchor linking
-- **StandaloneTestimonialSection** -- Amara Williams standalone testimonial below case studies (deep-green bg)
-- Separate Testimonials section removed (Wave 1 UX audit -- embedded in case study cards)
+- **ImpactHero** -- white bg, centered "Impact in Action.", PillLabel "Impact"
+- **ResultsSnapshot** -- cardSurface bg, SectionLabel "At a Glance", 3 case study rows (org + sector, challenge, key result with gold dot), rows anchor-link to `#[slug]`, gold left-border with hover effect
+- **CaseStudySection** -- structured article (Challenge + Approach side-by-side grid, Outcome, Measurable Results with gold dots, embedded testimonial blockquote with quote mark SVG), alternating bg, `id` for anchor linking, gold gradient divider between studies
+- **StandaloneTestimonialSection** -- Amara Williams standalone testimonial below case studies (deepGreen bg, gold stars, parchment text, circle avatar with initial)
+- **RoundedCTACard** -- "Ready to create your own impact story?" with microcopy + qualifier
 
 ### Contact Page Sections (inline in `src/app/contact/page.tsx`)
 
-- **BestFitSection** -- bone bg, 4 positive-framing cards with gold left-border (qualifying without exclusion)
-- **ContactFormSection** -- 4-field form + honeypot (offscreen positioned, aria-hidden, tabindex=-1), Formspree fetch POST, idle/submitting/success/error states, inline validation, `aria-live="polite"` on success message
-- **CommonConcernsSection** -- boneDark bg, 4-item FAQ accordion (aria-expanded, aria-controls, role="region"), objection handling
-- **CalendarBookingSection** -- deepGreen bg, Calendly link (window.open), CTA microcopy
-- **LocationInfoSection** -- boneDark bg, email link, GTA location info
+- **BestFitSection** -- cardSurface bg, PillLabel "Best Fit", 4 positive-framing cards with gold left-border (Growing Beyond Your Founder, Strengthening Governance, Proving Your Impact, Scaling Without Losing Mission), 2-column grid
+- **ContactHeroForm** -- white bg, 2-column grid: left (heading "Begin the Conversation." + calendar CTA pill button + microcopy), right (deepGreen form card with Name, Organization (optional), Email, Challenge (optional) + honeypot + Formspree POST + success/error states)
+- **FAQSection** -- white bg, 4-item FAQ accordion (aria-expanded, aria-controls, role="region", AnimatePresence), circle ×/+ toggle
+- **CalendarBookingSection** -- deepGreen bg, centered "Prefer to book directly?", gold pill CTA "Book a Free 30-Min Call" + microcopy + qualifier
+- **LocationInfoSection** -- cardSurface bg, 2-column grid: email link + GTA location info
 
 ### Page Routes
 
-- `src/app/about/page.tsx` -- FounderBio > ValuesRow > CTASection (Philosophy removed)
-- `src/app/services/page.tsx` -- hunter-green intro + 7 ServicePillar sections (data-driven from pillars.ts) + CTASection
-- `src/app/model/page.tsx` -- ModelDiagram > ModelFlow (thought leadership page)
-- `src/app/impact/page.tsx` -- page header + ResultsSnapshot + 3 CaseStudySections (with embedded testimonials) + standalone Amara Williams testimonial + CTASection
-- `src/app/contact/page.tsx` -- BestFitSection + ContactFormSection + CommonConcernsSection + CalendarBookingSection + LocationInfoSection
+- `src/app/page.tsx` -- HeroSection > GalleryStrip > AboutTeaser > ServicesSection > BenefitsBento > WhoWeServeSection > HowWeWorkSection > TestimonialsSection > FAQSection > RoundedCTACard
+- `src/app/about/page.tsx` -- PageHero > WhoWeAre > ValuesGrid > StatsBar > FounderProfile > StandaloneTestimonial > RoundedCTACard
+- `src/app/services/page.tsx` -- PageHero > Sticky-Scroll (sidebar + 7 PillarCards) > RoundedCTACard
+- `src/app/model/page.tsx` -- ModelHero > EditorialStats > ModelDiagramSection > PhasesDeepDive > PillarIntegration > WhyItWorks > RoundedCTACard
+- `src/app/impact/page.tsx` -- ImpactHero > ResultsSnapshot > 3 CaseStudySections (with embedded testimonials) > StandaloneTestimonialSection (Amara Williams, deepGreen bg) > RoundedCTACard
+- `src/app/contact/page.tsx` -- BestFitSection > ContactHeroForm > FAQSection > CalendarBookingSection > LocationInfoSection
 - `src/app/privacy/page.tsx` -- PIPEDA-compliant privacy policy (Server Component, static content)
 - `src/app/not-found.tsx` -- Branded 404 page (noindex, gold CTA to homepage)
 

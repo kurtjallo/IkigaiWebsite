@@ -545,7 +545,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
   return (
     <section
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: tokens.deepGreen,
         padding: 'clamp(4rem, 8vw, 5rem) 2rem',
       }}
     >
@@ -558,7 +558,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
               marginBottom: '1.5rem',
               fontSize: '1.5rem',
               letterSpacing: '0.25em',
-              color: '#d97706',
+              color: tokens.archGold,
             }}
           >
             &#9733;&#9733;&#9733;&#9733;&#9733;
@@ -571,7 +571,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                 fontWeight: 400,
                 fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)',
                 lineHeight: 1.7,
-                color: tokens.ink,
+                color: tokens.parchment,
                 fontStyle: 'italic',
                 marginBottom: '2rem',
                 maxWidth: '44rem',
@@ -595,8 +595,8 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                   width: '3rem',
                   height: '3rem',
                   borderRadius: '50%',
-                  backgroundColor: tokens.cardSurface,
-                  border: `1px solid ${tokens.structuralLine}`,
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -607,7 +607,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                   style={{
                     fontFamily: 'var(--font-instrument-serif)',
                     fontSize: '1.125rem',
-                    color: tokens.bodyGray,
+                    color: tokens.archGoldTextDark,
                     fontWeight: 400,
                   }}
                 >
@@ -621,7 +621,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                 style={{
                   width: '1px',
                   height: '2.5rem',
-                  backgroundColor: tokens.structuralLine,
+                  backgroundColor: 'rgba(255,255,255,0.2)',
                 }}
               />
 
@@ -631,7 +631,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                     fontFamily: 'var(--font-ibm-plex-sans)',
                     fontWeight: 500,
                     fontSize: '0.9375rem',
-                    color: tokens.ink,
+                    color: '#ffffff',
                     marginBottom: '0.125rem',
                   }}
                 >
@@ -642,7 +642,7 @@ function StandaloneTestimonialSection({ testimonial }: { testimonial: Testimonia
                     fontFamily: 'var(--font-ibm-plex-sans)',
                     fontWeight: 300,
                     fontSize: '0.8125rem',
-                    color: tokens.bodyGray,
+                    color: tokens.boneDark,
                   }}
                 >
                   {testimonial.role}, {testimonial.organization}
@@ -681,7 +681,7 @@ export default function ImpactPage() {
         heading="Ready to create your own impact story?"
         description="Let's talk about what's possible for your organization."
         buttonText="Book a Strategy Call"
-        microcopy="Free 30-minute call with Nilda."
+        microcopy="Free 30-minute call with Nilda. For leaders ready to strengthen their organization's foundations."
       />
     </>
   )
